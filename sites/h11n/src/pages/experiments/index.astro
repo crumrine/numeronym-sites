@@ -1,0 +1,416 @@
+---
+import BaseLayout from '@shared/components/BaseLayout.astro';
+import SiteHeader from '@shared/components/SiteHeader.astro';
+import SiteFooter from '@shared/components/SiteFooter.astro';
+import { getCollection } from 'astro:content';
+
+const experiments = await getCollection('experiments');
+
+const sorted = experiments.sort((a, b) =>
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const typeLabels: Record<string, string> = {
+  music: 'Music',
+  image: 'Image',
+  text: 'Text',
+  chain: 'Telephone',
+};
+
+const typeIcons: Record<string, string> = {
+  music: '\u266B',
+  image: '\u25A3',
+  text: '\u270E',
+  chain: '\u2B82',
+};
+---
+
+<BaseLayout
+  title="I Hallucinated This — h11n.dev"
+  description="Creative experiments: feeding AI hallucinations into music generators, art tools, and other AIs. What could go wrong?"
+  site="h11n"
+>
+  <SiteHeader site="h11n" nav={[{ label: 'Hall of Fame', href: '/hall-of-fame' }, { label: 'Quiz', href: '/quiz' }, { label: 'Experiments', href: '/experiments' }]} />
+
+  <main>
+    <section class="exp-hero">
+      <div class="container text-center">
+        <p class="exp-label fade-up">Lab Notebook</p>
+        <h1 class="exp-title fade-up fade-up-delay-1">I Hallucinated This</h1>
+        <p class="exp-subtitle fade-up fade-up-delay-2">
+          What happens when you feed AI hallucinations into music generators,
+          other AIs, and creative tools? Weird, beautiful, recursive chaos.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <!-- Filter -->
+        <div class="filter-bar fade-up">
+          <button class="filter-chip active" data-type="all">All</button>
+          <button class="filter-chip" data-type="music" style="--chip-color: var(--type-music)">Music</button>
+          <button class="filter-chip" data-type="chain" style="--chip-color: var(--type-chain)">Telephone</button>
+          <button class="filter-chip" data-type="text" style="--chip-color: var(--type-text)">Text</button>
+          <button class="filter-chip" data-type="image" style="--chip-color: var(--type-image)">Image</button>
+        </div>
+
+        <!-- Cards -->
+        <div class="exp-grid" id="exp-grid">
+          {sorted.map((exp) => {
+            const preview = exp.data.reflection.length > 120
+              ? exp.data.reflection.slice(0, 120) + '...'
+              : exp.data.reflection;
+            return (
+              <a
+                href={`/experiments/${exp.id}`}
+                class="exp-card fade-up"
+                data-type={exp.data.output_type}
+                style={`--card-accent: var(--type-${exp.data.output_type})`}
+              >
+                <div class="exp-card-header">
+                  <span class="type-badge">
+                    <span class="type-icon">{typeIcons[exp.data.output_type]}</span>
+                    {typeLabels[exp.data.output_type]}
+                  </span>
+                  <span class="tools-list">
+                    {exp.data.tools_used.slice(0, 2).join(' + ')}
+                  </span>
+                </div>
+                <h3 class="exp-card-title">{exp.data.title}</h3>
+                <p class="exp-card-preview">{preview}</p>
+                <div class="exp-card-footer">
+                  <span class="exp-card-source">Source: Hall of Fame</span>
+                  <span class="exp-card-arrow">&rarr;</span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <section class="section pipeline-section">
+      <div class="container text-center">
+        <h2 class="fade-up">The Pipeline</h2>
+        <div class="pipeline fade-up fade-up-delay-1">
+          <div class="pipeline-step">
+            <span class="pipeline-num">1</span>
+            <span class="pipeline-label">Hallucination discovered</span>
+          </div>
+          <span class="pipeline-arrow">&rarr;</span>
+          <div class="pipeline-step">
+            <span class="pipeline-num">2</span>
+            <span class="pipeline-label">Creative prompt generated</span>
+          </div>
+          <span class="pipeline-arrow">&rarr;</span>
+          <div class="pipeline-step">
+            <span class="pipeline-num">3</span>
+            <span class="pipeline-label">Art / music produced</span>
+          </div>
+          <span class="pipeline-arrow">&rarr;</span>
+          <div class="pipeline-step">
+            <span class="pipeline-num">4</span>
+            <span class="pipeline-label">Featured on h11n.dev</span>
+          </div>
+        </div>
+        <p class="pipeline-note fade-up fade-up-delay-2">
+          Some experiments are ready to experience. Others are prompts waiting for Brian to produce.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter site="h11n" extra="Accuracy of this website: not guaranteed" />
+</BaseLayout>
+
+<script>
+  const chips = document.querySelectorAll('.filter-chip');
+  const grid = document.getElementById('exp-grid');
+
+  if (grid) {
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        chips.forEach((c) => c.classList.remove('active'));
+        chip.classList.add('active');
+        const type = (chip as HTMLElement).dataset.type;
+        const cards = grid.querySelectorAll('.exp-card');
+        cards.forEach((card) => {
+          const el = card as HTMLElement;
+          if (type === 'all' || el.dataset.type === type) {
+            el.style.display = '';
+          } else {
+            el.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+</script>
+
+<style>
+  /* Output type colors */
+  :root {
+    --type-music: #f59e0b;
+    --type-image: #a855f7;
+    --type-text: #06b6d4;
+    --type-chain: #22c55e;
+  }
+
+  .exp-hero {
+    padding: var(--space-xl) 0 var(--space-lg);
+  }
+
+  .exp-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
+  }
+
+  .exp-title {
+    font-size: var(--text-5xl);
+    margin-bottom: var(--space-md);
+    font-style: italic;
+  }
+
+  .exp-subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 52ch;
+    margin: 0 auto;
+  }
+
+  /* Filter chips */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+    justify-content: center;
+  }
+
+  .filter-chip {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .filter-chip:hover {
+    border-color: var(--chip-color, var(--accent));
+    color: var(--chip-color, var(--accent));
+  }
+
+  .filter-chip.active {
+    background: var(--chip-color, var(--accent));
+    border-color: var(--chip-color, var(--accent));
+    color: var(--bg-primary);
+  }
+
+  /* Experiment cards */
+  .exp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .exp-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--card-accent, var(--accent));
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    text-decoration: none;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .exp-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--card-accent) 4%, transparent),
+      transparent 60%
+    );
+    pointer-events: none;
+  }
+
+  .exp-card:hover {
+    border-color: var(--card-accent, var(--accent));
+    box-shadow: 0 0 24px color-mix(in srgb, var(--card-accent) 15%, transparent),
+                0 0 48px color-mix(in srgb, var(--card-accent) 8%, transparent);
+    transform: translateY(-3px);
+  }
+
+  .exp-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+    position: relative;
+  }
+
+  .type-badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 3px 10px;
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--card-accent) 18%, transparent);
+    color: var(--card-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .type-icon {
+    font-size: 0.75rem;
+  }
+
+  .tools-list {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .exp-card-title {
+    font-size: var(--text-xl);
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-mono);
+    line-height: 1.3;
+    position: relative;
+  }
+
+  .exp-card-preview {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: var(--space-md);
+    position: relative;
+  }
+
+  .exp-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  .exp-card-source {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .exp-card-arrow {
+    font-size: var(--text-lg);
+    color: var(--card-accent);
+    transition: transform var(--transition-fast);
+  }
+
+  .exp-card:hover .exp-card-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Pipeline */
+  .pipeline-section {
+    border-top: 1px solid var(--border);
+  }
+
+  .pipeline-section h2 {
+    margin-bottom: var(--space-lg);
+  }
+
+  .pipeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-lg);
+  }
+
+  .pipeline-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .pipeline-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .pipeline-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    text-align: center;
+    max-width: 12ch;
+  }
+
+  .pipeline-arrow {
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+  }
+
+  .pipeline-note {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    font-style: italic;
+    max-width: 50ch;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .exp-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .exp-title {
+      font-size: var(--text-4xl);
+    }
+
+    .pipeline {
+      flex-direction: column;
+    }
+
+    .pipeline-arrow {
+      transform: rotate(90deg);
+    }
+  }
+</style>

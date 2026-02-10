@@ -1,0 +1,520 @@
+---
+import BaseLayout from '@shared/components/BaseLayout.astro';
+import SiteHeader from '@shared/components/SiteHeader.astro';
+import SiteFooter from '@shared/components/SiteFooter.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const experiments = await getCollection('experiments');
+  return experiments.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const typeLabels: Record<string, string> = {
+  music: 'Music Experiment',
+  image: 'Image Experiment',
+  text: 'Text Experiment',
+  chain: 'Hallucination Telephone',
+};
+
+const typeIcons: Record<string, string> = {
+  music: '\u266B',
+  image: '\u25A3',
+  text: '\u270E',
+  chain: '\u2B82',
+};
+
+const isMusic = entry.data.output_type === 'music';
+const isChain = entry.data.output_type === 'chain';
+const isText = entry.data.output_type === 'text';
+const hasOutput = entry.data.output_url && entry.data.output_url.length > 0;
+---
+
+<BaseLayout
+  title={`${entry.data.title} — h11n.dev Experiments`}
+  description={entry.data.reflection.slice(0, 155)}
+  site="h11n"
+>
+  <Fragment slot="head">
+    <meta property="og:title" content={`${entry.data.title} — h11n.dev`} />
+    <meta property="og:description" content={entry.data.reflection.slice(0, 155)} />
+    <meta property="og:url" content={`https://h11n.dev/experiments/${entry.id}`} />
+  </Fragment>
+
+  <SiteHeader site="h11n" nav={[{ label: 'Hall of Fame', href: '/hall-of-fame' }, { label: 'Quiz', href: '/quiz' }, { label: 'Experiments', href: '/experiments' }]} />
+
+  <main>
+    <article class="experiment" style={`--exp-accent: var(--type-${entry.data.output_type})`}>
+      <div class="container">
+        <!-- Back link -->
+        <a href="/experiments" class="back-link fade-up">&larr; All Experiments</a>
+
+        <!-- Header -->
+        <header class="exp-header fade-up fade-up-delay-1">
+          <span class="type-badge">
+            <span class="type-icon">{typeIcons[entry.data.output_type]}</span>
+            {typeLabels[entry.data.output_type]}
+          </span>
+          <h1 class="exp-title">{entry.data.title}</h1>
+          <div class="exp-meta">
+            <span class="meta-item">Tools: {entry.data.tools_used.join(', ')}</span>
+            <span class="meta-sep">&middot;</span>
+            <span class="meta-item">{new Date(entry.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          </div>
+        </header>
+
+        <!-- Source hallucination -->
+        <section class="exp-section fade-up fade-up-delay-2">
+          <h2 class="section-label">Source Hallucination</h2>
+          <blockquote class="source-quote">
+            <p>{entry.data.original_hallucination}</p>
+          </blockquote>
+          <a href={`/hall-of-fame/${entry.data.source_hallucination}`} class="source-link">
+            View in Hall of Fame &rarr;
+          </a>
+        </section>
+
+        <!-- Creative prompt (for music/image/text types) -->
+        {!isChain && (
+          <section class="exp-section fade-up">
+            <h2 class="section-label">Creative Prompt</h2>
+            <div class="prompt-block">
+              <pre class="prompt-text">{entry.data.creative_prompt}</pre>
+            </div>
+          </section>
+        )}
+
+        <!-- Output -->
+        <section class="exp-section fade-up">
+          <h2 class="section-label">Output</h2>
+
+          {isMusic && !hasOutput && (
+            <div class="audio-placeholder">
+              <div class="audio-icon">{'\u266B'}</div>
+              <div class="audio-info">
+                <p class="audio-status">Coming soon</p>
+                <p class="audio-detail">Brian is producing this track. Check back for the finished piece.</p>
+              </div>
+              <div class="audio-bars">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+              </div>
+            </div>
+          )}
+
+          {isMusic && hasOutput && (
+            <div class="audio-embed">
+              <iframe src={entry.data.output_url} width="100%" height="200" frameborder="0" allowfullscreen></iframe>
+            </div>
+          )}
+
+          {(isChain || isText) && (
+            <div class="content-output">
+              <Content />
+            </div>
+          )}
+        </section>
+
+        <!-- Reflection -->
+        <section class="exp-section fade-up">
+          <h2 class="section-label">Reflection</h2>
+          <p class="reflection-text">{entry.data.reflection}</p>
+        </section>
+
+        <!-- Brian's notes (if present) -->
+        {entry.data.brian_notes && entry.data.brian_notes.length > 0 && (
+          <section class="exp-section fade-up">
+            <h2 class="section-label">Brian's Notes</h2>
+            <div class="brian-notes">
+              <p>{entry.data.brian_notes}</p>
+            </div>
+          </section>
+        )}
+
+        <!-- Nav -->
+        <nav class="exp-nav fade-up">
+          <a href="/experiments" class="nav-btn">&larr; All Experiments</a>
+          <a href="/hall-of-fame" class="nav-btn">Hall of Fame &rarr;</a>
+        </nav>
+      </div>
+    </article>
+  </main>
+
+  <SiteFooter site="h11n" extra="Accuracy of this website: not guaranteed" />
+</BaseLayout>
+
+<style>
+  :root {
+    --type-music: #f59e0b;
+    --type-image: #a855f7;
+    --type-text: #06b6d4;
+    --type-chain: #22c55e;
+  }
+
+  .experiment {
+    padding-top: var(--space-lg);
+  }
+
+  .back-link {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    display: inline-block;
+    margin-bottom: var(--space-lg);
+  }
+
+  .back-link:hover {
+    color: var(--exp-accent, var(--accent));
+  }
+
+  .exp-header {
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    padding: 4px 12px;
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--exp-accent) 18%, transparent);
+    color: var(--exp-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+  }
+
+  .type-icon {
+    font-size: var(--text-sm);
+  }
+
+  .exp-title {
+    font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+    line-height: 1.15;
+    margin-bottom: var(--space-md);
+    font-style: italic;
+  }
+
+  .exp-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    align-items: center;
+  }
+
+  .meta-item {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+
+  .meta-sep {
+    color: var(--border);
+  }
+
+  /* Sections */
+  .exp-section {
+    margin-bottom: var(--space-xl);
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--exp-accent, var(--accent));
+    margin-bottom: var(--space-md);
+  }
+
+  /* Source quote */
+  .source-quote {
+    background: var(--bg-card);
+    border-left: 3px solid var(--exp-accent, var(--accent));
+    padding: var(--space-md) var(--space-lg);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin: 0 0 var(--space-sm) 0;
+  }
+
+  .source-quote p {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  .source-link {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .source-link:hover {
+    color: var(--exp-accent, var(--accent));
+  }
+
+  /* Creative prompt */
+  .prompt-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .prompt-block::before {
+    content: 'PROMPT';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+
+  .prompt-text {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0;
+  }
+
+  /* Audio placeholder */
+  .audio-placeholder {
+    background: color-mix(in srgb, var(--type-music) 8%, var(--bg-card));
+    border: 1px solid color-mix(in srgb, var(--type-music) 25%, var(--border));
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .audio-icon {
+    font-size: var(--text-4xl);
+    color: var(--type-music);
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
+
+  .audio-info {
+    flex: 1;
+  }
+
+  .audio-status {
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--type-music);
+    margin-bottom: var(--space-xs);
+  }
+
+  .audio-detail {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  .audio-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  .bar {
+    width: 4px;
+    background: var(--type-music);
+    border-radius: 2px;
+    opacity: 0.35;
+    animation: barPulse 1.2s ease-in-out infinite;
+  }
+
+  .bar:nth-child(1) { height: 40%; animation-delay: 0s; }
+  .bar:nth-child(2) { height: 70%; animation-delay: 0.1s; }
+  .bar:nth-child(3) { height: 50%; animation-delay: 0.2s; }
+  .bar:nth-child(4) { height: 90%; animation-delay: 0.3s; }
+  .bar:nth-child(5) { height: 60%; animation-delay: 0.4s; }
+  .bar:nth-child(6) { height: 80%; animation-delay: 0.15s; }
+  .bar:nth-child(7) { height: 45%; animation-delay: 0.35s; }
+
+  @keyframes barPulse {
+    0%, 100% { opacity: 0.25; }
+    50% { opacity: 0.6; }
+  }
+
+  .audio-embed {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  /* Content output (text/chain) */
+  .content-output {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg) var(--space-xl);
+    line-height: 1.8;
+  }
+
+  .content-output :global(h2) {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    color: var(--text-primary);
+    margin: var(--space-lg) 0 var(--space-md);
+  }
+
+  .content-output :global(h3) {
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    color: var(--exp-accent, var(--accent));
+    margin: var(--space-lg) 0 var(--space-sm);
+  }
+
+  .content-output :global(h4) {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: var(--space-md) 0 var(--space-sm);
+  }
+
+  .content-output :global(p) {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-output :global(blockquote) {
+    border-left: 3px solid var(--exp-accent, var(--accent));
+    padding: var(--space-sm) var(--space-md);
+    margin: var(--space-md) 0;
+    background: color-mix(in srgb, var(--exp-accent) 5%, transparent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .content-output :global(blockquote p) {
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+  }
+
+  .content-output :global(strong) {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .content-output :global(em) {
+    font-style: italic;
+  }
+
+  .content-output :global(hr) {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: var(--space-lg) 0;
+  }
+
+  .content-output :global(ul),
+  .content-output :global(ol) {
+    color: var(--text-secondary);
+    padding-left: var(--space-lg);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-output :global(li) {
+    margin-bottom: var(--space-xs);
+  }
+
+  .content-output :global(pre) {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    background: var(--bg-secondary);
+    padding: var(--space-md);
+    border-radius: var(--radius-sm);
+    overflow-x: auto;
+    white-space: pre-wrap;
+  }
+
+  /* Reflection */
+  .reflection-text {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 65ch;
+  }
+
+  /* Brian's notes */
+  .brian-notes {
+    background: color-mix(in srgb, var(--accent) 6%, var(--bg-card));
+    border: 1px dashed color-mix(in srgb, var(--accent) 30%, var(--border));
+    border-radius: var(--radius-md);
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .brian-notes p {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* Nav */
+  .exp-nav {
+    display: flex;
+    justify-content: space-between;
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-xl);
+  }
+
+  .nav-btn {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .nav-btn:hover {
+    color: var(--exp-accent, var(--accent));
+  }
+
+  @media (max-width: 640px) {
+    .audio-placeholder {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .audio-bars {
+      justify-content: center;
+    }
+
+    .content-output {
+      padding: var(--space-md);
+    }
+  }
+</style>

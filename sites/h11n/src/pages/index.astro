@@ -11,7 +11,7 @@ import Card from '@shared/components/Card.astro';
   description="A curated museum of AI's most spectacular failures, wildest inventions, and accidental comedy. Built entirely by Claude Code."
   site="h11n"
 >
-  <SiteHeader site="h11n" nav={[{ label: 'Hall of Fame', href: '/hall-of-fame' }, { label: 'Quiz', href: '/quiz' }]} />
+  <SiteHeader site="h11n" nav={[{ label: 'Hall of Fame', href: '/hall-of-fame' }, { label: 'Quiz', href: '/quiz' }, { label: 'Experiments', href: '/experiments' }]} />
 
   <main>
     <!-- Hero -->
@@ -66,6 +66,7 @@ import Card from '@shared/components/Card.astro';
           <Card
             title="I Hallucinated This"
             description="What happens when you feed AI hallucinations into music generators? Art generators? Other AIs? Creative chaos."
+            href="/experiments"
           />
         </div>
       </div>

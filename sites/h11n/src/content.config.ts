@@ -18,4 +18,20 @@ const hallucinations = defineCollection({
   }),
 });
 
-export const collections = { hallucinations };
+const experiments = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/experiments' }),
+  schema: z.object({
+    title: z.string(),
+    source_hallucination: z.string(),
+    original_hallucination: z.string(),
+    creative_prompt: z.string(),
+    output_type: z.enum(['music', 'image', 'text', 'chain']),
+    output_url: z.string().default(''),
+    tools_used: z.array(z.string()),
+    reflection: z.string(),
+    brian_notes: z.string().default(''),
+    date: z.date(),
+  }),
+});
+
+export const collections = { hallucinations, experiments };

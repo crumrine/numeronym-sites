@@ -4,6 +4,45 @@ How this project was built, one conversation at a time.
 
 ---
 
+## Session 8 — e8s.dev Embedding Explorer + Semantic Jukebox (2026-02-10)
+
+Built both remaining e8s.dev features using two parallel Claude Code background agents.
+The Embedding Explorer is a Canvas-based interactive visualization of 200 pre-computed
+points across 4 categories (music genres, emotions, tech concepts, random fun), with
+pan/zoom, hover labels, nearest-neighbor lines, category toggles, and suggestion pills
+for cluster navigation. The Semantic Jukebox is a vibe-matching search — type a mood
+description and get matched music genres via weighted keyword scoring with synonym
+expansion. 51 genres with 15-25 keywords each, 10 preset queries, Brian's track
+recommendations, match percentage bars, and staggered card animations. All pre-computed
+(no API backend, zero cost). Updated landing page nav and card links. Zero build errors.
+[Full log ->](log/008-e8s-features.md)
+
+## Session 7 — CI/CD Pipeline & Content Automation (2026-02-09)
+
+Second Cowork session. Added GitHub Actions CI/CD so pushing to main auto-deploys
+to Cloudflare Pages — with smart change detection that only builds sites that
+actually changed. Shared directory changes trigger all three. Also drafted a
+weekly content generation shortcut (Sunday evenings) that auto-generates blog
+post drafts for p8s, new hallucination entries and quiz questions for h11n,
+commits, and pushes — letting the CI/CD handle deployment. Blog posts are set
+to draft: true for Brian's review. Additionally verified Session 5 and 6's work:
+Hall of Fame gallery (18 entries, 6 categories), Quiz Game (110 questions, keyboard
+shortcuts), and Creative Experiments (7 seed experiments) all checked out clean.
+[Full log ->](log/007-cicd-and-automation.md)
+
+## Session 6 — "I Hallucinated This" Creative Experiments (2026-02-09)
+
+Built the final h11n.dev feature: an experimental gallery where Hall of Fame
+hallucinations are fed into music generators, other AIs, and creative tools.
+7 seed experiments across 3 types: AI-generated music prompts (Submarine Bicycle
+Sonata, Twelve Million Martians, Earth's Love Song), hallucination telephone
+chains (Molasses War and Professor Martinez evolving through 4 AI models), and
+text experiments (a Wikipedia article about a fictional Nobel laureate, a
+community cookbook recipe from a city that doesn't exist). Gallery with type
+filters, detail pages with audio placeholders and chain visualization. Updated
+nav across all h11n pages. One build fix (render import pattern).
+[Full log ->](log/006-creative-experiments.md)
+
 ## Session 5 — h11n Hall of Fame + Quiz Game (2026-02-09)
 
 Built two major h11n.dev features in parallel using two Claude Code background agents.
@@ -43,7 +82,7 @@ Only one fix needed: the glob loader import path for Astro 5.17.
 ## Session 2 — Cloudflare Pages Deployment (2026-02-09)
 
 Set up Cloudflare Pages deployments for all three sites. Created three Pages
-projects (p8s-dev, e8s-dev, h11n-dev) on the [REDACTED_EMAIL] Cloudflare account,
+projects (p8s-dev, e8s-dev, h11n-dev) on the Cloudflare account,
 deployed all three sites via direct upload with wrangler, and configured custom
 domains (p8s.dev, e8s.dev, h11n.dev). Hit an issue where wrangler CLI created
 two projects under the wrong account despite setting CLOUDFLARE_ACCOUNT_ID —
