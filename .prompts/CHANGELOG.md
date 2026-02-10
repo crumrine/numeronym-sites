@@ -4,6 +4,18 @@ How this project was built, one conversation at a time.
 
 ---
 
+## Session 4 — Verification & Landing Page Fix (2026-02-09)
+
+First session using Claude via Cowork mode (desktop app) instead of Claude Code CLI.
+Brian asked for a verification pass on Session 3's blog and playground work. Reviewed
+all 14 new files for code quality, accessibility, and responsiveness — everything
+checked out clean. Caught two issues by comparing source to live site: the landing
+page nav links for Blog and Playground weren't showing on the deployed p8s.dev
+(stale deploy), and the hero CTA still pointed to `#coming-soon` instead of
+`/playground`. Fixed the CTA, rebuilt successfully. Deploy handed off to Claude Code
+which has the Cloudflare API token.
+[Full log ->](log/004-verification-and-fix.md)
+
 ## Session 3 — Blog + Parameter Playground (2026-02-09)
 
 Built two major p8s.dev features in parallel using two Claude Code agents.
