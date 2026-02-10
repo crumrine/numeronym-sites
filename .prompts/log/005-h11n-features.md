@@ -2,9 +2,7 @@
 
 **Date:** 2026-02-09
 **Site:** h11n.dev
-**ClickUp Tasks:**
-- [Build Hall of Fame Gallery](ClickUp)
-- [Build "Real or Hallucinated?" Quiz](ClickUp)
+**ClickUp Tasks:** Build Hall of Fame Gallery, Build "Real or Hallucinated?" Quiz
 
 ## Prompt
 

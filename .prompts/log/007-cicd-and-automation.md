@@ -48,7 +48,7 @@ Brian asked about automating content updates across all three sites. After discu
 2. **GitHub secrets required**: The CI/CD workflow needs two secrets added to the GitHub repo:
    - `CLOUDFLARE_API_TOKEN` — Cloudflare API token with Pages edit permissions
    - `CLOUDFLARE_ACCOUNT_ID` — Cloudflare account ID
-   Brian needs to add these at the repo's GitHub Settings > Secrets and variables > Actions
+   These need to be added in the repo's GitHub Settings > Secrets and variables > Actions
 
 ## Notes
 

@@ -2,7 +2,7 @@
 
 **Date:** 2026-02-09
 **Site:** shared / all
-**ClickUp Tasks:** [Initialize Monorepo Structure](ClickUp), [Create Shared Design System](ClickUp), [Build Landing Page (p8s)](ClickUp), [Build Landing Page (e8s)](ClickUp), [Build Landing Page (h11n)](ClickUp), [Create README and Documentation](ClickUp), [Set Up Prompt History](ClickUp)
+**ClickUp Tasks:** Initialize Monorepo Structure, Create Shared Design System, Build Landing Page (p8s), Build Landing Page (e8s), Build Landing Page (h11n), Create README and Documentation, Set Up Prompt History
 
 ## Prompt
 

@@ -2,7 +2,7 @@
 
 **Date:** 2026-02-09
 **Site:** p8s
-**ClickUp Tasks:** [Build Parameter Playground](ClickUp), [Set Up Blog with Seed Content](ClickUp)
+**ClickUp Tasks:** Build Parameter Playground, Set Up Blog with Seed Content
 
 ## Prompt
 

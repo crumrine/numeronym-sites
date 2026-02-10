@@ -2,7 +2,7 @@
 
 **Date:** 2026-02-09
 **Site:** shared (infrastructure)
-**ClickUp Task:** [Configure Cloudflare Pages Deployments](ClickUp)
+**ClickUp Task:** Configure Cloudflare Pages Deployments
 
 ## Prompt
 
@@ -33,13 +33,13 @@
 
 1. **Wrangler account selection bug**: `wrangler pages project create` with `CLOUDFLARE_ACCOUNT_ID` env var created p8s-dev correctly but silently created e8s-dev and h11n-dev under a different account (or nowhere). Verified by listing projects via API — only p8s-dev existed in the target account. Fixed by creating e8s-dev and h11n-dev directly via the Cloudflare REST API (`POST /accounts/:id/pages/projects`).
 
-2. **No wrangler CLI for custom domains**: Wrangler doesn't have a `pages project add-domain` subcommand. Had to use the Cloudflare REST API directly (`POST /accounts/:id/pages/projects/:name/domains`) to add custom domains. Required extracting the OAuth token from wrangler's config file at `wrangler's local config file`.
+2. **No wrangler CLI for custom domains**: Wrangler doesn't have a `pages project add-domain` subcommand. Had to use the Cloudflare REST API directly (`POST /accounts/:id/pages/projects/:name/domains`) to add custom domains. Required extracting the OAuth token from wrangler's local config file.
 
 3. **SSL provisioning timing**: p8s.dev went active within 30 seconds. e8s.dev and h11n.dev were still in "pending" status after ~1 minute — this is normal behavior for Cloudflare SSL certificate provisioning and resolves automatically within a few minutes.
 
 ## Notes
 
-- All three domains (p8s.dev, e8s.dev, h11n.dev) were already registered and using Cloudflare DNS in the [REDACTED_EMAIL] account
+- All three domains (p8s.dev, e8s.dev, h11n.dev) were already registered and using Cloudflare DNS
 - Cloudflare automatically creates CNAME records when adding custom domains to Pages projects in the same account
-- Future deploys can use `wrangler pages deploy` with `CLOUDFLARE_ACCOUNT_ID=[REDACTED_ACCOUNT_ID]`
+- Future deploys can use `wrangler pages deploy` with `CLOUDFLARE_ACCOUNT_ID` set as an environment variable
 - Could set up GitHub Actions for auto-deploy on push (future task)
