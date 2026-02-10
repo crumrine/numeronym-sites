@@ -4,10 +4,10 @@ on:
   push:
     branches: [main]
 
-# Only one deploy at a time — queue newer pushes
+# Only one deploy at a time — cancel stale runs when a new push arrives
 concurrency:
-  group: deploy
-  cancel-in-progress: false
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   detect-changes:
@@ -24,8 +24,12 @@ jobs:
       - name: Detect which sites changed
         id: changes
         run: |
-          # Compare against previous commit
-          CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || echo "sites/")
+          # Compare against previous commit (fallback to all sites if HEAD~1 doesn't exist)
+          if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            CHANGED=$(git diff --name-only HEAD~1 HEAD)
+          else
+            CHANGED="sites/"
+          fi
 
           # Check each site + shared (shared changes trigger all sites)
           if echo "$CHANGED" | grep -qE '^(sites/p8s/|shared/)'; then
