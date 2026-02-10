@@ -1,0 +1,128 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+
+# Only one deploy at a time — queue newer pushes
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      p8s: ${{ steps.changes.outputs.p8s }}
+      e8s: ${{ steps.changes.outputs.e8s }}
+      h11n: ${{ steps.changes.outputs.h11n }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect which sites changed
+        id: changes
+        run: |
+          # Compare against previous commit
+          CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || echo "sites/")
+
+          # Check each site + shared (shared changes trigger all sites)
+          if echo "$CHANGED" | grep -qE '^(sites/p8s/|shared/)'; then
+            echo "p8s=true" >> $GITHUB_OUTPUT
+          else
+            echo "p8s=false" >> $GITHUB_OUTPUT
+          fi
+
+          if echo "$CHANGED" | grep -qE '^(sites/e8s/|shared/)'; then
+            echo "e8s=true" >> $GITHUB_OUTPUT
+          else
+            echo "e8s=false" >> $GITHUB_OUTPUT
+          fi
+
+          if echo "$CHANGED" | grep -qE '^(sites/h11n/|shared/)'; then
+            echo "h11n=true" >> $GITHUB_OUTPUT
+          else
+            echo "h11n=false" >> $GITHUB_OUTPUT
+          fi
+
+          echo "Changed files:"
+          echo "$CHANGED"
+
+  deploy-p8s:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.p8s == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: sites/p8s/package-lock.json
+
+      - name: Install and build
+        run: |
+          cd sites/p8s
+          npm ci
+          npm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy sites/p8s/dist --project-name p8s-dev
+
+  deploy-e8s:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.e8s == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: sites/e8s/package-lock.json
+
+      - name: Install and build
+        run: |
+          cd sites/e8s
+          npm ci
+          npm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy sites/e8s/dist --project-name e8s-dev
+
+  deploy-h11n:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.h11n == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: sites/h11n/package-lock.json
+
+      - name: Install and build
+        run: |
+          cd sites/h11n
+          npm ci
+          npm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy sites/h11n/dist --project-name h11n-dev
