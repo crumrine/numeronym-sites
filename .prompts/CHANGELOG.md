@@ -4,6 +4,18 @@ How this project was built, one conversation at a time.
 
 ---
 
+## Session 3 — Blog + Parameter Playground (2026-02-09)
+
+Built two major p8s.dev features in parallel using two Claude Code agents.
+The blog uses Astro Content Collections with three seed posts — "English is
+the New Programming Language", "I Built Three Sites Without Code", and
+"The Death of the Traditional SWE". The parameter playground is a fully
+interactive split-screen tool with sliders for temperature, top_p, and
+max_tokens, plus system prompt and model selectors. Uses pre-generated
+responses that swap based on slider positions with typing animations.
+Only one fix needed: the glob loader import path for Astro 5.17.
+[Full log ->](log/003-blog-and-playground.md)
+
 ## Session 2 — Cloudflare Pages Deployment (2026-02-09)
 
 Set up Cloudflare Pages deployments for all three sites. Created three Pages

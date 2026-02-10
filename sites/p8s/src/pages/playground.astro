@@ -1,0 +1,967 @@
+---
+import BaseLayout from '@shared/components/BaseLayout.astro';
+import SiteHeader from '@shared/components/SiteHeader.astro';
+import SiteFooter from '@shared/components/SiteFooter.astro';
+import responsesData from '../data/playground-responses.json';
+---
+
+<BaseLayout
+  title="Parameter Playground | p8s.dev"
+  description="Adjust AI parameters and see how temperature, top_p, and system prompts change model output. An interactive demo by p8s.dev."
+  site="p8s"
+>
+  <SiteHeader
+    site="p8s"
+    nav={[
+      { label: 'Blog', href: '/blog' },
+      { label: 'Playground', href: '/playground' },
+    ]}
+  />
+
+  <main class="playground-main">
+    <div class="container">
+      <!-- Page header -->
+      <div class="playground-header fade-up">
+        <h1>Parameter <span class="accent">Playground</span></h1>
+        <p class="playground-subtitle">
+          Slide the dials. See what changes. Explore how parameters shape AI output.
+        </p>
+      </div>
+
+      <!-- Preset buttons -->
+      <div class="preset-bar fade-up fade-up-delay-1">
+        <span class="preset-label">Presets:</span>
+        <button class="preset-btn" data-preset="conservative">Conservative</button>
+        <button class="preset-btn active" data-preset="balanced">Balanced</button>
+        <button class="preset-btn" data-preset="creative">Creative</button>
+        <button class="preset-btn preset-btn--chaos" data-preset="chaos">Chaos Mode</button>
+        <button class="reset-btn" id="resetBtn">Reset to Defaults</button>
+      </div>
+
+      <!-- Main split layout -->
+      <div class="playground-grid fade-up fade-up-delay-2">
+        <!-- Left panel: Controls -->
+        <div class="panel panel--controls">
+          <h2 class="panel-title">Controls</h2>
+
+          <!-- Temperature -->
+          <div class="param-group" data-param="temperature">
+            <div class="param-header">
+              <label class="param-label" for="tempSlider">Temperature</label>
+              <span class="param-value" id="tempValue">0.7</span>
+            </div>
+            <p class="param-desc">Controls randomness. Lower = more focused, higher = more creative.</p>
+            <input
+              type="range"
+              id="tempSlider"
+              class="param-slider"
+              min="0"
+              max="2"
+              step="0.1"
+              value="0.7"
+            />
+            <div class="param-range-labels">
+              <span>0.0</span>
+              <span>2.0</span>
+            </div>
+            <details class="param-details">
+              <summary>Learn more</summary>
+              <p>Temperature scales the logits (raw prediction scores) before the softmax function. At 0, the model always picks the most probable token. At 2.0, the probability distribution flattens dramatically, making unlikely tokens almost as probable as likely ones. Most production applications use 0.3-0.8.</p>
+            </details>
+          </div>
+
+          <!-- Top P -->
+          <div class="param-group" data-param="topP">
+            <div class="param-header">
+              <label class="param-label" for="topPSlider">Top P (Nucleus Sampling)</label>
+              <span class="param-value" id="topPValue">0.9</span>
+            </div>
+            <p class="param-desc">Limits token pool to the most probable subset.</p>
+            <input
+              type="range"
+              id="topPSlider"
+              class="param-slider"
+              min="0"
+              max="1"
+              step="0.05"
+              value="0.9"
+            />
+            <div class="param-range-labels">
+              <span>0.0</span>
+              <span>1.0</span>
+            </div>
+            <details class="param-details">
+              <summary>Learn more</summary>
+              <p>Top P (nucleus sampling) considers only the smallest set of tokens whose cumulative probability exceeds P. At 0.1, only the most probable tokens (summing to 10% probability) are considered. At 1.0, all tokens are eligible. It works alongside temperature to control output diversity.</p>
+            </details>
+          </div>
+
+          <!-- Max Tokens -->
+          <div class="param-group" data-param="maxTokens">
+            <div class="param-header">
+              <label class="param-label" for="tokensSlider">Max Tokens</label>
+              <span class="param-value" id="tokensValue">500</span>
+            </div>
+            <p class="param-desc">Maximum length of the response in tokens (~0.75 words each).</p>
+            <input
+              type="range"
+              id="tokensSlider"
+              class="param-slider"
+              min="50"
+              max="2000"
+              step="50"
+              value="500"
+            />
+            <div class="param-range-labels">
+              <span>50</span>
+              <span>2000</span>
+            </div>
+            <details class="param-details">
+              <summary>Learn more</summary>
+              <p>Max tokens sets an upper limit on response length. One token is roughly 3/4 of a word in English. Setting this too low truncates useful responses; too high wastes compute and can lead to rambling. Most conversational responses fit within 200-800 tokens.</p>
+            </details>
+          </div>
+
+          <!-- System Prompt -->
+          <div class="param-group" data-param="systemPrompt">
+            <div class="param-header">
+              <label class="param-label" for="systemPromptSelect">System Prompt</label>
+            </div>
+            <p class="param-desc">Sets the model's persona and behavior constraints.</p>
+            <select id="systemPromptSelect" class="param-select">
+              <option value="default">Default</option>
+              <option value="pirate">Pirate</option>
+              <option value="shakespeare">Shakespeare</option>
+              <option value="technical">Technical Writer</option>
+              <option value="eli5">Explain Like I'm 5</option>
+            </select>
+            <details class="param-details">
+              <summary>Learn more</summary>
+              <p>The system prompt is a special instruction that shapes the model's entire personality, tone, and constraints. It's processed before the user's message and fundamentally changes how the model approaches every response. It's the most powerful "parameter" you can set.</p>
+            </details>
+          </div>
+
+          <!-- Model -->
+          <div class="param-group" data-param="model">
+            <div class="param-header">
+              <label class="param-label" for="modelSelect">Model</label>
+            </div>
+            <p class="param-desc">Different models have distinct reasoning styles and capabilities.</p>
+            <select id="modelSelect" class="param-select">
+              <option value="claude-3.5-sonnet">claude-3.5-sonnet</option>
+              <option value="gpt-4o">gpt-4o</option>
+              <option value="claude-3-haiku">claude-3-haiku</option>
+            </select>
+            <details class="param-details">
+              <summary>Learn more</summary>
+              <p>Each model has different training data, architectures, and fine-tuning. Larger models tend to produce more nuanced and detailed output, while smaller models are faster and cheaper. The same parameters can produce noticeably different results across models.</p>
+            </details>
+          </div>
+        </div>
+
+        <!-- Right panel: Output -->
+        <div class="panel panel--output">
+          <h2 class="panel-title">Output</h2>
+
+          <div class="output-prompt-box">
+            <span class="output-prompt-label">Prompt</span>
+            <p class="output-prompt-text">Explain what a neural network is.</p>
+          </div>
+
+          <!-- What changed callout -->
+          <div class="what-changed" id="whatChanged" aria-live="polite" hidden>
+            <span class="what-changed-label">What changed?</span>
+            <span class="what-changed-text" id="whatChangedText"></span>
+          </div>
+
+          <!-- Parameter badge bar -->
+          <div class="output-badges" id="outputBadges">
+            <span class="badge badge--temp">temp: <strong>0.7</strong></span>
+            <span class="badge badge--topp">top_p: <strong>0.9</strong></span>
+            <span class="badge badge--tokens">max: <strong>500</strong></span>
+            <span class="badge badge--model">claude-3.5-sonnet</span>
+          </div>
+
+          <div class="output-response" id="outputResponse">
+            <div class="output-text" id="outputText">
+              <!-- Response rendered here -->
+            </div>
+            <div class="output-cursor" id="outputCursor" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <SiteFooter site="p8s" />
+</BaseLayout>
+
+<!-- Inline the response data for client-side JS -->
+<script is:inline define:vars={{ responsesData }}>
+  window.__playgroundData = responsesData;
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const data = (window as any).__playgroundData;
+    if (!data) return;
+
+    // --- DOM refs ---
+    const tempSlider = document.getElementById('tempSlider') as HTMLInputElement;
+    const topPSlider = document.getElementById('topPSlider') as HTMLInputElement;
+    const tokensSlider = document.getElementById('tokensSlider') as HTMLInputElement;
+    const systemPromptSelect = document.getElementById('systemPromptSelect') as HTMLSelectElement;
+    const modelSelect = document.getElementById('modelSelect') as HTMLSelectElement;
+    const tempValue = document.getElementById('tempValue')!;
+    const topPValue = document.getElementById('topPValue')!;
+    const tokensValue = document.getElementById('tokensValue')!;
+    const outputText = document.getElementById('outputText')!;
+    const outputCursor = document.getElementById('outputCursor')!;
+    const whatChanged = document.getElementById('whatChanged')!;
+    const whatChangedText = document.getElementById('whatChangedText')!;
+    const resetBtn = document.getElementById('resetBtn')!;
+    const presetBtns = document.querySelectorAll('.preset-btn');
+    const outputBadges = document.getElementById('outputBadges')!;
+
+    // --- Defaults ---
+    const DEFAULTS = {
+      temperature: 0.7,
+      topP: 0.9,
+      maxTokens: 500,
+      systemPrompt: 'default',
+      model: 'claude-3.5-sonnet',
+    };
+
+    const PRESETS: Record<string, { temperature: number; topP: number; maxTokens: number; label: string; description: string }> = {
+      conservative: { temperature: 0.1, topP: 0.3, maxTokens: 200, label: 'Conservative', description: 'Factual and focused. The model sticks to high-probability tokens, producing predictable and precise output.' },
+      balanced: { temperature: 0.7, topP: 0.9, maxTokens: 500, label: 'Balanced', description: 'Natural and reliable. A good default for most tasks, balancing creativity with coherence.' },
+      creative: { temperature: 1.2, topP: 0.95, maxTokens: 1000, label: 'Creative', description: 'Surprising and expressive. Higher temperature lets the model take risks with word choice and structure.' },
+      chaos: { temperature: 2.0, topP: 1.0, maxTokens: 2000, label: 'Chaos Mode', description: 'Hold on to something. Maximum randomness. Outputs may be brilliant, nonsensical, or both.' },
+    };
+
+    // --- State ---
+    let currentParams = { ...DEFAULTS };
+    let previousParams = { ...DEFAULTS };
+    let typingTimer: number | null = null;
+    let currentResponseText = '';
+
+    // --- Helpers ---
+
+    function getParams() {
+      return {
+        temperature: parseFloat(tempSlider.value),
+        topP: parseFloat(topPSlider.value),
+        maxTokens: parseInt(tokensSlider.value, 10),
+        systemPrompt: systemPromptSelect.value,
+        model: modelSelect.value,
+      };
+    }
+
+    function findNearestResponse(params: typeof DEFAULTS) {
+      const responses = data.responses;
+      let bestMatch = responses[0];
+      let bestScore = Infinity;
+
+      for (const r of responses) {
+        // Weighted distance: system prompt & model are exact-match bonuses
+        let score = 0;
+        score += Math.abs(r.temperature - params.temperature) * 3;
+        score += Math.abs(r.topP - params.topP) * 2;
+        // System prompt match is very important
+        if (r.systemPrompt !== params.systemPrompt) score += 10;
+        // Model match
+        if (r.model !== params.model) score += 5;
+
+        if (score < bestScore) {
+          bestScore = score;
+          bestMatch = r;
+        }
+      }
+      return bestMatch;
+    }
+
+    function updateValueDisplays() {
+      tempValue.textContent = parseFloat(tempSlider.value).toFixed(1);
+      topPValue.textContent = parseFloat(topPSlider.value).toFixed(2);
+      tokensValue.textContent = tokensSlider.value;
+    }
+
+    function updateBadges(params: typeof DEFAULTS) {
+      outputBadges.innerHTML = `
+        <span class="badge badge--temp">temp: <strong>${params.temperature.toFixed(1)}</strong></span>
+        <span class="badge badge--topp">top_p: <strong>${params.topP.toFixed(2)}</strong></span>
+        <span class="badge badge--tokens">max: <strong>${params.maxTokens}</strong></span>
+        <span class="badge badge--model">${params.model}</span>
+      `;
+    }
+
+    function updateSliderFill(slider: HTMLInputElement) {
+      const min = parseFloat(slider.min);
+      const max = parseFloat(slider.max);
+      const val = parseFloat(slider.value);
+      const pct = ((val - min) / (max - min)) * 100;
+      slider.style.setProperty('--fill', `${pct}%`);
+    }
+
+    function updateActivePreset(params: typeof DEFAULTS) {
+      let matched = '';
+      for (const [key, preset] of Object.entries(PRESETS)) {
+        if (
+          Math.abs(params.temperature - preset.temperature) < 0.05 &&
+          Math.abs(params.topP - preset.topP) < 0.03 &&
+          params.maxTokens === preset.maxTokens
+        ) {
+          matched = key;
+          break;
+        }
+      }
+      presetBtns.forEach((btn) => {
+        const el = btn as HTMLElement;
+        el.classList.toggle('active', el.dataset.preset === matched);
+      });
+    }
+
+    // --- What Changed ---
+
+    function showWhatChanged(prev: typeof DEFAULTS, curr: typeof DEFAULTS) {
+      const changes: string[] = [];
+      if (Math.abs(prev.temperature - curr.temperature) > 0.05) {
+        if (curr.temperature < 0.4) changes.push('Lower temperature produces more deterministic, focused output');
+        else if (curr.temperature > 1.0) changes.push('Higher temperature increases randomness and creativity');
+        else changes.push('Temperature shifted toward a balanced range');
+      }
+      if (Math.abs(prev.topP - curr.topP) > 0.03) {
+        if (curr.topP < 0.5) changes.push('Narrower top_p restricts the model to high-confidence tokens');
+        else if (curr.topP > 0.9) changes.push('Wider top_p allows more diverse word choices');
+        else changes.push('Top P adjusted to a moderate sampling range');
+      }
+      if (prev.systemPrompt !== curr.systemPrompt) {
+        const labels: Record<string, string> = {
+          default: 'a neutral, informative tone',
+          pirate: 'a pirate persona with nautical flair',
+          shakespeare: 'Elizabethan language and dramatic structure',
+          technical: 'precise technical documentation style',
+          eli5: 'a simple, child-friendly explanation style',
+        };
+        changes.push(`System prompt changed to ${labels[curr.systemPrompt] || curr.systemPrompt}`);
+      }
+      if (prev.model !== curr.model) {
+        changes.push(`Switched to ${curr.model}, which has a different response style`);
+      }
+
+      if (changes.length > 0) {
+        whatChangedText.textContent = changes.join('. ') + '.';
+        whatChanged.hidden = false;
+        // Auto-hide after 6s
+        setTimeout(() => {
+          whatChanged.hidden = true;
+        }, 6000);
+      }
+    }
+
+    // --- Typing animation ---
+
+    function typeResponse(text: string) {
+      if (typingTimer !== null) {
+        cancelAnimationFrame(typingTimer);
+        typingTimer = null;
+      }
+
+      // If same response, skip animation
+      if (text === currentResponseText) return;
+      currentResponseText = text;
+
+      outputText.textContent = '';
+      outputCursor.classList.add('typing');
+
+      const chars = text.split('');
+      const totalDuration = Math.min(1200, chars.length * 8);
+      const charsPerFrame = Math.max(1, Math.ceil(chars.length / (totalDuration / 16)));
+      let idx = 0;
+
+      function tick() {
+        const end = Math.min(idx + charsPerFrame, chars.length);
+        outputText.textContent += chars.slice(idx, end).join('');
+        idx = end;
+
+        if (idx < chars.length) {
+          typingTimer = requestAnimationFrame(tick);
+        } else {
+          outputCursor.classList.remove('typing');
+          typingTimer = null;
+        }
+      }
+
+      typingTimer = requestAnimationFrame(tick);
+    }
+
+    // --- Main update ---
+
+    function update() {
+      const params = getParams();
+      updateValueDisplays();
+      updateBadges(params);
+      updateActivePreset(params);
+
+      // Update slider fills
+      updateSliderFill(tempSlider);
+      updateSliderFill(topPSlider);
+      updateSliderFill(tokensSlider);
+
+      const match = findNearestResponse(params);
+      showWhatChanged(previousParams, params);
+      typeResponse(match.response);
+
+      previousParams = { ...params };
+      currentParams = { ...params };
+    }
+
+    // --- Event listeners ---
+
+    tempSlider.addEventListener('input', update);
+    topPSlider.addEventListener('input', update);
+    tokensSlider.addEventListener('input', update);
+    systemPromptSelect.addEventListener('change', update);
+    modelSelect.addEventListener('change', update);
+
+    presetBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = (btn as HTMLElement).dataset.preset;
+        if (!key || !PRESETS[key]) return;
+        const preset = PRESETS[key];
+        tempSlider.value = String(preset.temperature);
+        topPSlider.value = String(preset.topP);
+        tokensSlider.value = String(preset.maxTokens);
+        update();
+      });
+    });
+
+    resetBtn.addEventListener('click', () => {
+      tempSlider.value = String(DEFAULTS.temperature);
+      topPSlider.value = String(DEFAULTS.topP);
+      tokensSlider.value = String(DEFAULTS.maxTokens);
+      systemPromptSelect.value = DEFAULTS.systemPrompt;
+      modelSelect.value = DEFAULTS.model;
+      update();
+    });
+
+    // --- Slider glow on focus ---
+    const allSliders = document.querySelectorAll('.param-slider');
+    allSliders.forEach((slider) => {
+      slider.addEventListener('focus', () => {
+        (slider as HTMLElement).closest('.param-group')?.classList.add('param-group--active');
+      });
+      slider.addEventListener('blur', () => {
+        (slider as HTMLElement).closest('.param-group')?.classList.remove('param-group--active');
+      });
+    });
+
+    // --- Init ---
+    update();
+  });
+</script>
+
+<style>
+  /* ==========================================
+     Playground Layout
+     ========================================== */
+
+  .playground-main {
+    padding: var(--space-xl) 0 0;
+    min-height: 80vh;
+  }
+
+  .playground-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .playground-header h1 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-sm);
+  }
+
+  .accent {
+    color: var(--accent);
+  }
+
+  .playground-subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 50ch;
+    margin: 0 auto;
+  }
+
+  /* ==========================================
+     Preset Bar
+     ========================================== */
+
+  .preset-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    justify-content: center;
+  }
+
+  .preset-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin-right: var(--space-xs);
+  }
+
+  .preset-btn {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    padding: var(--space-xs) var(--space-md);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .preset-btn:hover {
+    border-color: var(--accent);
+    color: var(--text-primary);
+  }
+
+  .preset-btn.active {
+    background: var(--accent-dim);
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 12px var(--accent-dim);
+  }
+
+  .preset-btn--chaos {
+    border-color: #ff4444;
+    color: #ff6666;
+  }
+
+  .preset-btn--chaos:hover {
+    border-color: #ff4444;
+    background: rgba(255, 68, 68, 0.1);
+    color: #ff8888;
+  }
+
+  .preset-btn--chaos.active {
+    background: rgba(255, 68, 68, 0.15);
+    border-color: #ff4444;
+    color: #ff6666;
+    box-shadow: 0 0 12px rgba(255, 68, 68, 0.3);
+  }
+
+  .reset-btn {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    padding: var(--space-xs) var(--space-sm);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    cursor: pointer;
+    margin-left: var(--space-sm);
+    transition: all var(--transition-fast);
+  }
+
+  .reset-btn:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-secondary);
+  }
+
+  /* ==========================================
+     Split Grid
+     ========================================== */
+
+  .playground-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: var(--space-lg);
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .playground-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ==========================================
+     Panels
+     ========================================== */
+
+  .panel {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+  }
+
+  .panel-title {
+    font-size: var(--text-lg);
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ==========================================
+     Parameter Controls
+     ========================================== */
+
+  .param-group {
+    margin-bottom: var(--space-lg);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .param-group--active {
+    border-color: var(--accent-dim);
+    box-shadow: 0 0 20px var(--accent-dim), inset 0 0 20px rgba(0, 212, 255, 0.02);
+  }
+
+  .param-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-xs);
+  }
+
+  .param-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .param-value {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--accent);
+    min-width: 3.5rem;
+    text-align: right;
+  }
+
+  .param-desc {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    margin-bottom: var(--space-sm);
+    max-width: none;
+  }
+
+  /* ---- Slider Styles ---- */
+
+  .param-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    background: linear-gradient(
+      to right,
+      var(--accent) 0%,
+      var(--accent) var(--fill, 50%),
+      var(--border) var(--fill, 50%),
+      var(--border) 100%
+    );
+    transition: box-shadow var(--transition-fast);
+  }
+
+  .param-slider:focus {
+    box-shadow: 0 0 8px var(--accent-glow);
+  }
+
+  .param-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg-primary);
+    cursor: pointer;
+    box-shadow: 0 0 6px var(--accent-glow);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .param-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+
+  .param-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg-primary);
+    cursor: pointer;
+    box-shadow: 0 0 6px var(--accent-glow);
+  }
+
+  .param-slider::-moz-range-track {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--border);
+  }
+
+  .param-slider::-moz-range-progress {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--accent);
+  }
+
+  .param-range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    margin-top: var(--space-xs);
+  }
+
+  /* ---- Select Styles ---- */
+
+  .param-select {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: border-color var(--transition-fast);
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='%238888a0'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 2.5rem;
+  }
+
+  .param-select:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 8px var(--accent-dim);
+  }
+
+  .param-select option {
+    background: var(--bg-card);
+    color: var(--text-primary);
+  }
+
+  /* ---- Details / Learn More ---- */
+
+  .param-details {
+    margin-top: var(--space-sm);
+  }
+
+  .param-details summary {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--accent);
+    cursor: pointer;
+    user-select: none;
+    transition: opacity var(--transition-fast);
+  }
+
+  .param-details summary:hover {
+    opacity: 0.8;
+  }
+
+  .param-details p {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    margin-top: var(--space-xs);
+    line-height: 1.6;
+    max-width: none;
+    padding: var(--space-sm);
+    background: var(--bg-card);
+    border-radius: var(--radius-sm);
+    border-left: 2px solid var(--accent-dim);
+  }
+
+  /* ==========================================
+     Output Panel
+     ========================================== */
+
+  .output-prompt-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .output-prompt-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .output-prompt-text {
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    max-width: none;
+  }
+
+  /* What Changed callout */
+
+  .what-changed {
+    background: var(--accent-dim);
+    border: 1px solid var(--accent-glow);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) var(--space-md);
+    margin-bottom: var(--space-md);
+    animation: fadeUp 0.3s ease both;
+  }
+
+  .what-changed[hidden] {
+    display: none;
+  }
+
+  .what-changed-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--accent);
+    margin-right: var(--space-sm);
+  }
+
+  .what-changed-text {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+  }
+
+  /* Badges */
+
+  .output-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .badge strong {
+    color: var(--text-primary);
+  }
+
+  /* Response area */
+
+  .output-response {
+    position: relative;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    min-height: 200px;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .output-text {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--text-primary);
+    line-height: 1.8;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  /* Typing cursor */
+
+  .output-cursor {
+    display: none;
+  }
+
+  .output-cursor.typing {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background: var(--accent);
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: blink 0.6s steps(2) infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* ==========================================
+     Mobile
+     ========================================== */
+
+  @media (max-width: 900px) {
+    .playground-header h1 {
+      font-size: var(--text-3xl);
+    }
+
+    .panel {
+      padding: var(--space-md);
+    }
+
+    .param-group {
+      padding: var(--space-sm);
+    }
+
+    .output-response {
+      max-height: 50vh;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .playground-main {
+      padding-top: var(--space-lg);
+    }
+
+    .playground-header h1 {
+      font-size: var(--text-2xl);
+    }
+
+    .preset-bar {
+      gap: var(--space-xs);
+    }
+
+    .preset-btn {
+      font-size: var(--text-xs);
+      padding: var(--space-xs) var(--space-sm);
+    }
+
+    .preset-label {
+      width: 100%;
+      text-align: center;
+    }
+
+    .reset-btn {
+      margin-left: 0;
+    }
+  }
+</style>
