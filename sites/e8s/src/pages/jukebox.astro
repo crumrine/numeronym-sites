@@ -301,14 +301,10 @@ const genresJSON = JSON.stringify(genreData);
 
         var linksHtml = '';
         if (g.spotify_url) {
-          linksHtml += '<a href="' + escapeAttr(g.spotify_url) + '" target="_blank" rel="noopener" class="listen-link listen-spotify">Spotify</a>';
-        } else {
-          linksHtml += '<span class="listen-link listen-disabled">Spotify</span>';
+          linksHtml += '<a href="' + escapeAttr(g.spotify_url) + '" target="_blank" rel="noopener" class="listen-link listen-spotify">Explore on Spotify</a>';
         }
         if (g.youtube_url) {
-          linksHtml += '<a href="' + escapeAttr(g.youtube_url) + '" target="_blank" rel="noopener" class="listen-link listen-youtube">YouTube</a>';
-        } else {
-          linksHtml += '<span class="listen-link listen-disabled">YouTube</span>';
+          linksHtml += '<a href="' + escapeAttr(g.youtube_url) + '" target="_blank" rel="noopener" class="listen-link listen-youtube">Explore on YouTube</a>';
         }
 
         var tracksHtml = '';
@@ -694,12 +690,6 @@ const genresJSON = JSON.stringify(genreData);
     border-radius: var(--radius-sm);
     border: 1px solid var(--border);
     transition: border-color var(--transition-fast), color var(--transition-fast);
-  }
-
-  .listen-link.listen-disabled {
-    color: var(--text-muted);
-    cursor: default;
-    opacity: 0.5;
   }
 
   a.listen-link {

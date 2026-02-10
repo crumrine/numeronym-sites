@@ -7,8 +7,8 @@
       "keywords": ["neon", "night", "driving", "retro", "80s", "city", "futuristic", "synth", "nostalgia", "cinematic", "cyber", "outrun", "electric", "dreamy", "pulsing", "sunset", "chrome", "arcade", "highway", "glowing"],
       "mood_color": "#ff6b9d",
       "energy": "medium-high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/synthwave",
+      "youtube_url": "https://www.youtube.com/results?search_query=synthwave+music",
       "brian_tracks": []
     },
     {
@@ -18,8 +18,8 @@
       "keywords": ["aesthetic", "mall", "nostalgia", "surreal", "slow", "glitch", "retro", "dreamy", "hazy", "corporate", "digital", "pastel", "lo-fi", "melancholy", "ironic", "sunset", "pool", "static", "distorted"],
       "mood_color": "#ff71ce",
       "energy": "low",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/vaporwave",
+      "youtube_url": "https://www.youtube.com/results?search_query=vaporwave+music",
       "brian_tracks": []
     },
     {
@@ -29,8 +29,8 @@
       "keywords": ["study", "chill", "rain", "warm", "cozy", "beats", "mellow", "relaxing", "coffee", "late-night", "vinyl", "soft", "calm", "homework", "focus", "jazz", "gentle", "afternoon", "window", "quiet"],
       "mood_color": "#c4a882",
       "energy": "low",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/lo-fi%20hip%20hop",
+      "youtube_url": "https://www.youtube.com/results?search_query=lo-fi+hip+hop+music",
       "brian_tracks": []
     },
     {
@@ -40,10 +40,10 @@
       "keywords": ["space", "floating", "atmospheric", "calm", "meditative", "ethereal", "drone", "peaceful", "vast", "texture", "minimal", "serene", "ocean", "forest", "deep", "still", "sleep", "clouds", "expansive", "weightless"],
       "mood_color": "#4a9eff",
       "energy": "very-low",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/ambient",
+      "youtube_url": "https://www.youtube.com/results?search_query=ambient+music",
       "brian_tracks": [
-        { "title": "Ocean of Silence (Shanti)", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" }
+        { "title": "Ocean of Silence (Shanti)", "artist": "Brian 200", "url": "https://open.spotify.com/track/3taCFBkQx3UgEvb5Z77tEW" }
       ]
     },
     {
@@ -53,8 +53,8 @@
       "keywords": ["summer", "beach", "dreamy", "hazy", "warm", "nostalgic", "sun", "washed", "reverb", "lazy", "afternoon", "golden", "faded", "breezy", "gentle", "shore", "sunset", "carefree", "pastel"],
       "mood_color": "#ffb347",
       "energy": "low-medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/chillwave",
+      "youtube_url": "https://www.youtube.com/results?search_query=chillwave+music",
       "brian_tracks": []
     },
     {
@@ -64,15 +64,15 @@
       "keywords": ["dance", "club", "groove", "party", "uplifting", "four-on-the-floor", "warm", "soulful", "night", "festival", "energy", "bass", "dancefloor", "funky", "euphoria", "crowd", "bounce", "movement", "celebration"],
       "mood_color": "#ff4757",
       "energy": "high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/house",
+      "youtube_url": "https://www.youtube.com/results?search_query=house+music",
       "brian_tracks": [
         { "title": "Neon Tidings", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" },
         { "title": "Deck the Club", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" },
         { "title": "Bass of the Bells", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" },
         { "title": "World of Joy", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" },
-        { "title": "Shiva's Dance (Eternal Vibration)", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" },
-        { "title": "Heart of the Sky (Radha's Love)", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" }
+        { "title": "Shiva's Dance (Eternal Vibration)", "artist": "Brian 200", "url": "https://open.spotify.com/track/0CZa2K8w1H6dmO5YR1ndg8" },
+        { "title": "Heart of the Sky (Radha's Love)", "artist": "Brian 200", "url": "https://open.spotify.com/track/1vDISoVvi6JYz6vLIdUeO7" }
       ]
     },
     {
@@ -82,8 +82,8 @@
       "keywords": ["smooth", "deep", "groovy", "night", "lounge", "sunset", "warm", "bass", "sophisticated", "rooftop", "chill", "jazzy", "mellow", "underground", "late-night", "silky", "classy", "sensual", "cocktail"],
       "mood_color": "#5f27cd",
       "energy": "medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/deep%20house",
+      "youtube_url": "https://www.youtube.com/results?search_query=deep+house+music",
       "brian_tracks": [
         { "title": "Velvet Snow", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" }
       ]
@@ -95,10 +95,10 @@
       "keywords": ["dark", "industrial", "warehouse", "mechanical", "hypnotic", "pounding", "underground", "night", "intense", "repetitive", "relentless", "berlin", "rave", "strobes", "bass", "minimal", "driving", "raw", "concrete"],
       "mood_color": "#2d3436",
       "energy": "high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/techno",
+      "youtube_url": "https://www.youtube.com/results?search_query=techno+music",
       "brian_tracks": [
-        { "title": "Voice of Truth (The Transmission)", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" },
+        { "title": "Voice of Truth (The Transmission)", "artist": "Brian 200", "url": "https://open.spotify.com/track/1QnvztoU8Eci22rxuAADm2" },
         { "title": "Midnight Kings", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" }
       ]
     },
@@ -109,11 +109,11 @@
       "keywords": ["euphoria", "soaring", "epic", "uplifting", "festival", "arpeggio", "build", "breakdown", "transcendent", "anthem", "energy", "emotional", "peak", "sunrise", "crowd", "massive", "spiritual", "bliss", "powerful"],
       "mood_color": "#00b894",
       "energy": "high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/trance",
+      "youtube_url": "https://www.youtube.com/results?search_query=trance+music",
       "brian_tracks": [
-        { "title": "Thousand Suns (Sahasrara Peak)", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" },
-        { "title": "The Inner Eye (Vision of the Void)", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" },
+        { "title": "Thousand Suns (Sahasrara Peak)", "artist": "Brian 200", "url": "https://open.spotify.com/track/0gY2XM4ntVKRQxY6x63oua" },
+        { "title": "The Inner Eye (Vision of the Void)", "artist": "Brian 200", "url": "https://open.spotify.com/track/0dOraX8k8I1EXrqO70ioNc" },
         { "title": "Adeste Raver", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" }
       ]
     },
@@ -124,10 +124,10 @@
       "keywords": ["fast", "breakbeat", "bass", "jungle", "rolling", "energy", "intense", "rave", "dark", "liquid", "night", "adrenaline", "rapid", "underground", "heavy", "movement", "frantic", "powerful", "urban"],
       "mood_color": "#e17055",
       "energy": "very-high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/drum%20and%20bass",
+      "youtube_url": "https://www.youtube.com/results?search_query=drum+and+bass+music",
       "brian_tracks": [
-        { "title": "River of Wisdom (Saraswati's Flow)", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" },
+        { "title": "River of Wisdom (Saraswati's Flow)", "artist": "Brian 200", "url": "https://open.spotify.com/track/7K7t68MBuRINODBvUYl0jc" },
         { "title": "Sky High Herald", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" }
       ]
     },
@@ -138,10 +138,10 @@
       "keywords": ["bass", "heavy", "drop", "wobble", "dark", "intense", "aggressive", "loud", "filthy", "massive", "breakdown", "distorted", "grinding", "powerful", "impact", "crushing", "storm", "brutal", "sub"],
       "mood_color": "#6c5ce7",
       "energy": "very-high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/dubstep",
+      "youtube_url": "https://www.youtube.com/results?search_query=dubstep+music",
       "brian_tracks": [
-        { "title": "Roots of Power (Ganesha's Ground)", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" },
+        { "title": "Roots of Power (Ganesha's Ground)", "artist": "Brian 200", "url": "https://open.spotify.com/track/6RffxH8lWXwHfVRnnnKDHY" },
         { "title": "Sugar Plum Bass", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" }
       ]
     },
@@ -152,8 +152,8 @@
       "keywords": ["colorful", "uplifting", "emotional", "bright", "shimmer", "lush", "sweet", "festival", "cheerful", "happy", "warm", "glittery", "positive", "sunshine", "playful", "melodic", "sparkle", "joyful", "vibrant"],
       "mood_color": "#fd79a8",
       "energy": "medium-high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/future%20bass",
+      "youtube_url": "https://www.youtube.com/results?search_query=future+bass+music",
       "brian_tracks": []
     },
     {
@@ -163,8 +163,8 @@
       "keywords": ["experimental", "glitch", "complex", "cerebral", "abstract", "intricate", "weird", "digital", "deconstructed", "brainy", "angular", "chaotic", "strange", "innovative", "layered", "textural", "precise", "headphones"],
       "mood_color": "#636e72",
       "energy": "medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/idm",
+      "youtube_url": "https://www.youtube.com/results?search_query=idm+music",
       "brian_tracks": []
     },
     {
@@ -174,8 +174,8 @@
       "keywords": ["slow", "groovy", "relaxing", "organic", "chill", "warm", "evening", "lounge", "worldly", "sophisticated", "mellow", "smooth", "sunset", "wine", "contemplative", "atmospheric", "lazy", "sensual", "flowing"],
       "mood_color": "#e17055",
       "energy": "low-medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/downtempo",
+      "youtube_url": "https://www.youtube.com/results?search_query=downtempo+music",
       "brian_tracks": []
     },
     {
@@ -185,8 +185,8 @@
       "keywords": ["dark", "moody", "cinematic", "urban", "night", "smoky", "mysterious", "slow", "atmospheric", "brooding", "shadowy", "film-noir", "rain", "hypnotic", "deep", "sensual", "gritty", "introspective", "haunting"],
       "mood_color": "#2d3436",
       "energy": "low-medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/trip-hop",
+      "youtube_url": "https://www.youtube.com/results?search_query=trip-hop+music",
       "brian_tracks": []
     },
     {
@@ -196,8 +196,8 @@
       "keywords": ["harsh", "mechanical", "dark", "aggressive", "noise", "dystopian", "factory", "metal", "distorted", "brutal", "cold", "machine", "abrasive", "intense", "angry", "concrete", "steel", "gritty", "oppressive"],
       "mood_color": "#636e72",
       "energy": "high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/industrial",
+      "youtube_url": "https://www.youtube.com/results?search_query=industrial+music",
       "brian_tracks": []
     },
     {
@@ -207,8 +207,8 @@
       "keywords": ["guitar", "alternative", "jangly", "introspective", "youthful", "authentic", "indie", "basement", "raw", "emotional", "lyrical", "energetic", "bittersweet", "college", "heartfelt", "honest", "lo-fi", "driving", "melodic"],
       "mood_color": "#fdcb6e",
       "energy": "medium-high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/indie%20rock",
+      "youtube_url": "https://www.youtube.com/results?search_query=indie+rock+music",
       "brian_tracks": []
     },
     {
@@ -218,8 +218,8 @@
       "keywords": ["dreamy", "distorted", "hazy", "wall-of-sound", "reverb", "ethereal", "loud", "blurry", "overwhelming", "beautiful", "noise", "layered", "melancholy", "hypnotic", "immersive", "warm", "fuzzy", "celestial", "swirling"],
       "mood_color": "#dfe6e9",
       "energy": "medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/shoegaze",
+      "youtube_url": "https://www.youtube.com/results?search_query=shoegaze+music",
       "brian_tracks": []
     },
     {
@@ -229,8 +229,8 @@
       "keywords": ["cinematic", "epic", "crescendo", "instrumental", "emotional", "atmospheric", "vast", "building", "quiet", "loud", "patient", "beautiful", "sweeping", "dramatic", "orchestral", "mountains", "expansive", "contemplative", "soaring"],
       "mood_color": "#74b9ff",
       "energy": "medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/post-rock",
+      "youtube_url": "https://www.youtube.com/results?search_query=post-rock+music",
       "brian_tracks": []
     },
     {
@@ -240,8 +240,8 @@
       "keywords": ["raw", "heavy", "angst", "distorted", "dark", "90s", "flannel", "rain", "seattle", "gritty", "loud", "emotional", "frustrated", "rebellious", "melancholy", "garage", "powerful", "authentic", "moody"],
       "mood_color": "#b2bec3",
       "energy": "high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/grunge",
+      "youtube_url": "https://www.youtube.com/results?search_query=grunge+music",
       "brian_tracks": []
     },
     {
@@ -251,8 +251,8 @@
       "keywords": ["fast", "loud", "rebellious", "angry", "raw", "diy", "aggressive", "short", "energetic", "defiant", "youth", "freedom", "chaotic", "urgent", "garage", "intense", "anarchic", "provocative", "furious"],
       "mood_color": "#d63031",
       "energy": "very-high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/punk",
+      "youtube_url": "https://www.youtube.com/results?search_query=punk+music",
       "brian_tracks": []
     },
     {
@@ -262,8 +262,8 @@
       "keywords": ["emotional", "heartbreak", "confessional", "passionate", "vulnerable", "cathartic", "melancholy", "intense", "youth", "raw", "bittersweet", "honest", "dramatic", "crying", "angsty", "personal", "longing", "tender"],
       "mood_color": "#e84393",
       "energy": "medium-high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/emo",
+      "youtube_url": "https://www.youtube.com/results?search_query=emo+music",
       "brian_tracks": []
     },
     {
@@ -273,8 +273,8 @@
       "keywords": ["complex", "technical", "angular", "intricate", "precise", "rhythmic", "tapping", "odd-time", "cerebral", "nerdy", "energetic", "playful", "dynamic", "sharp", "progressive", "clean", "dexterous", "tight"],
       "mood_color": "#00cec9",
       "energy": "medium-high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/math%20rock",
+      "youtube_url": "https://www.youtube.com/results?search_query=math+rock+music",
       "brian_tracks": []
     },
     {
@@ -284,8 +284,8 @@
       "keywords": ["trippy", "swirling", "psychedelic", "colorful", "expanded", "mind-bending", "cosmic", "jam", "kaleidoscope", "acid", "groovy", "hypnotic", "spacey", "vibrant", "surreal", "flowing", "phased", "mystical", "consciousness"],
       "mood_color": "#e056a0",
       "energy": "medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/psychedelic%20rock",
+      "youtube_url": "https://www.youtube.com/results?search_query=psychedelic+rock+music",
       "brian_tracks": []
     },
     {
@@ -295,8 +295,8 @@
       "keywords": ["epic", "complex", "ambitious", "progressive", "virtuoso", "long", "classical", "orchestral", "dynamic", "intellectual", "layered", "dramatic", "concept", "adventurous", "technical", "sweeping", "grandiose", "sophisticated"],
       "mood_color": "#a29bfe",
       "energy": "medium-high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/progressive%20rock",
+      "youtube_url": "https://www.youtube.com/results?search_query=progressive+rock+music",
       "brian_tracks": []
     },
     {
@@ -306,8 +306,8 @@
       "keywords": ["raw", "fuzzy", "lo-fi", "garage", "energetic", "rock", "primal", "loud", "scrappy", "rough", "fun", "raucous", "stomping", "gritty", "unpolished", "wild", "sweaty", "riff", "direct"],
       "mood_color": "#ffeaa7",
       "energy": "high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/garage%20rock",
+      "youtube_url": "https://www.youtube.com/results?search_query=garage+rock+music",
       "brian_tracks": []
     },
     {
@@ -317,8 +317,8 @@
       "keywords": ["classic", "hip-hop", "lyrical", "drums", "samples", "golden-era", "east-coast", "head-nodding", "gritty", "urban", "vinyl", "raw", "boom", "bap", "street", "real", "crates", "wordplay", "old-school"],
       "mood_color": "#d4a574",
       "energy": "medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/boom%20bap",
+      "youtube_url": "https://www.youtube.com/results?search_query=boom+bap+music",
       "brian_tracks": []
     },
     {
@@ -328,8 +328,8 @@
       "keywords": ["808", "bass", "hi-hats", "dark", "hard", "aggressive", "heavy", "modern", "urban", "banging", "loud", "street", "flex", "bounce", "night", "intense", "powerful", "gritty", "menacing"],
       "mood_color": "#e17055",
       "energy": "high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/trap",
+      "youtube_url": "https://www.youtube.com/results?search_query=trap+music",
       "brian_tracks": [
         { "title": "The 808 Drummer", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" }
       ]
@@ -341,8 +341,8 @@
       "keywords": ["jazzy", "intelligent", "sophisticated", "smooth", "lyrical", "conscious", "groovy", "complex", "organic", "live", "saxophone", "improvisational", "thoughtful", "warm", "creative", "cerebral", "cool", "artistic"],
       "mood_color": "#81ecec",
       "energy": "medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/jazz%20rap",
+      "youtube_url": "https://www.youtube.com/results?search_query=jazz+rap+music",
       "brian_tracks": []
     },
     {
@@ -352,8 +352,8 @@
       "keywords": ["warm", "soulful", "organic", "intimate", "sensual", "smooth", "jazzy", "personal", "heartfelt", "groove", "golden", "honest", "romantic", "earthy", "lush", "vocal", "passionate", "rich", "tender"],
       "mood_color": "#fab1a0",
       "energy": "low-medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/neo-soul",
+      "youtube_url": "https://www.youtube.com/results?search_query=neo-soul+music",
       "brian_tracks": []
     },
     {
@@ -363,8 +363,8 @@
       "keywords": ["smooth", "vocal", "romantic", "sensual", "night", "groovy", "silky", "emotional", "love", "passion", "sultry", "bedroom", "warm", "soulful", "slow", "intimate", "moonlight", "heartfelt", "velvet"],
       "mood_color": "#e84393",
       "energy": "low-medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/r%26b",
+      "youtube_url": "https://www.youtube.com/results?search_query=r%26b+music",
       "brian_tracks": []
     },
     {
@@ -374,8 +374,8 @@
       "keywords": ["dark", "drift", "cowbell", "memphis", "distorted", "aggressive", "driving", "night", "car", "heavy", "bass", "chopped", "haunting", "gritty", "fast", "menacing", "underground", "raw", "intense"],
       "mood_color": "#d63031",
       "energy": "high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/phonk",
+      "youtube_url": "https://www.youtube.com/results?search_query=phonk+music",
       "brian_tracks": []
     },
     {
@@ -385,8 +385,8 @@
       "keywords": ["improvisation", "swing", "saxophone", "club", "smoky", "sophisticated", "complex", "spontaneous", "night", "warm", "intimate", "trumpet", "piano", "cool", "live", "groove", "creative", "elegant", "timeless", "classic"],
       "mood_color": "#fdcb6e",
       "energy": "medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/jazz",
+      "youtube_url": "https://www.youtube.com/results?search_query=jazz+music",
       "brian_tracks": []
     },
     {
@@ -396,8 +396,8 @@
       "keywords": ["orchestral", "elegant", "dramatic", "beautiful", "composed", "dynamic", "sweeping", "refined", "timeless", "concert", "symphony", "piano", "violin", "grand", "delicate", "emotional", "majestic", "contemplative", "serene", "powerful"],
       "mood_color": "#dfe6e9",
       "energy": "medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/classical",
+      "youtube_url": "https://www.youtube.com/results?search_query=classical+music",
       "brian_tracks": []
     },
     {
@@ -407,8 +407,8 @@
       "keywords": ["brazilian", "gentle", "warm", "beach", "swaying", "guitar", "soft", "romantic", "sunny", "relaxing", "tropical", "breezy", "afternoon", "elegant", "smooth", "coastal", "golden", "intimate", "peaceful", "cafe"],
       "mood_color": "#55efc4",
       "energy": "low",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/bossa%20nova",
+      "youtube_url": "https://www.youtube.com/results?search_query=bossa+nova+music",
       "brian_tracks": []
     },
     {
@@ -418,8 +418,8 @@
       "keywords": ["acoustic", "storytelling", "campfire", "rustic", "warm", "honest", "gentle", "nature", "rural", "heartfelt", "simple", "authentic", "guitar", "tradition", "community", "earthy", "intimate", "woodland", "morning", "home"],
       "mood_color": "#a0855b",
       "energy": "low-medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/folk",
+      "youtube_url": "https://www.youtube.com/results?search_query=folk+music",
       "brian_tracks": []
     },
     {
@@ -429,8 +429,8 @@
       "keywords": ["soulful", "raw", "guitar", "emotion", "pain", "warm", "gritty", "smoky", "deep", "honest", "night", "bar", "whiskey", "roots", "slow", "heartfelt", "expressive", "earthy", "bending", "groove"],
       "mood_color": "#0984e3",
       "energy": "low-medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/blues",
+      "youtube_url": "https://www.youtube.com/results?search_query=blues+music",
       "brian_tracks": []
     },
     {
@@ -440,8 +440,8 @@
       "keywords": ["twang", "rural", "storytelling", "highway", "heartbreak", "guitar", "freedom", "honest", "dusty", "americana", "bar", "truck", "sunset", "open-road", "simple", "warm", "homesick", "boots", "tradition"],
       "mood_color": "#e17055",
       "energy": "medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/country",
+      "youtube_url": "https://www.youtube.com/results?search_query=country+music",
       "brian_tracks": []
     },
     {
@@ -451,8 +451,8 @@
       "keywords": ["vocal", "passionate", "gospel", "warm", "emotional", "groovy", "heartfelt", "powerful", "uplifting", "horn", "strings", "classic", "retro", "soulful", "expressive", "rich", "joyful", "gritty", "church"],
       "mood_color": "#e17055",
       "energy": "medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/soul",
+      "youtube_url": "https://www.youtube.com/results?search_query=soul+music",
       "brian_tracks": []
     },
     {
@@ -462,8 +462,8 @@
       "keywords": ["groove", "bass", "funky", "dance", "rhythm", "bouncy", "party", "tight", "syncopated", "fun", "energetic", "wah-wah", "slap", "playful", "celebratory", "retro", "movement", "swagger", "pocket"],
       "mood_color": "#fdcb6e",
       "energy": "high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/funk",
+      "youtube_url": "https://www.youtube.com/results?search_query=funk+music",
       "brian_tracks": []
     },
     {
@@ -473,8 +473,8 @@
       "keywords": ["jamaica", "offbeat", "bass", "conscious", "peaceful", "sunny", "laid-back", "island", "spiritual", "roots", "sway", "tropical", "warm", "positive", "resistance", "unity", "groove", "summer", "slow"],
       "mood_color": "#00b894",
       "energy": "low-medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/reggae",
+      "youtube_url": "https://www.youtube.com/results?search_query=reggae+music",
       "brian_tracks": []
     },
     {
@@ -484,8 +484,8 @@
       "keywords": ["polyrhythmic", "percussion", "african", "groovy", "horn", "energetic", "warm", "dancing", "celebratory", "political", "layered", "tropical", "pulsing", "community", "vibrant", "rhythmic", "joyful", "organic", "powerful"],
       "mood_color": "#e17055",
       "energy": "high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/afrobeat",
+      "youtube_url": "https://www.youtube.com/results?search_query=afrobeat+music",
       "brian_tracks": []
     },
     {
@@ -495,8 +495,8 @@
       "keywords": ["polished", "catchy", "dance", "colorful", "energetic", "pop", "choreography", "bright", "fun", "youthful", "slick", "hooks", "vibrant", "upbeat", "shiny", "performance", "trendy", "flashy", "addictive"],
       "mood_color": "#fd79a8",
       "energy": "high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/k-pop",
+      "youtube_url": "https://www.youtube.com/results?search_query=k-pop+music",
       "brian_tracks": []
     },
     {
@@ -506,8 +506,8 @@
       "keywords": ["heavy", "aggressive", "loud", "powerful", "dark", "intense", "riff", "thundering", "epic", "brutal", "fast", "distorted", "headbanging", "angry", "ferocious", "crushing", "raw", "massive", "furious"],
       "mood_color": "#636e72",
       "energy": "very-high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/metal",
+      "youtube_url": "https://www.youtube.com/results?search_query=metal+music",
       "brian_tracks": []
     },
     {
@@ -517,8 +517,8 @@
       "keywords": ["swing", "jazz", "retro", "fun", "dance", "vintage", "brass", "lively", "party", "classy", "bouncy", "upbeat", "playful", "charming", "energetic", "prohibition", "cabaret", "celebratory", "whimsical"],
       "mood_color": "#fdcb6e",
       "energy": "high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/electro%20swing",
+      "youtube_url": "https://www.youtube.com/results?search_query=electro+swing+music",
       "brian_tracks": []
     },
     {
@@ -528,8 +528,8 @@
       "keywords": ["synth", "80s", "angular", "stylish", "electronic", "catchy", "art", "cool", "new-wave", "post-punk", "dance", "quirky", "bright", "urban", "glossy", "fashionable", "energetic", "modern", "sharp"],
       "mood_color": "#e056a0",
       "energy": "medium-high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/new%20wave",
+      "youtube_url": "https://www.youtube.com/results?search_query=new+wave+music",
       "brian_tracks": []
     },
     {
@@ -539,8 +539,8 @@
       "keywords": ["dreamy", "ethereal", "soft", "shimmering", "beautiful", "hazy", "floating", "gentle", "lush", "romantic", "nostalgic", "serene", "celestial", "warm", "pastel", "delicate", "hypnotic", "blissful", "moonlit"],
       "mood_color": "#dfe6e9",
       "energy": "low",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/dream%20pop",
+      "youtube_url": "https://www.youtube.com/results?search_query=dream+pop+music",
       "brian_tracks": []
     },
     {
@@ -550,8 +550,8 @@
       "keywords": ["dark", "occult", "eerie", "haunting", "slow", "heavy", "gothic", "creepy", "fog", "ritual", "mysterious", "distorted", "night", "sinister", "shadowy", "cold", "dread", "supernatural", "unsettling"],
       "mood_color": "#2d3436",
       "energy": "low-medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/witch%20house",
+      "youtube_url": "https://www.youtube.com/results?search_query=witch+house+music",
       "brian_tracks": []
     },
     {
@@ -561,8 +561,8 @@
       "keywords": ["japanese", "glossy", "urban", "retro", "80s", "smooth", "funky", "sophisticated", "neon", "night", "breezy", "groovy", "warm", "disco", "city", "sunshine", "upbeat", "elegant", "cruising"],
       "mood_color": "#ff6b9d",
       "energy": "medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/city%20pop",
+      "youtube_url": "https://www.youtube.com/results?search_query=city+pop+music",
       "brian_tracks": []
     },
     {
@@ -572,8 +572,8 @@
       "keywords": ["fast", "angry", "loud", "aggressive", "intense", "raw", "furious", "explosive", "short", "adrenaline", "mosh", "underground", "diy", "brutal", "unrelenting", "chaotic", "defiant", "fierce", "primal"],
       "mood_color": "#d63031",
       "energy": "very-high",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/hardcore%20punk",
+      "youtube_url": "https://www.youtube.com/results?search_query=hardcore+punk+music",
       "brian_tracks": []
     },
     {
@@ -583,10 +583,10 @@
       "keywords": ["synth", "digital", "electronic", "futuristic", "beats", "produced", "modern", "atmospheric", "layered", "textural", "innovative", "clean", "precise", "glowing", "immersive", "sonic", "experimental", "pulsing", "technological"],
       "mood_color": "#a855f7",
       "energy": "medium",
-      "spotify_url": "",
-      "youtube_url": "",
+      "spotify_url": "https://open.spotify.com/search/electronic",
+      "youtube_url": "https://www.youtube.com/results?search_query=electronic+music",
       "brian_tracks": [
-        { "title": "The Indigo Hive", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" }
+        { "title": "The Indigo Hive", "artist": "Brian 200", "url": "https://open.spotify.com/track/7xcppUWST8V2FEJExLIUIT" }
       ]
     }
   ],
