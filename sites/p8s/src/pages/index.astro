@@ -1,0 +1,179 @@
+---
+import BaseLayout from '@shared/components/BaseLayout.astro';
+import SiteHeader from '@shared/components/SiteHeader.astro';
+import SiteFooter from '@shared/components/SiteFooter.astro';
+import NumeroLogo from '@shared/components/NumeroLogo.astro';
+import Card from '@shared/components/Card.astro';
+---
+
+<BaseLayout
+  title="p8s.dev — Know Your Parameters"
+  description="An interactive guide to the knobs, dials, and levers of AI. Built entirely by Claude Code."
+  site="p8s"
+>
+  <SiteHeader site="p8s" />
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container text-center">
+        <div class="hero-logo fade-up">
+          <NumeroLogo site="p8s" size="hero" />
+        </div>
+        <p class="hero-tagline fade-up fade-up-delay-1">Everything is a parameter.</p>
+        <p class="hero-subtitle fade-up fade-up-delay-2">
+          An interactive guide to the knobs, dials, and levers of AI — built entirely by Claude Code.
+        </p>
+        <a href="#coming-soon" class="hero-cta fade-up fade-up-delay-3">Explore Parameters &rarr;</a>
+      </div>
+      <div class="hero-grid-bg" aria-hidden="true"></div>
+    </section>
+
+    <!-- What is p8s? -->
+    <section class="section explainer">
+      <div class="container">
+        <h2 class="fade-up">What is p<span class="accent">8</span>s?</h2>
+        <p class="explainer-text fade-up fade-up-delay-1">
+          p8s is a numeronym for <em>parameters</em> — like k8s is for Kubernetes.
+          First letter, 8 middle letters, last letter.
+        </p>
+        <p class="explainer-text fade-up fade-up-delay-2">
+          Parameters are the invisible controls that shape every AI interaction.
+          Temperature, top_p, max_tokens, system prompts — they're the difference
+          between AI that helps and AI that hallucinates.
+        </p>
+      </div>
+    </section>
+
+    <!-- Coming Soon -->
+    <section class="section" id="coming-soon">
+      <div class="container">
+        <h2 class="text-center fade-up">Coming Soon</h2>
+        <div class="card-grid" style="margin-top: var(--space-xl);">
+          <Card
+            title="Parameter Playground"
+            description="Slide the dials. See what changes. An interactive explorer for AI parameters."
+          />
+          <Card
+            title="The Blog"
+            description="Hot takes on the death of traditional software engineering and the rise of prompt-first development."
+          />
+          <Card
+            title="Benchmarks"
+            description="Same prompt. Different parameters. See the data."
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Meta -->
+    <section class="section meta">
+      <div class="container text-center">
+        <p class="meta-text fade-up">
+          This site was built without writing a single line of code by hand.
+          Every component, every style, every deployment was authored by Claude Code —
+          directed by a human who knows what to ask for.
+        </p>
+        <p class="meta-punchline fade-up fade-up-delay-1">
+          That's the whole point. The skill isn't writing code anymore. It's knowing your parameters.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter site="p8s" />
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    padding: var(--space-2xl) 0;
+    overflow: hidden;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+    background-size: 4rem 4rem;
+    z-index: -1;
+  }
+
+  .hero-logo {
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-tagline {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 40ch;
+    margin: 0 auto var(--space-xl);
+  }
+
+  .hero-cta {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    color: var(--bg-primary);
+    background: var(--accent);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .hero-cta:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .explainer h2 {
+    margin-bottom: var(--space-lg);
+  }
+
+  .accent {
+    color: var(--accent);
+  }
+
+  .explainer-text {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-md);
+    max-width: 60ch;
+  }
+
+  .meta-text {
+    font-size: var(--text-lg);
+    max-width: 55ch;
+    margin: 0 auto var(--space-lg);
+  }
+
+  .meta-punchline {
+    font-family: var(--font-mono);
+    font-size: var(--text-xl);
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      min-height: 60vh;
+      padding: var(--space-xl) 0;
+    }
+
+    .hero-tagline {
+      font-size: var(--text-xl);
+    }
+  }
+</style>

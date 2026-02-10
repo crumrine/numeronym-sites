@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="16" fill="#0a0a0f"/>
+  <text x="40" y="52" text-anchor="middle" font-family="monospace" font-weight="700" font-size="32" fill="#e8e8ed">h</text>
+  <text x="64" y="52" text-anchor="middle" font-family="monospace" font-weight="700" font-size="32" fill="#f59e0b">11</text>
+  <text x="90" y="52" text-anchor="middle" font-family="monospace" font-weight="700" font-size="32" fill="#e8e8ed">n</text>
+  <text x="64" y="86" text-anchor="middle" font-family="monospace" font-size="14" fill="#55556a">.dev</text>
+</svg>

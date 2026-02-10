@@ -1,0 +1,214 @@
+---
+import BaseLayout from '@shared/components/BaseLayout.astro';
+import SiteHeader from '@shared/components/SiteHeader.astro';
+import SiteFooter from '@shared/components/SiteFooter.astro';
+import NumeroLogo from '@shared/components/NumeroLogo.astro';
+import Card from '@shared/components/Card.astro';
+---
+
+<BaseLayout
+  title="e8s.dev — Everything is an Embedding"
+  description="Explore the hidden geometry of language, music, and meaning. Built entirely by Claude Code."
+  site="e8s"
+>
+  <SiteHeader site="e8s" />
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container text-center">
+        <div class="hero-logo fade-up">
+          <NumeroLogo site="e8s" size="hero" />
+        </div>
+        <p class="hero-tagline fade-up fade-up-delay-1">Everything is a point in space.</p>
+        <p class="hero-subtitle fade-up fade-up-delay-2">
+          Explore the hidden geometry of language, music, and meaning — built entirely by Claude Code.
+        </p>
+      </div>
+      <div class="particles" aria-hidden="true">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+      </div>
+    </section>
+
+    <!-- What is e8s? -->
+    <section class="section explainer">
+      <div class="container">
+        <h2 class="fade-up">What is e<span class="accent">8</span>s?</h2>
+        <p class="explainer-text fade-up fade-up-delay-1">
+          e8s is a numeronym for <em>embeddings</em> — the mathematical representations
+          that let AI understand meaning.
+        </p>
+        <p class="explainer-text fade-up fade-up-delay-2">
+          Every word, every sentence, every song, every image can be converted into a
+          point in multidimensional space. Things that are similar end up close together.
+          Things that are different drift apart.
+        </p>
+        <p class="explainer-text fade-up fade-up-delay-3">
+          e8s explores that hidden geometry.
+        </p>
+      </div>
+    </section>
+
+    <!-- Coming Soon -->
+    <section class="section">
+      <div class="container">
+        <h2 class="text-center fade-up">Coming Soon</h2>
+        <div class="card-grid" style="margin-top: var(--space-xl);">
+          <Card
+            title="Embedding Explorer"
+            description="Type anything. See where it lands in the space of meaning. Discover what's nearby."
+          />
+          <Card
+            title="Semantic Jukebox"
+            description="Describe a vibe. Find the music that matches. Where math meets taste."
+          />
+          <Card
+            title="What's Near What?"
+            description="Surprising semantic relationships visualized. You won't believe what's close to what."
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Bridge -->
+    <section class="section bridge">
+      <div class="container text-center">
+        <p class="bridge-text fade-up">
+          e8s lives at the intersection of engineering and art.
+        </p>
+        <p class="bridge-punchline fade-up fade-up-delay-1">
+          Music is math. Embeddings prove it.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter site="e8s" />
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    padding: var(--space-2xl) 0;
+    overflow: hidden;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-logo {
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-tagline {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 45ch;
+    margin: 0 auto;
+  }
+
+  .particles {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  .particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0.2;
+    animation: float linear infinite;
+  }
+
+  .particle:nth-child(1)  { left: 10%; top: 20%; animation-duration: 18s; animation-delay: 0s; }
+  .particle:nth-child(2)  { left: 25%; top: 60%; animation-duration: 22s; animation-delay: -3s; }
+  .particle:nth-child(3)  { left: 40%; top: 35%; animation-duration: 16s; animation-delay: -6s; }
+  .particle:nth-child(4)  { left: 55%; top: 75%; animation-duration: 20s; animation-delay: -2s; }
+  .particle:nth-child(5)  { left: 70%; top: 15%; animation-duration: 24s; animation-delay: -8s; }
+  .particle:nth-child(6)  { left: 85%; top: 50%; animation-duration: 19s; animation-delay: -4s; }
+  .particle:nth-child(7)  { left: 15%; top: 80%; animation-duration: 21s; animation-delay: -7s; }
+  .particle:nth-child(8)  { left: 50%; top: 10%; animation-duration: 17s; animation-delay: -1s; }
+  .particle:nth-child(9)  { left: 35%; top: 90%; animation-duration: 23s; animation-delay: -5s; }
+  .particle:nth-child(10) { left: 80%; top: 30%; animation-duration: 15s; animation-delay: -9s; }
+  .particle:nth-child(11) { left: 60%; top: 45%; animation-duration: 25s; animation-delay: -11s; }
+  .particle:nth-child(12) { left: 5%;  top: 55%; animation-duration: 20s; animation-delay: -6s; }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.15;
+    }
+    25% {
+      transform: translate(30px, -40px) scale(1.4);
+      opacity: 0.35;
+    }
+    50% {
+      transform: translate(-20px, -80px) scale(0.8);
+      opacity: 0.2;
+    }
+    75% {
+      transform: translate(40px, -30px) scale(1.2);
+      opacity: 0.3;
+    }
+  }
+
+  .explainer h2 {
+    margin-bottom: var(--space-lg);
+  }
+
+  .accent {
+    color: var(--accent);
+  }
+
+  .explainer-text {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-md);
+    max-width: 60ch;
+  }
+
+  .bridge-text {
+    font-size: var(--text-xl);
+    max-width: 50ch;
+    margin: 0 auto var(--space-lg);
+  }
+
+  .bridge-punchline {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      min-height: 60vh;
+      padding: var(--space-xl) 0;
+    }
+
+    .hero-tagline {
+      font-size: var(--text-xl);
+    }
+  }
+</style>

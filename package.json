@@ -1,0 +1,18 @@
+{
+  "name": "numeronym-sites",
+  "private": true,
+  "description": "Three AI-themed websites built entirely by Claude Code. p8s.dev · e8s.dev · h11n.dev",
+  "scripts": {
+    "dev:p8s": "cd sites/p8s && npm run dev",
+    "dev:e8s": "cd sites/e8s && npm run dev",
+    "dev:h11n": "cd sites/h11n && npm run dev",
+    "build:p8s": "cd sites/p8s && npm run build",
+    "build:e8s": "cd sites/e8s && npm run build",
+    "build:h11n": "cd sites/h11n && npm run build",
+    "build:all": "npm run build:p8s && npm run build:e8s && npm run build:h11n",
+    "preview:p8s": "cd sites/p8s && npm run preview",
+    "preview:e8s": "cd sites/e8s && npm run preview",
+    "preview:h11n": "cd sites/h11n && npm run preview"
+  },
+  "license": "MIT"
+}

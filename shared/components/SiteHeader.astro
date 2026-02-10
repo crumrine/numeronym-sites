@@ -1,0 +1,90 @@
+---
+import NumeroLogo from './NumeroLogo.astro';
+
+interface Props {
+  site: 'p8s' | 'e8s' | 'h11n';
+  nav?: { label: string; href: string }[];
+}
+
+const { site, nav = [] } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="header-logo" aria-label="Home">
+      <NumeroLogo site={site} size="sm" />
+      <span class="header-dot">.dev</span>
+    </a>
+    {nav.length > 0 && (
+      <nav class="header-nav" aria-label="Main navigation">
+        {nav.map((item) => (
+          <a href={item.href} class="nav-link">{item.label}</a>
+        ))}
+      </nav>
+    )}
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3.5rem;
+  }
+
+  .header-logo {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+    text-decoration: none;
+  }
+
+  .header-logo:hover {
+    opacity: 1;
+  }
+
+  .header-dot {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .header-nav {
+    display: flex;
+    gap: var(--space-lg);
+  }
+
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .nav-link:hover {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  @media (max-width: 640px) {
+    .header-nav {
+      gap: var(--space-md);
+    }
+
+    .nav-link {
+      font-size: var(--text-xs);
+    }
+  }
+</style>

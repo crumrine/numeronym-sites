@@ -1,0 +1,120 @@
+---
+interface Props {
+  site: 'p8s' | 'e8s' | 'h11n';
+  extra?: string;
+}
+
+const { site, extra } = Astro.props;
+
+const sites = [
+  { name: 'p8s', url: 'https://p8s.dev', label: 'parameters' },
+  { name: 'e8s', url: 'https://e8s.dev', label: 'embeddings' },
+  { name: 'h11n', url: 'https://h11n.dev', label: 'hallucination' },
+];
+
+const siblings = sites.filter((s) => s.name !== site);
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-badge">
+      Built entirely by <a href="https://claude.ai/code" target="_blank" rel="noopener">Claude Code</a>
+    </div>
+
+    <div class="footer-sisters">
+      <span class="footer-label">Sister sites:</span>
+      {siblings.map((s) => (
+        <a href={s.url} class="sister-link" target="_blank" rel="noopener">
+          {s.name}<span class="sister-dot">.dev</span>
+        </a>
+      ))}
+    </div>
+
+    <div class="footer-links">
+      <a href="https://github.com/crumrine/numeronym-sites" target="_blank" rel="noopener">
+        GitHub
+      </a>
+      {extra && <span class="footer-extra">{extra}</span>}
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding: var(--space-xl) 0;
+    margin-top: var(--space-2xl);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    text-align: center;
+  }
+
+  .footer-badge {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+
+  .footer-badge a {
+    color: var(--accent);
+  }
+
+  .footer-sisters {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+
+  .footer-label {
+    color: var(--text-muted);
+  }
+
+  .sister-link {
+    color: var(--text-secondary);
+    font-weight: 600;
+    transition: color var(--transition-fast);
+  }
+
+  .sister-link:hover {
+    color: var(--text-primary);
+    opacity: 1;
+  }
+
+  .sister-dot {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .footer-links {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+  }
+
+  .footer-links a {
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+  }
+
+  .footer-links a:hover {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  .footer-extra {
+    font-style: italic;
+  }
+</style>

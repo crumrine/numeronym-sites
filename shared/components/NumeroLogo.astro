@@ -1,0 +1,49 @@
+---
+interface Props {
+  site: 'p8s' | 'e8s' | 'h11n';
+  size?: 'sm' | 'md' | 'lg' | 'hero';
+}
+
+const { site, size = 'md' } = Astro.props;
+
+const parts: Record<string, { prefix: string; number: string; suffix: string }> = {
+  p8s: { prefix: 'p', number: '8', suffix: 's' },
+  e8s: { prefix: 'e', number: '8', suffix: 's' },
+  h11n: { prefix: 'h', number: '11', suffix: 'n' },
+};
+
+const { prefix, number, suffix } = parts[site];
+---
+
+<span class={`numero-logo numero-logo--${size}`} aria-label={site}>
+  <span class="numero-letter">{prefix}</span><span class="numero-number">{number}</span><span class="numero-letter">{suffix}</span>
+</span>
+
+<style>
+  .numero-logo {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    display: inline-block;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .numero-letter {
+    color: var(--text-primary);
+  }
+
+  .numero-number {
+    color: var(--accent);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  .numero-logo--sm { font-size: var(--text-2xl); }
+  .numero-logo--md { font-size: var(--text-4xl); }
+  .numero-logo--lg { font-size: var(--text-5xl); }
+  .numero-logo--hero { font-size: var(--text-hero); }
+
+  @keyframes shimmer {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+</style>

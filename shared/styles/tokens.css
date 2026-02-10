@@ -1,0 +1,72 @@
+/* ============================================
+   Numeronym Sites — Design Tokens
+   Shared across p8s.dev, e8s.dev, h11n.dev
+   ============================================ */
+
+:root {
+  /* Base palette */
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-card: #1a1a25;
+  --text-primary: #e8e8ed;
+  --text-secondary: #8888a0;
+  --text-muted: #55556a;
+  --border: #2a2a3a;
+
+  /* Typography */
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Font sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 3.5rem;
+  --text-hero: clamp(4rem, 12vw, 8rem);
+
+  /* Spacing scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  --space-2xl: 8rem;
+
+  /* Layout */
+  --max-width: 72rem;
+  --content-width: 48rem;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* Border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+}
+
+/* Site-specific accent colors */
+[data-site="p8s"] {
+  --accent: #00d4ff;
+  --accent-dim: #00d4ff22;
+  --accent-glow: #00d4ff44;
+}
+
+[data-site="e8s"] {
+  --accent: #a855f7;
+  --accent-dim: #a855f722;
+  --accent-glow: #a855f744;
+}
+
+[data-site="h11n"] {
+  --accent: #f59e0b;
+  --accent-dim: #f59e0b22;
+  --accent-glow: #f59e0b44;
+}

@@ -1,0 +1,243 @@
+---
+import BaseLayout from '@shared/components/BaseLayout.astro';
+import SiteHeader from '@shared/components/SiteHeader.astro';
+import SiteFooter from '@shared/components/SiteFooter.astro';
+import NumeroLogo from '@shared/components/NumeroLogo.astro';
+import Card from '@shared/components/Card.astro';
+---
+
+<BaseLayout
+  title="h11n.dev — The Hallucination Museum"
+  description="A curated museum of AI's most spectacular failures, wildest inventions, and accidental comedy. Built entirely by Claude Code."
+  site="h11n"
+>
+  <SiteHeader site="h11n" />
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container text-center">
+        <div class="hero-logo fade-up">
+          <NumeroLogo site="h11n" size="hero" />
+        </div>
+        <p class="hero-tagline fade-up fade-up-delay-1">Confidently wrong since 2022.</p>
+        <p class="hero-subtitle fade-up fade-up-delay-2">
+          A curated museum of AI's most spectacular failures, wildest inventions,
+          and accidental comedy — built entirely by Claude Code.
+        </p>
+      </div>
+      <div class="noise-bg" aria-hidden="true"></div>
+    </section>
+
+    <!-- What is h11n? -->
+    <section class="section explainer">
+      <div class="container">
+        <h2 class="fade-up">What is h<span class="accent">11</span>n?</h2>
+        <p class="explainer-text fade-up fade-up-delay-1">
+          h11n is a numeronym for <em>hallucination</em> — when AI generates information
+          that sounds completely plausible but is entirely fabricated.
+        </p>
+        <p class="explainer-text fade-up fade-up-delay-2">
+          We're not here to bash AI. We're here to understand it, laugh with it,
+          and learn from it. Every hallucination teaches us something about how these
+          models think.
+        </p>
+        <p class="explainer-text explainer-welcome fade-up fade-up-delay-3">
+          Welcome to the museum. Please don't touch the exhibits. They might not be real.
+        </p>
+      </div>
+    </section>
+
+    <!-- Featured Exhibits -->
+    <section class="section">
+      <div class="container">
+        <h2 class="text-center fade-up">Featured Exhibits</h2>
+        <div class="card-grid" style="margin-top: var(--space-xl);">
+          <Card
+            title="The Hall of Fame"
+            description="Our curated collection of the wildest, most confidently incorrect AI outputs ever captured. Rated by absurdity."
+          />
+          <Card
+            title="Real or Hallucinated?"
+            description="Think you can tell fact from fabrication? Take the quiz. Your confidence might be misplaced — just like the AI's."
+          />
+          <Card
+            title="I Hallucinated This"
+            description="What happens when you feed AI hallucinations into music generators? Art generators? Other AIs? Creative chaos."
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Ticker -->
+    <section class="section stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat fade-up">
+            <span class="stat-number">247</span>
+            <span class="stat-label">hallucinations catalogued</span>
+          </div>
+          <div class="stat fade-up fade-up-delay-1">
+            <span class="stat-number">1,842</span>
+            <span class="stat-label">quizzes taken</span>
+          </div>
+          <div class="stat fade-up fade-up-delay-2">
+            <span class="stat-number">62%</span>
+            <span class="stat-label">average human accuracy</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Submit -->
+    <section class="section submit">
+      <div class="container text-center">
+        <h2 class="fade-up">Caught an AI in the act?</h2>
+        <p class="submit-text fade-up fade-up-delay-1">
+          Share your best hallucination catches. The more confidently wrong, the better.
+        </p>
+        <a href="#" class="submit-cta fade-up fade-up-delay-2">Submit a Hallucination &rarr;</a>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter site="h11n" extra="Accuracy of this website: not guaranteed" />
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    padding: var(--space-2xl) 0;
+    overflow: hidden;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .noise-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+  }
+
+  .hero-logo {
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-tagline {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 48ch;
+    margin: 0 auto;
+  }
+
+  .explainer h2 {
+    margin-bottom: var(--space-lg);
+  }
+
+  .accent {
+    color: var(--accent);
+  }
+
+  .explainer-text {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-md);
+    max-width: 60ch;
+  }
+
+  .explainer-welcome {
+    font-style: italic;
+    color: var(--text-muted);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-lg);
+    text-align: center;
+  }
+
+  .stat {
+    padding: var(--space-lg);
+  }
+
+  .stat-number {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: var(--space-xs);
+  }
+
+  .stat-label {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .submit h2 {
+    margin-bottom: var(--space-md);
+  }
+
+  .submit-text {
+    font-size: var(--text-lg);
+    max-width: 50ch;
+    margin: 0 auto var(--space-xl);
+  }
+
+  .submit-cta {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    color: var(--bg-primary);
+    background: var(--accent);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .submit-cta:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  :global(.card:hover .card-title) {
+    animation: glitch 0.3s ease;
+  }
+
+  @keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 1px); }
+    40% { transform: translate(2px, -1px); }
+    60% { transform: translate(-1px, -1px); }
+    80% { transform: translate(1px, 1px); }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      min-height: 60vh;
+      padding: var(--space-xl) 0;
+    }
+
+    .hero-tagline {
+      font-size: var(--text-xl);
+    }
+
+    .stat-number {
+      font-size: var(--text-3xl);
+    }
+  }
+</style>
