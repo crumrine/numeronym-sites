@@ -315,7 +315,7 @@ const genresJSON = JSON.stringify(genreData);
               var trackLink = t.url
                 ? '<a href="' + escapeAttr(t.url) + '" target="_blank" rel="noopener" class="brian-track-link">' + escapeHtml(t.title) + '</a>'
                 : '<span class="brian-track-title">' + escapeHtml(t.title) + '</span>';
-              return '<div class="brian-track">' + trackLink + '<span class="brian-artist">' + escapeHtml(t.artist) + '</span></div>';
+              return '<div class="brian-track">' + trackLink + '<span class="brian-sep">·</span><span class="brian-artist">' + escapeHtml(t.artist) + '</span></div>';
             }).join('') +
             '</div>';
         }
@@ -679,6 +679,7 @@ const genresJSON = JSON.stringify(genreData);
   /* Listen links */
   .result-links {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--space-sm);
     margin-bottom: var(--space-sm);
   }
@@ -721,8 +722,14 @@ const genresJSON = JSON.stringify(genreData);
   .brian-track {
     display: flex;
     align-items: baseline;
-    gap: var(--space-sm);
-    margin-bottom: 2px;
+    gap: var(--space-xs);
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+  }
+
+  .brian-sep {
+    color: var(--text-muted);
+    font-size: var(--text-xs);
   }
 
   .brian-track-title,
