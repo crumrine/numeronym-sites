@@ -1,0 +1,289 @@
+---
+import BaseLayout from '@shared/components/BaseLayout.astro';
+import SiteHeader from '@shared/components/SiteHeader.astro';
+import SiteFooter from '@shared/components/SiteFooter.astro';
+import { getCollection } from 'astro:content';
+
+const hallucinations = await getCollection('hallucinations');
+
+const categoryLabels: Record<string, string> = {
+  fake_history: 'Fake History',
+  people_who_dont_exist: "People Who Don't Exist",
+  confident_math: 'Confident Math',
+  citation_needed: 'Citation Needed',
+  geographic_confusion: 'Geographic Confusion',
+  creative_interpretation: 'Creative Interpretation',
+};
+
+const categoryColors: Record<string, string> = {
+  fake_history: '#ef4444',
+  people_who_dont_exist: '#8b5cf6',
+  confident_math: '#06b6d4',
+  citation_needed: '#f97316',
+  geographic_confusion: '#22c55e',
+  creative_interpretation: '#ec4899',
+};
+
+const ranked = hallucinations
+  .map((entry) => ({
+    ...entry,
+    gold: entry.data.absurdity_rating * entry.data.confidence_rating,
+  }))
+  .sort((a, b) => b.gold - a.gold);
+
+const medals = ['gold-medal', 'silver-medal', 'bronze-medal'];
+---
+
+<BaseLayout
+  title="Leaderboard — Hall of Fame — h11n.dev"
+  description="All hallucinations ranked by Comedy Gold score. The most absurdly confident AI outputs, in order."
+  site="h11n"
+>
+  <SiteHeader site="h11n" nav={[{ label: 'Hall of Fame', href: '/hall-of-fame' }, { label: 'Leaderboard', href: '/hall-of-fame/leaderboard' }, { label: 'Quiz', href: '/quiz' }]} />
+
+  <main>
+    <section class="leaderboard-hero">
+      <div class="container text-center">
+        <h1 class="leaderboard-title fade-up">Leaderboard</h1>
+        <p class="leaderboard-subtitle fade-up fade-up-delay-1">
+          Ranked by Comedy Gold score — because being confidently wrong deserves recognition.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container leaderboard-container">
+        <div class="leaderboard-table">
+          <div class="leaderboard-header">
+            <span class="col-rank">Rank</span>
+            <span class="col-title">Exhibit</span>
+            <span class="col-model">Model</span>
+            <span class="col-category">Category</span>
+            <span class="col-score">Comedy Gold</span>
+          </div>
+          {ranked.map((entry, i) => (
+            <a
+              href={`/hall-of-fame/${entry.id}`}
+              class:list={['leaderboard-row', 'fade-up', i < 3 ? medals[i] : '']}
+            >
+              <span class="col-rank">
+                <span class="rank-number">{i < 3 ? ['🥇','🥈','🥉'][i] : `#${i + 1}`}</span>
+              </span>
+              <span class="col-title">
+                <span class="row-title">{entry.data.title}</span>
+              </span>
+              <span class="col-model">
+                <span class="model-badge">{entry.data.model}</span>
+              </span>
+              <span class="col-category">
+                <span class="category-tag" style={`--cat-color: ${categoryColors[entry.data.category]}`}>
+                  {categoryLabels[entry.data.category]}
+                </span>
+              </span>
+              <span class="col-score">
+                <span class="score-badge">{entry.gold}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+
+        <div class="leaderboard-footer fade-up">
+          <a href="/hall-of-fame" class="back-link">&larr; Back to Gallery</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter site="h11n" extra="Accuracy of this website: not guaranteed" />
+</BaseLayout>
+
+<style>
+  .leaderboard-hero {
+    padding: var(--space-xl) 0 var(--space-lg);
+  }
+
+  .leaderboard-title {
+    font-size: var(--text-5xl);
+    margin-bottom: var(--space-md);
+  }
+
+  .leaderboard-subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 50ch;
+    margin: 0 auto;
+  }
+
+  .leaderboard-container {
+    max-width: 64rem;
+  }
+
+  .leaderboard-table {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .leaderboard-header {
+    display: grid;
+    grid-template-columns: 60px 1fr 150px 160px 100px;
+    padding: var(--space-sm) var(--space-md);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .leaderboard-row {
+    display: grid;
+    grid-template-columns: 60px 1fr 150px 160px 100px;
+    align-items: center;
+    padding: var(--space-md);
+    background: var(--bg-card);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    border: 1px solid transparent;
+  }
+
+  .leaderboard-row:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 12px var(--accent-dim);
+    transform: translateX(4px);
+    opacity: 1;
+  }
+
+  .gold-medal {
+    border-left: 3px solid #fbbf24;
+    background: linear-gradient(90deg, color-mix(in srgb, #fbbf24 8%, var(--bg-card)), var(--bg-card));
+  }
+
+  .silver-medal {
+    border-left: 3px solid #94a3b8;
+    background: linear-gradient(90deg, color-mix(in srgb, #94a3b8 6%, var(--bg-card)), var(--bg-card));
+  }
+
+  .bronze-medal {
+    border-left: 3px solid #d97706;
+    background: linear-gradient(90deg, color-mix(in srgb, #d97706 6%, var(--bg-card)), var(--bg-card));
+  }
+
+  .rank-number {
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+
+  .gold-medal .rank-number,
+  .silver-medal .rank-number,
+  .bronze-medal .rank-number {
+    font-size: var(--text-xl);
+  }
+
+  .row-title {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .model-badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  .category-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--cat-color) 20%, transparent);
+    color: var(--cat-color);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+  }
+
+  .score-badge {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: var(--radius-sm);
+    background: var(--accent);
+    color: var(--bg-primary);
+    display: inline-block;
+  }
+
+  .gold-medal .score-badge {
+    font-size: var(--text-base);
+    box-shadow: 0 0 12px var(--accent-dim);
+  }
+
+  .leaderboard-footer {
+    margin-top: var(--space-xl);
+    text-align: center;
+  }
+
+  .back-link {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .leaderboard-header {
+      display: none;
+    }
+
+    .leaderboard-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      padding: var(--space-md);
+    }
+
+    .col-rank {
+      flex: 0 0 auto;
+    }
+
+    .col-title {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .row-title {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .col-model,
+    .col-category {
+      flex: 0 0 auto;
+    }
+
+    .col-score {
+      flex: 0 0 auto;
+      margin-left: auto;
+    }
+
+    .leaderboard-title {
+      font-size: var(--text-4xl);
+    }
+  }
+</style>

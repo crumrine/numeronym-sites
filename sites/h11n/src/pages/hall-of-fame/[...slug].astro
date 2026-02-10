@@ -1,0 +1,440 @@
+---
+import BaseLayout from '@shared/components/BaseLayout.astro';
+import SiteHeader from '@shared/components/SiteHeader.astro';
+import SiteFooter from '@shared/components/SiteFooter.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const hallucinations = await getCollection('hallucinations');
+  return hallucinations.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const categoryLabels: Record<string, string> = {
+  fake_history: 'Fake History',
+  people_who_dont_exist: "People Who Don't Exist",
+  confident_math: 'Confident Math',
+  citation_needed: 'Citation Needed',
+  geographic_confusion: 'Geographic Confusion',
+  creative_interpretation: 'Creative Interpretation',
+};
+
+const categoryColors: Record<string, string> = {
+  fake_history: '#ef4444',
+  people_who_dont_exist: '#8b5cf6',
+  confident_math: '#06b6d4',
+  citation_needed: '#f97316',
+  geographic_confusion: '#22c55e',
+  creative_interpretation: '#ec4899',
+};
+
+const gold = entry.data.absurdity_rating * entry.data.confidence_rating;
+const catColor = categoryColors[entry.data.category];
+const dateStr = entry.data.date_captured.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout
+  title={`${entry.data.title} — Hall of Fame — h11n.dev`}
+  description={`${entry.data.title}: ${entry.data.response.slice(0, 120)}...`}
+  site="h11n"
+>
+  <SiteHeader site="h11n" nav={[{ label: 'Hall of Fame', href: '/hall-of-fame' }, { label: 'Leaderboard', href: '/hall-of-fame/leaderboard' }, { label: 'Quiz', href: '/quiz' }]} />
+
+  <main>
+    <article class="exhibit">
+      <div class="container">
+        <a href="/hall-of-fame" class="back-link fade-up">&larr; Back to Gallery</a>
+
+        <!-- Header -->
+        <header class="exhibit-header fade-up fade-up-delay-1">
+          <div class="exhibit-badges">
+            <span class="category-tag" style={`--cat-color: ${catColor}`}>
+              {categoryLabels[entry.data.category]}
+            </span>
+            <span class="model-badge">{entry.data.model}</span>
+            <span class="date-badge">{dateStr}</span>
+          </div>
+          <h1 class="exhibit-title">{entry.data.title}</h1>
+          <div class="gold-display">
+            <span class="gold-label">Comedy Gold Score</span>
+            <span class="gold-score">{gold}</span>
+            <span class="gold-calc">{entry.data.absurdity_rating} absurdity &times; {entry.data.confidence_rating} confidence</span>
+          </div>
+        </header>
+
+        <!-- The Prompt -->
+        <section class="exhibit-section fade-up fade-up-delay-2">
+          <h2 class="section-heading">The Prompt</h2>
+          <div class="prompt-box">
+            <span class="prompt-icon">&#9654;</span>
+            <p>{entry.data.prompt}</p>
+          </div>
+        </section>
+
+        <!-- The Response -->
+        <section class="exhibit-section fade-up fade-up-delay-3">
+          <h2 class="section-heading">The Response</h2>
+          <blockquote class="response-box">
+            <p>{entry.data.response}</p>
+          </blockquote>
+        </section>
+
+        <!-- Why It's Wrong -->
+        <section class="exhibit-section fade-up fade-up-delay-4">
+          <h2 class="section-heading">Reality Check</h2>
+          <div class="reality-box">
+            <p>{entry.data.why_its_wrong}</p>
+          </div>
+        </section>
+
+        <!-- Meters -->
+        <section class="exhibit-section meters-section fade-up">
+          <div class="meter-row">
+            <div class="meter">
+              <div class="meter-header">
+                <span class="meter-label">Absurdity</span>
+                <span class="meter-value">{entry.data.absurdity_rating}/10</span>
+              </div>
+              <div class="meter-track">
+                <div class="meter-fill absurdity-fill" style={`width: ${entry.data.absurdity_rating * 10}%`}></div>
+              </div>
+            </div>
+            <div class="meter">
+              <div class="meter-header">
+                <span class="meter-label">Confidence</span>
+                <span class="meter-value">{entry.data.confidence_rating}/10</span>
+              </div>
+              <div class="meter-track">
+                <div class="meter-fill confidence-fill" style={`width: ${entry.data.confidence_rating * 10}%`}></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Commentary -->
+        <section class="exhibit-section fade-up">
+          <h2 class="section-heading">Curator's Notes</h2>
+          <div class="commentary">
+            <Content />
+          </div>
+        </section>
+
+        <!-- Tags -->
+        <section class="exhibit-section fade-up">
+          <div class="tag-list">
+            {entry.data.tags.map((tag) => (
+              <span class="tag">#{tag}</span>
+            ))}
+          </div>
+        </section>
+
+        <div class="exhibit-nav fade-up">
+          <a href="/hall-of-fame" class="back-link">&larr; Back to Gallery</a>
+          <a href="/hall-of-fame/leaderboard" class="back-link">View Leaderboard &rarr;</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <SiteFooter site="h11n" extra="Accuracy of this website: not guaranteed" />
+</BaseLayout>
+
+<style>
+  .exhibit {
+    padding: var(--space-lg) 0;
+  }
+
+  .exhibit .container {
+    max-width: var(--content-width);
+  }
+
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+    transition: color var(--transition-fast);
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  .exhibit-header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .exhibit-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .category-tag {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    padding: 3px 10px;
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--cat-color) 20%, transparent);
+    color: var(--cat-color);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+  }
+
+  .model-badge {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    padding: 3px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  .date-badge {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    padding: 3px 0;
+  }
+
+  .exhibit-title {
+    font-size: var(--text-4xl);
+    line-height: 1.15;
+    margin-bottom: var(--space-lg);
+  }
+
+  .gold-display {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: var(--space-md) var(--space-lg);
+    background: color-mix(in srgb, var(--accent) 10%, var(--bg-card));
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    border-radius: var(--radius-md);
+  }
+
+  .gold-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .gold-score {
+    font-family: var(--font-mono);
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .gold-calc {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+
+  .exhibit-section {
+    margin-bottom: var(--space-xl);
+  }
+
+  .section-heading {
+    font-size: var(--text-lg);
+    color: var(--accent);
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .prompt-box {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+  }
+
+  .prompt-icon {
+    color: var(--accent);
+    font-size: var(--text-sm);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .prompt-box p {
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    line-height: 1.6;
+    max-width: none;
+  }
+
+  .response-box {
+    padding: var(--space-lg);
+    background: var(--bg-card);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-md);
+    font-style: italic;
+    position: relative;
+  }
+
+  .response-box::before {
+    content: '\201C';
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    font-size: 4rem;
+    color: var(--accent-dim);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  .response-box p {
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    line-height: 1.8;
+    max-width: none;
+    padding-top: var(--space-sm);
+  }
+
+  .reality-box {
+    padding: var(--space-lg);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid color-mix(in srgb, #22c55e 30%, var(--border));
+  }
+
+  .reality-box p {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: none;
+  }
+
+  .meters-section {
+    margin-bottom: var(--space-xl);
+  }
+
+  .meter-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .meter {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .meter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .meter-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .meter-value {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .meter-track {
+    height: 8px;
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .meter-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s ease;
+  }
+
+  .absurdity-fill {
+    background: linear-gradient(90deg, var(--accent), #ef4444);
+  }
+
+  .confidence-fill {
+    background: linear-gradient(90deg, var(--accent), #8b5cf6);
+  }
+
+  .commentary {
+    padding: var(--space-md) 0;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: var(--text-base);
+  }
+
+  .commentary :global(p) {
+    max-width: none;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+  }
+
+  .exhibit-nav {
+    display: flex;
+    justify-content: space-between;
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-xl);
+  }
+
+  @media (max-width: 640px) {
+    .exhibit-title {
+      font-size: var(--text-3xl);
+    }
+
+    .meter-row {
+      grid-template-columns: 1fr;
+    }
+
+    .gold-score {
+      font-size: var(--text-3xl);
+    }
+
+    .exhibit-nav {
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+  }
+</style>

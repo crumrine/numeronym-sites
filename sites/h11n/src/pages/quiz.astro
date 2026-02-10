@@ -1,0 +1,987 @@
+---
+import BaseLayout from '@shared/components/BaseLayout.astro';
+import SiteHeader from '@shared/components/SiteHeader.astro';
+import SiteFooter from '@shared/components/SiteFooter.astro';
+import questions from '../data/quiz-questions.json';
+
+const questionsJSON = JSON.stringify(questions.questions);
+---
+
+<BaseLayout
+  title="Real or Hallucinated? — h11n.dev Quiz"
+  description="Think you can spot an AI hallucination? Test your BS detector with 10 random questions from our curated bank."
+  site="h11n"
+>
+  <Fragment slot="head">
+    <meta property="og:title" content="Real or Hallucinated? — h11n.dev Quiz" />
+    <meta property="og:description" content="Think you can spot an AI hallucination? Test your BS detector." />
+    <meta property="og:url" content="https://h11n.dev/quiz" />
+  </Fragment>
+
+  <SiteHeader
+    site="h11n"
+    nav={[
+      { label: 'Hall of Fame', href: '/hall-of-fame' },
+      { label: 'Quiz', href: '/quiz' },
+    ]}
+  />
+
+  <main id="quiz-app">
+    <!-- State 1: Start Screen -->
+    <section id="start-screen" class="quiz-state active">
+      <div class="quiz-card start-card">
+        <div class="start-logo" aria-label="h11n">
+          <span class="logo-letter">h</span><span class="logo-number">11</span><span class="logo-letter">n</span>
+        </div>
+        <h1 class="start-title">Real or Hallucinated?</h1>
+        <p class="start-subtitle">Think you can spot an AI hallucination? Test your BS detector.</p>
+        <button id="start-btn" class="btn-primary" type="button">Start Quiz</button>
+        <p class="start-meta">10 questions. Random every time.</p>
+      </div>
+      <div class="noise-bg" aria-hidden="true"></div>
+    </section>
+
+    <!-- State 2: Question Screen -->
+    <section id="question-screen" class="quiz-state">
+      <div class="quiz-card question-card">
+        <div class="question-top">
+          <div class="progress-bar-container">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+          <div class="question-meta">
+            <span id="question-counter" class="question-counter">1 / 10</span>
+            <span id="streak-badge" class="streak-badge hidden">Streak: 0</span>
+          </div>
+          <span id="category-badge" class="category-badge">history</span>
+        </div>
+        <p id="statement-text" class="statement-text">Loading question...</p>
+        <div class="answer-buttons">
+          <button id="btn-real" class="btn-answer btn-real" type="button">
+            <span class="btn-icon">&#10003;</span> Real
+          </button>
+          <button id="btn-hallucinated" class="btn-answer btn-hallucinated" type="button">
+            <span class="btn-icon">&#10007;</span> Hallucinated
+          </button>
+        </div>
+      </div>
+      <div class="noise-bg" aria-hidden="true"></div>
+    </section>
+
+    <!-- State 3: Reveal Screen -->
+    <section id="reveal-screen" class="quiz-state">
+      <div class="quiz-card reveal-card">
+        <div class="question-top">
+          <div class="progress-bar-container">
+            <div id="reveal-progress-bar" class="progress-bar"></div>
+          </div>
+          <div class="question-meta">
+            <span id="reveal-counter" class="question-counter">1 / 10</span>
+            <span id="reveal-streak" class="streak-badge hidden">Streak: 0</span>
+          </div>
+        </div>
+        <div id="result-indicator" class="result-indicator">CORRECT</div>
+        <p id="reveal-statement" class="statement-text reveal-statement">Statement text here...</p>
+        <div id="truth-label" class="truth-label">This was <strong>REAL</strong></div>
+        <div id="source-model" class="source-model hidden">Source model: <span id="model-name"></span></div>
+        <p id="explanation-text" class="explanation-text">Explanation here...</p>
+        <button id="next-btn" class="btn-primary" type="button">Next Question &rarr;</button>
+      </div>
+      <div class="noise-bg" aria-hidden="true"></div>
+    </section>
+
+    <!-- State 4: Results Screen -->
+    <section id="results-screen" class="quiz-state">
+      <div class="quiz-card results-card">
+        <div class="results-score-wrapper">
+          <span id="results-score" class="results-score">7</span>
+          <span class="results-total">/ 10</span>
+        </div>
+        <p id="results-commentary" class="results-commentary">Not bad! These models are really convincing.</p>
+        <div class="results-stats">
+          <div class="result-stat">
+            <span class="result-stat-value" id="stat-streak">0</span>
+            <span class="result-stat-label">Best Streak</span>
+          </div>
+          <div class="result-stat">
+            <span class="result-stat-value" id="stat-fastest">0s</span>
+            <span class="result-stat-label">Fastest Answer</span>
+          </div>
+        </div>
+        <div class="results-actions">
+          <button id="play-again-btn" class="btn-primary" type="button">Play Again</button>
+          <button id="share-btn" class="btn-secondary" type="button">Share Result</button>
+        </div>
+        <p id="share-toast" class="share-toast hidden">Copied to clipboard!</p>
+      </div>
+      <div class="noise-bg" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <SiteFooter site="h11n" extra="Accuracy of this website: not guaranteed" />
+</BaseLayout>
+
+<style>
+  /* Quiz States */
+  .quiz-state {
+    display: none;
+    min-height: calc(100vh - 3.5rem);
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg) var(--space-md);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quiz-state.active {
+    display: flex;
+    animation: fadeIn 0.4s ease both;
+  }
+
+  .noise-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+    pointer-events: none;
+  }
+
+  /* Quiz Card */
+  .quiz-card {
+    width: 100%;
+    max-width: 42rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl) var(--space-lg);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Start Screen */
+  .start-card {
+    text-align: center;
+  }
+
+  .start-logo {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: clamp(4rem, 10vw, 7rem);
+    line-height: 1;
+    margin-bottom: var(--space-lg);
+    letter-spacing: -0.03em;
+  }
+
+  .logo-letter {
+    color: var(--text-primary);
+  }
+
+  .logo-number {
+    color: var(--accent);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  .start-title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-md);
+    color: var(--text-primary);
+  }
+
+  .start-subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 40ch;
+    margin: 0 auto var(--space-xl);
+  }
+
+  .start-meta {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin-top: var(--space-md);
+  }
+
+  /* Buttons */
+  .btn-primary {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--bg-primary);
+    background: var(--accent);
+    border: none;
+    padding: var(--space-sm) var(--space-xl);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+    min-height: 48px;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  .btn-secondary {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--accent);
+    background: transparent;
+    border: 2px solid var(--accent);
+    padding: var(--space-sm) var(--space-xl);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: opacity var(--transition-fast), transform var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+    min-height: 48px;
+  }
+
+  .btn-secondary:hover {
+    background: var(--accent);
+    color: var(--bg-primary);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary:active {
+    transform: translateY(0);
+  }
+
+  /* Question Screen */
+  .question-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .question-top {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .progress-bar-container {
+    width: 100%;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    width: 10%;
+    transition: width 0.5s ease;
+  }
+
+  .question-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .question-counter {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  .streak-badge {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--accent);
+    padding: 0.15em 0.6em;
+    border: 1px solid var(--accent-dim);
+    border-radius: var(--radius-sm);
+    background: var(--accent-dim);
+  }
+
+  .streak-badge.hidden {
+    display: none;
+  }
+
+  .category-badge {
+    display: inline-block;
+    align-self: flex-start;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.2em 0.8em;
+    border: 1px solid var(--accent-dim);
+    border-radius: var(--radius-sm);
+    background: var(--accent-dim);
+  }
+
+  .statement-text {
+    font-size: clamp(var(--text-lg), 2.5vw, var(--text-2xl));
+    color: var(--text-primary);
+    line-height: 1.5;
+    max-width: none;
+  }
+
+  .answer-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .btn-answer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    border: 2px solid;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    min-height: 60px;
+    background: transparent;
+  }
+
+  .btn-icon {
+    font-size: var(--text-2xl);
+    line-height: 1;
+  }
+
+  .btn-real {
+    color: #4ade80;
+    border-color: #4ade8044;
+    background: #4ade8011;
+  }
+
+  .btn-real:hover {
+    background: #4ade8022;
+    border-color: #4ade8088;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 24px #4ade8022;
+  }
+
+  .btn-real:active {
+    transform: translateY(0);
+  }
+
+  .btn-hallucinated {
+    color: #f87171;
+    border-color: #f8717144;
+    background: #f8717111;
+  }
+
+  .btn-hallucinated:hover {
+    background: #f8717122;
+    border-color: #f8717188;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 24px #f8717122;
+  }
+
+  .btn-hallucinated:active {
+    transform: translateY(0);
+  }
+
+  /* Reveal Screen */
+  .reveal-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+
+  .result-indicator {
+    font-family: var(--font-mono);
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    padding: var(--space-sm) 0;
+  }
+
+  .result-indicator.correct {
+    color: #4ade80;
+    animation: glowCorrect 0.6s ease both;
+  }
+
+  .result-indicator.wrong {
+    color: #f87171;
+    animation: shakeWrong 0.5s ease both;
+  }
+
+  @keyframes glowCorrect {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+      text-shadow: 0 0 0 transparent;
+    }
+    50% {
+      text-shadow: 0 0 40px #4ade8088, 0 0 80px #4ade8044;
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+      text-shadow: 0 0 20px #4ade8044;
+    }
+  }
+
+  @keyframes shakeWrong {
+    0% { transform: translateX(0); opacity: 0; }
+    10% { transform: translateX(-12px); opacity: 1; }
+    20% { transform: translateX(10px); }
+    30% { transform: translateX(-8px); }
+    40% { transform: translateX(6px); }
+    50% { transform: translateX(-4px); }
+    60% { transform: translateX(2px); }
+    100% { transform: translateX(0); }
+  }
+
+  .reveal-statement {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    font-style: italic;
+    text-align: left;
+    padding: var(--space-md);
+    border-left: 3px solid var(--border);
+    background: var(--bg-card);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .truth-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    color: var(--text-primary);
+  }
+
+  .truth-label strong {
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .source-model {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  .source-model span {
+    color: var(--text-secondary);
+  }
+
+  .source-model.hidden {
+    display: none;
+  }
+
+  .explanation-text {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    text-align: left;
+    line-height: 1.7;
+    max-width: none;
+  }
+
+  /* Correct/Wrong card flash */
+  .reveal-card.flash-correct {
+    animation: cardFlashCorrect 0.6s ease both;
+  }
+
+  .reveal-card.flash-wrong {
+    animation: cardFlashWrong 0.6s ease both;
+  }
+
+  @keyframes cardFlashCorrect {
+    0% { box-shadow: 0 0 0 0 transparent; border-color: var(--border); }
+    30% { box-shadow: 0 0 60px #4ade8033, inset 0 0 30px #4ade800d; border-color: #4ade8066; }
+    100% { box-shadow: 0 0 20px #4ade8011; border-color: #4ade8033; }
+  }
+
+  @keyframes cardFlashWrong {
+    0% { box-shadow: 0 0 0 0 transparent; border-color: var(--border); }
+    15% { box-shadow: 0 0 60px #f8717133, inset 0 0 30px #f871710d; border-color: #f8717166; }
+    30% { box-shadow: 0 0 20px #f8717111; border-color: #f8717144; }
+    50% { box-shadow: 0 0 40px #f8717122; border-color: #f8717155; }
+    100% { box-shadow: 0 0 10px #f8717108; border-color: #f8717122; }
+  }
+
+  /* Results Screen */
+  .results-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .results-score-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-xs);
+  }
+
+  .results-score {
+    font-family: var(--font-mono);
+    font-size: clamp(5rem, 15vw, 8rem);
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    animation: scoreReveal 0.8s ease both;
+  }
+
+  .results-total {
+    font-family: var(--font-mono);
+    font-size: var(--text-3xl);
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  @keyframes scoreReveal {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    60% {
+      transform: scale(1.1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .results-commentary {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 40ch;
+    font-style: italic;
+  }
+
+  .results-stats {
+    display: flex;
+    gap: var(--space-xl);
+  }
+
+  .result-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .result-stat-value {
+    font-family: var(--font-mono);
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .result-stat-label {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .results-actions {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .share-toast {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: #4ade80;
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid #4ade8044;
+    border-radius: var(--radius-sm);
+    background: #4ade8011;
+    animation: toastIn 0.3s ease both;
+  }
+
+  .share-toast.hidden {
+    display: none;
+  }
+
+  @keyframes toastIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 640px) {
+    .quiz-card {
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .answer-buttons {
+      grid-template-columns: 1fr;
+    }
+
+    .btn-answer {
+      min-height: 56px;
+    }
+
+    .start-title {
+      font-size: var(--text-2xl);
+    }
+
+    .results-stats {
+      gap: var(--space-lg);
+    }
+
+    .results-actions {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .results-actions .btn-primary,
+    .results-actions .btn-secondary {
+      width: 100%;
+    }
+  }
+</style>
+
+<script is:inline define:vars={{ questionsJSON }}>
+  (function() {
+    'use strict';
+
+    // Parse questions from server
+    const allQuestions = JSON.parse(questionsJSON);
+
+    // Category display names
+    const categoryLabels = {
+      history: 'History & People',
+      science: 'Science & Nature',
+      geography: 'Geography',
+      technology: 'Technology',
+      pop_culture: 'Pop Culture'
+    };
+
+    // Game state
+    let gameQuestions = [];
+    let currentIndex = 0;
+    let score = 0;
+    let streak = 0;
+    let bestStreak = 0;
+    let questionTimes = [];
+    let questionStartTime = 0;
+
+    // DOM references
+    const screens = {
+      start: document.getElementById('start-screen'),
+      question: document.getElementById('question-screen'),
+      reveal: document.getElementById('reveal-screen'),
+      results: document.getElementById('results-screen')
+    };
+
+    const els = {
+      startBtn: document.getElementById('start-btn'),
+      progressBar: document.getElementById('progress-bar'),
+      questionCounter: document.getElementById('question-counter'),
+      streakBadge: document.getElementById('streak-badge'),
+      categoryBadge: document.getElementById('category-badge'),
+      statementText: document.getElementById('statement-text'),
+      btnReal: document.getElementById('btn-real'),
+      btnHallucinated: document.getElementById('btn-hallucinated'),
+      revealProgressBar: document.getElementById('reveal-progress-bar'),
+      revealCounter: document.getElementById('reveal-counter'),
+      revealStreak: document.getElementById('reveal-streak'),
+      resultIndicator: document.getElementById('result-indicator'),
+      revealStatement: document.getElementById('reveal-statement'),
+      truthLabel: document.getElementById('truth-label'),
+      sourceModel: document.getElementById('source-model'),
+      modelName: document.getElementById('model-name'),
+      explanationText: document.getElementById('explanation-text'),
+      nextBtn: document.getElementById('next-btn'),
+      resultsScore: document.getElementById('results-score'),
+      resultsCommentary: document.getElementById('results-commentary'),
+      statStreak: document.getElementById('stat-streak'),
+      statFastest: document.getElementById('stat-fastest'),
+      playAgainBtn: document.getElementById('play-again-btn'),
+      shareBtn: document.getElementById('share-btn'),
+      shareToast: document.getElementById('share-toast')
+    };
+
+    // Shuffle array (Fisher-Yates)
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    // Switch screens
+    function showScreen(name) {
+      Object.values(screens).forEach(function(s) {
+        s.classList.remove('active');
+      });
+      screens[name].classList.add('active');
+    }
+
+    // Start new game
+    function startGame() {
+      gameQuestions = shuffle(allQuestions).slice(0, 10);
+      currentIndex = 0;
+      score = 0;
+      streak = 0;
+      bestStreak = 0;
+      questionTimes = [];
+      showScreen('question');
+      loadQuestion();
+    }
+
+    // Load current question
+    function loadQuestion() {
+      var q = gameQuestions[currentIndex];
+      var progress = ((currentIndex) / 10) * 100;
+
+      els.progressBar.style.width = progress + '%';
+      els.questionCounter.textContent = (currentIndex + 1) + ' / 10';
+      els.categoryBadge.textContent = categoryLabels[q.category] || q.category;
+      els.statementText.textContent = q.statement;
+
+      if (streak > 0) {
+        els.streakBadge.classList.remove('hidden');
+        els.streakBadge.textContent = 'Streak: ' + streak;
+      } else {
+        els.streakBadge.classList.add('hidden');
+      }
+
+      // Enable buttons
+      els.btnReal.disabled = false;
+      els.btnHallucinated.disabled = false;
+
+      questionStartTime = Date.now();
+    }
+
+    // Handle answer
+    function handleAnswer(answeredReal) {
+      // Disable buttons immediately
+      els.btnReal.disabled = true;
+      els.btnHallucinated.disabled = true;
+
+      var q = gameQuestions[currentIndex];
+      var timeTaken = (Date.now() - questionStartTime) / 1000;
+      questionTimes.push(timeTaken);
+
+      var isCorrect = (answeredReal === q.is_real);
+
+      if (isCorrect) {
+        score++;
+        streak++;
+        if (streak > bestStreak) bestStreak = streak;
+      } else {
+        streak = 0;
+      }
+
+      // Show reveal
+      showReveal(q, isCorrect);
+    }
+
+    // Show reveal screen
+    function showReveal(q, isCorrect) {
+      var progress = ((currentIndex + 1) / 10) * 100;
+      els.revealProgressBar.style.width = progress + '%';
+      els.revealCounter.textContent = (currentIndex + 1) + ' / 10';
+
+      if (streak > 0) {
+        els.revealStreak.classList.remove('hidden');
+        els.revealStreak.textContent = 'Streak: ' + streak;
+      } else {
+        els.revealStreak.classList.add('hidden');
+      }
+
+      // Result indicator
+      var revealCard = document.querySelector('.reveal-card');
+      revealCard.classList.remove('flash-correct', 'flash-wrong');
+
+      if (isCorrect) {
+        els.resultIndicator.textContent = 'CORRECT';
+        els.resultIndicator.className = 'result-indicator correct';
+        // Force reflow to restart animation
+        void revealCard.offsetWidth;
+        revealCard.classList.add('flash-correct');
+      } else {
+        els.resultIndicator.textContent = 'WRONG';
+        els.resultIndicator.className = 'result-indicator wrong';
+        void revealCard.offsetWidth;
+        revealCard.classList.add('flash-wrong');
+      }
+
+      // Statement
+      els.revealStatement.textContent = q.statement;
+
+      // Truth label
+      if (q.is_real) {
+        els.truthLabel.innerHTML = 'This was <strong>REAL</strong>';
+      } else {
+        els.truthLabel.innerHTML = 'This was <strong>HALLUCINATED</strong>';
+      }
+
+      // Source model
+      if (!q.is_real && q.source_model) {
+        els.sourceModel.classList.remove('hidden');
+        els.modelName.textContent = q.source_model;
+      } else {
+        els.sourceModel.classList.add('hidden');
+      }
+
+      // Explanation
+      els.explanationText.textContent = q.explanation;
+
+      // Next button text
+      if (currentIndex >= 9) {
+        els.nextBtn.textContent = 'See Results \u2192';
+      } else {
+        els.nextBtn.textContent = 'Next Question \u2192';
+      }
+
+      showScreen('reveal');
+    }
+
+    // Handle next
+    function handleNext() {
+      currentIndex++;
+      if (currentIndex >= 10) {
+        showResults();
+      } else {
+        showScreen('question');
+        loadQuestion();
+      }
+    }
+
+    // Get commentary based on score
+    function getCommentary(s) {
+      if (s === 10) return "You might be an AI yourself.";
+      if (s >= 8) return "Solid detector. Most humans score here.";
+      if (s >= 6) return "Not bad! These models are really convincing.";
+      if (s >= 4) return "Don't feel bad. The line between real and fake is blurry.";
+      return "You might want to double-check your own memories.";
+    }
+
+    // Show results
+    function showResults() {
+      els.resultsScore.textContent = score;
+      els.resultsCommentary.textContent = getCommentary(score);
+      els.statStreak.textContent = bestStreak;
+
+      var fastest = Math.min.apply(null, questionTimes);
+      els.statFastest.textContent = fastest.toFixed(1) + 's';
+
+      els.shareToast.classList.add('hidden');
+
+      showScreen('results');
+    }
+
+    // Share
+    function handleShare() {
+      var text = 'I scored ' + score + '/10 on the h11n.dev hallucination quiz \u2014 can you do better? https://h11n.dev/quiz';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+          showToast();
+        }).catch(function() {
+          fallbackCopy(text);
+        });
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast();
+      } catch(e) {
+        // Silently fail
+      }
+      document.body.removeChild(ta);
+    }
+
+    function showToast() {
+      els.shareToast.classList.remove('hidden');
+      setTimeout(function() {
+        els.shareToast.classList.add('hidden');
+      }, 3000);
+    }
+
+    // Event listeners
+    els.startBtn.addEventListener('click', startGame);
+    els.btnReal.addEventListener('click', function() { handleAnswer(true); });
+    els.btnHallucinated.addEventListener('click', function() { handleAnswer(false); });
+    els.nextBtn.addEventListener('click', handleNext);
+    els.playAgainBtn.addEventListener('click', startGame);
+    els.shareBtn.addEventListener('click', handleShare);
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+      // Start screen
+      if (screens.start.classList.contains('active')) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          startGame();
+        }
+        return;
+      }
+
+      // Question screen
+      if (screens.question.classList.contains('active')) {
+        if (e.key === '1' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          if (!els.btnReal.disabled) handleAnswer(true);
+        } else if (e.key === '2' || e.key === 'ArrowRight') {
+          e.preventDefault();
+          if (!els.btnHallucinated.disabled) handleAnswer(false);
+        }
+        return;
+      }
+
+      // Reveal screen
+      if (screens.reveal.classList.contains('active')) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleNext();
+        }
+        return;
+      }
+
+      // Results screen
+      if (screens.results.classList.contains('active')) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          startGame();
+        }
+        return;
+      }
+    });
+  })();
+</script>

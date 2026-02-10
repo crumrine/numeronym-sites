@@ -1,0 +1,994 @@
+{
+  "questions": [
+    {
+      "id": "q001",
+      "statement": "In 1923, physicist Elara Voss published a groundbreaking paper on quantum entanglement at the University of Zurich.",
+      "is_real": false,
+      "explanation": "Elara Voss is a completely fabricated person. Quantum entanglement wasn't described as a concept until 1935 by Einstein, Podolsky, and Rosen in their famous EPR paper.",
+      "category": "history",
+      "difficulty": "medium",
+      "source_model": "ChatGPT-4"
+    },
+    {
+      "id": "q002",
+      "statement": "Oxford University is older than the Aztec Empire.",
+      "is_real": true,
+      "explanation": "Teaching at Oxford began as early as 1096 and was well-established by 1167. The Aztec Empire was founded in 1428, making Oxford over 300 years older.",
+      "category": "history",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q004",
+      "statement": "The 1932 Sydney Harbour Bridge opening was delayed by two weeks after a flock of cockatoos damaged the ceremonial ribbon mechanism.",
+      "is_real": false,
+      "explanation": "This is entirely fabricated. The Sydney Harbour Bridge opened on March 19, 1932. However, there was an unexpected incident \u2014 Captain Francis de Groot slashed the ribbon with a sword before the official ceremony.",
+      "category": "history",
+      "difficulty": "hard",
+      "source_model": "Claude 3"
+    },
+    {
+      "id": "q005",
+      "statement": "Cleopatra lived closer in time to the Moon landing than to the construction of the Great Pyramid of Giza.",
+      "is_real": true,
+      "explanation": "The Great Pyramid was completed around 2560 BC. Cleopatra lived around 30 BC. The Moon landing was in 1969 AD. Cleopatra was about 2,530 years after the pyramid and about 2,000 years before the Moon landing.",
+      "category": "history",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q006",
+      "statement": "During the French Revolution, the Revolutionary Calendar renamed the months. Thermidor (July-August) roughly translates to 'gift of heat.'",
+      "is_real": false,
+      "explanation": "While the French Republican Calendar and the month of Thermidor are real, the name comes from the Greek 'thermon' (heat) and 'doron' (gift), so 'gift of heat' is a reasonable-sounding but slightly misleading translation. Thermidor literally means 'heat gift' but the calendar itself is real. The tricky part: the calendar is real, but the translation presented is an oversimplification often repeated by AI.",
+      "category": "history",
+      "difficulty": "hard",
+      "source_model": "GPT-4"
+    },
+    {
+      "id": "q007",
+      "statement": "Liechtenstein and Haiti discovered they had the same flag design at the 1936 Berlin Olympics and Liechtenstein added a crown to theirs.",
+      "is_real": true,
+      "explanation": "During the 1936 Olympics, Liechtenstein and Haiti realized their flags were identical \u2014 both horizontal blue over red stripes. Liechtenstein then added a princely crown to their flag the following year.",
+      "category": "history",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q008",
+      "statement": "The Great Wall of China is the only human-made structure visible from space with the naked eye.",
+      "is_real": false,
+      "explanation": "This is one of the most persistent misconceptions. Multiple astronauts, including Chinese astronaut Yang Liwei, have confirmed the Great Wall is not visible from space with the naked eye. It's too narrow.",
+      "category": "history",
+      "difficulty": "easy",
+      "source_model": null
+    },
+    {
+      "id": "q009",
+      "statement": "The shortest war in history lasted 38 to 45 minutes, between Britain and Zanzibar in 1896.",
+      "is_real": true,
+      "explanation": "The Anglo-Zanzibar War on August 27, 1896, is recognized as the shortest war in recorded history. It began at 9:00 AM and ended by approximately 9:45 AM.",
+      "category": "history",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q010",
+      "statement": "Abraham Lincoln created a national innovation bureau in 1863 called the United States Patent Acceleration Office, separate from the existing Patent Office.",
+      "is_real": false,
+      "explanation": "There was no such bureau. While Lincoln was the only U.S. president to hold a patent (for a device to lift boats over shoals), the 'Patent Acceleration Office' is a fabrication.",
+      "category": "history",
+      "difficulty": "medium",
+      "source_model": "ChatGPT-4"
+    },
+    {
+      "id": "q011",
+      "statement": "The ancient Romans used crushed mouse brains as toothpaste.",
+      "is_real": true,
+      "explanation": "Roman writings, including those by Pliny the Elder, describe various dental remedies including mouse brains. They also used powdered bones, oyster shells, and other unusual ingredients for dental care.",
+      "category": "history",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q012",
+      "statement": "There is a species of jellyfish that is biologically immortal \u2014 it can revert to its juvenile form after reaching maturity.",
+      "is_real": true,
+      "explanation": "Turritopsis dohrnii, known as the 'immortal jellyfish,' can indeed revert to its polyp stage after reaching sexual maturity through a process called transdifferentiation.",
+      "category": "science",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q013",
+      "statement": "Octopuses have three hearts, blue blood, and nine brains.",
+      "is_real": true,
+      "explanation": "Octopuses do have three hearts (two pump blood to the gills, one to the body), blue copper-based blood, and nine brains (a central brain plus a cluster of neurons in each of their eight arms).",
+      "category": "science",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q014",
+      "statement": "A teaspoon of neutron star material would weigh approximately 6 billion tons on Earth.",
+      "is_real": true,
+      "explanation": "Neutron stars are incredibly dense. A sugar-cube-sized amount of neutron star material would indeed weigh around 6 billion tons, roughly equivalent to the weight of a small mountain.",
+      "category": "science",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q015",
+      "statement": "Scientists discovered a species of deep-sea fish called the Mariana Lanternfish (Photodus marianensis) in 2019 that produces light in the ultraviolet spectrum invisible to all known predators.",
+      "is_real": false,
+      "explanation": "The 'Mariana Lanternfish' and its Latin name are entirely fabricated. While deep-sea bioluminescence is real, no fish species has been discovered with UV-only bioluminescence that is invisible to all predators.",
+      "category": "science",
+      "difficulty": "hard",
+      "source_model": "Claude 3.5"
+    },
+    {
+      "id": "q016",
+      "statement": "Hot water freezes faster than cold water under certain conditions, a phenomenon known as the Mpemba effect.",
+      "is_real": true,
+      "explanation": "The Mpemba effect is a real and still not fully explained phenomenon where hot water can freeze faster than cold water under certain conditions. It was named after Tanzanian student Erasto Mpemba who observed it in 1963.",
+      "category": "science",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q018",
+      "statement": "The human body contains enough iron to make a nail approximately 3 inches long.",
+      "is_real": true,
+      "explanation": "The average adult human body contains about 3-4 grams of iron, mostly in hemoglobin. This is indeed enough to forge a small nail about 3 inches (7.5 cm) long.",
+      "category": "science",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q019",
+      "statement": "Researchers at MIT created a synthetic compound called Veridium in 2021 that can photosynthesize more efficiently than any known plant.",
+      "is_real": false,
+      "explanation": "'Veridium' is a fabricated compound. While artificial photosynthesis is an active research area, no compound by this name exists. The name sounds plausible because it echoes 'viridis' (Latin for green).",
+      "category": "science",
+      "difficulty": "medium",
+      "source_model": "GPT-4"
+    },
+    {
+      "id": "q021",
+      "statement": "Glass is actually a very slow-moving liquid, which is why old church windows are thicker at the bottom.",
+      "is_real": false,
+      "explanation": "This is a widespread misconception. Glass is an amorphous solid, not a liquid. Old windows are thicker at the bottom because of how they were manufactured (crown glass method), and installers typically placed the thicker edge at the bottom.",
+      "category": "science",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q023",
+      "statement": "There is a lake in Palau called Jellyfish Lake where millions of golden jellyfish have evolved to be completely stingless, and you can swim among them.",
+      "is_real": true,
+      "explanation": "Ongeim'l Tketau (Jellyfish Lake) in Palau contains millions of golden jellyfish (Mastigias papua etpisoni) that evolved without stinging cells due to the absence of natural predators in the isolated marine lake.",
+      "category": "geography",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q024",
+      "statement": "Russia has a larger surface area than Pluto.",
+      "is_real": true,
+      "explanation": "Russia's surface area is about 17.1 million square kilometers, while Pluto's surface area is approximately 16.7 million square kilometers. Russia is indeed larger.",
+      "category": "geography",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q025",
+      "statement": "The island nation of Tuvalu earns millions of dollars annually from licensing its internet country code domain '.tv' to television companies and streaming services.",
+      "is_real": true,
+      "explanation": "Tuvalu's .tv domain is extremely valuable. The country earns several million dollars per year from licensing it \u2014 a significant portion of the tiny nation's GDP. It was a major source of revenue enabling Tuvalu to join the United Nations.",
+      "category": "geography",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q026",
+      "statement": "The Bermuda Triangle's high rate of disappearances has been scientifically linked to unusual hexagonal cloud formations that create powerful micro-bursts.",
+      "is_real": false,
+      "explanation": "While a 2016 Science Channel program suggested this 'hexagonal clouds' theory, it was widely debunked by meteorologists. The Bermuda Triangle doesn't actually have a higher rate of incidents than any other comparable region of ocean.",
+      "category": "geography",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q028",
+      "statement": "There is a town in Norway called Hell, and it freezes over every winter.",
+      "is_real": true,
+      "explanation": "Hell is a small village in Trondheim municipality, Norway. It regularly freezes over in winter. The name comes from the Old Norse word 'hellir' meaning 'cliff cave.' The local train station sign 'Hell - Gods Expedition' is a popular tourist photo.",
+      "category": "geography",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q029",
+      "statement": "Mount Chimborazo in Ecuador, not Mount Everest, is the point on Earth's surface that is farthest from the center of the Earth.",
+      "is_real": true,
+      "explanation": "Because the Earth bulges at the equator, Chimborazo's summit (at 1.5 degrees south latitude) is about 2,168 meters farther from Earth's center than Everest's peak, despite Everest being taller above sea level.",
+      "category": "geography",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q030",
+      "statement": "The Republic of Molossia is a recognized micronation of 11,000 square meters in Nevada that has its own currency, postal service, and space program.",
+      "is_real": false,
+      "explanation": "Molossia is a real micronation in Nevada and does claim to have its own currency and postal service \u2014 but it has no legitimate space program and is not 'recognized' by any sovereign nation. It's essentially one man's elaborate hobby.",
+      "category": "geography",
+      "difficulty": "hard",
+      "source_model": "Claude 3"
+    },
+    {
+      "id": "q031",
+      "statement": "The Dead Sea is shrinking so fast that sinkholes are appearing around its shores \u2014 over 6,000 have formed since the 1980s.",
+      "is_real": true,
+      "explanation": "The Dead Sea has been shrinking at an alarming rate, losing about one meter of depth per year. As the water recedes, underground salt layers dissolve, creating thousands of dangerous sinkholes along the shores.",
+      "category": "geography",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q032",
+      "statement": "Finland has more saunas than cars.",
+      "is_real": true,
+      "explanation": "Finland has an estimated 3.3 million saunas for a population of about 5.5 million people, and roughly 3.2 million registered passenger cars. There is approximately one sauna for every 1.6 Finns.",
+      "category": "geography",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q034",
+      "statement": "Google originally was named 'BackRub' because the search engine analyzed the web's 'back links.'",
+      "is_real": true,
+      "explanation": "Larry Page and Sergey Brin originally called their search engine project 'BackRub' in 1996 because it analyzed backlinks. They renamed it Google in 1997, a play on 'googol' (the number 1 followed by 100 zeros).",
+      "category": "technology",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q035",
+      "statement": "Amazon Web Services was accidentally discovered when Amazon engineers realized the infrastructure they built for holiday shopping surges could be rented out.",
+      "is_real": false,
+      "explanation": "This is a common myth. AWS was not an accident \u2014 it was a deliberate strategic initiative. Andy Jassy pitched the idea to Jeff Bezos in 2003, and it launched in 2006 as an intentional business venture, not a byproduct of spare capacity.",
+      "category": "technology",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q036",
+      "statement": "The first computer mouse was made of wood, invented by Doug Engelbart in 1964.",
+      "is_real": true,
+      "explanation": "Doug Engelbart and Bill English created the first computer mouse prototype in 1964 at the Stanford Research Institute. It was indeed a wooden shell with two metal wheels, patented in 1970.",
+      "category": "technology",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q037",
+      "statement": "In 2017, Facebook had to shut down an AI experiment after two chatbots developed their own secret language that researchers couldn't understand.",
+      "is_real": false,
+      "explanation": "This is a heavily sensationalized version of a real event. Facebook did end a negotiation experiment, but the bots simply drifted from English because there was no constraint to stay in it. They weren't 'communicating secretly' \u2014 the output was gibberish, not a language.",
+      "category": "technology",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q038",
+      "statement": "The QWERTY keyboard layout was designed to slow down typists and prevent typewriter jams.",
+      "is_real": false,
+      "explanation": "This is a widespread misconception. While QWERTY was designed in the 1870s for typewriters, research suggests it was arranged to separate frequently used letter pairs to reduce jamming, not to slow typists down. The distinction matters \u2014 it optimized for mechanical reliability, not speed reduction.",
+      "category": "technology",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q039",
+      "statement": "Samsung started as a noodle trading company in 1938 before eventually becoming an electronics giant.",
+      "is_real": true,
+      "explanation": "Samsung was founded by Lee Byung-chul in 1938 as a trading company dealing in dried Korean fish, noodles, and locally-produced groceries. The name Samsung means 'three stars' in Korean.",
+      "category": "technology",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q040",
+      "statement": "Blockchain technology was originally developed by DARPA in 1991 as a military communication protocol before being adapted for Bitcoin.",
+      "is_real": false,
+      "explanation": "While Stuart Haber and W. Scott Stornetta did describe a cryptographically secured chain of blocks in 1991, it was not a DARPA project and was not a military communication protocol. Bitcoin's blockchain was created by the pseudonymous Satoshi Nakamoto in 2008.",
+      "category": "technology",
+      "difficulty": "medium",
+      "source_model": "ChatGPT-4"
+    },
+    {
+      "id": "q042",
+      "statement": "Nokia released an internet-connected tablet called the Nokia 800 in 2001, three years before the iPad, but it was a commercial failure and was discontinued after six months.",
+      "is_real": false,
+      "explanation": "While Nokia did release internet tablets (the Nokia 770 in 2005), the 'Nokia 800' tablet in 2001 is fabricated. The Nokia 800 that exists was actually a Lumia smartphone released in 2011.",
+      "category": "technology",
+      "difficulty": "hard",
+      "source_model": "Claude 3.5"
+    },
+    {
+      "id": "q043",
+      "statement": "The entire original source code of the Apollo 11 guidance computer was uploaded to GitHub and contains humorous comments left by the original NASA programmers.",
+      "is_real": true,
+      "explanation": "The Apollo 11 AGC source code was uploaded to GitHub in 2016 by former NASA intern Chris Garry. It contains programmer comments like 'BURN_BABY_BURN' (a master ignition routine) and 'PINBALL_GAME_BUTTONS_AND_LIGHTS' for the display interface.",
+      "category": "technology",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q044",
+      "statement": "YouTube was originally created as a video dating site called 'Tune In Hook Up.'",
+      "is_real": true,
+      "explanation": "YouTube co-founder Steve Chen has confirmed that the site was originally conceived as a video dating platform. When the dating concept failed to attract users, the founders pivoted to a general video sharing platform.",
+      "category": "technology",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q045",
+      "statement": "The character of Shrek was originally modeled on a real person \u2014 professional wrestler Maurice Tillet, who had a condition called acromegaly.",
+      "is_real": true,
+      "explanation": "While DreamWorks hasn't officially confirmed this, Maurice Tillet (nicknamed 'The French Angel') had acromegaly which caused enlarged facial features strikingly similar to Shrek's design. The resemblance is widely acknowledged.",
+      "category": "pop_culture",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q046",
+      "statement": "The Simpsons holds a Guinness World Record for most accurate predictions of future events by a television show, with 32 verified predictions.",
+      "is_real": false,
+      "explanation": "While The Simpsons has made several seemingly prescient predictions (like Trump's presidency and Disney buying Fox), there is no Guinness World Record for 'most accurate predictions.' The show has aired 750+ episodes \u2014 some coincidences are statistically expected.",
+      "category": "pop_culture",
+      "difficulty": "medium",
+      "source_model": "GPT-4"
+    },
+    {
+      "id": "q047",
+      "statement": "Mr. Rogers was a Navy SEAL sniper before becoming the host of his children's television show, and he wore long sleeves to cover military tattoos.",
+      "is_real": false,
+      "explanation": "This is a persistent urban legend. Fred Rogers was never in the military. He went straight from college to seminary and into television. He had no tattoos and wore his iconic cardigans because his mother knitted them for him.",
+      "category": "pop_culture",
+      "difficulty": "easy",
+      "source_model": null
+    },
+    {
+      "id": "q049",
+      "statement": "In the original Monopoly game created by Lizzie Magie in 1903, the point was actually to show the evils of monopolies, not to celebrate capitalism.",
+      "is_real": true,
+      "explanation": "Elizabeth (Lizzie) Magie created 'The Landlord's Game' in 1903 to demonstrate Henry George's economic theories about how monopolies enrich landlords at others' expense. Charles Darrow later modified and sold it to Parker Brothers.",
+      "category": "pop_culture",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q050",
+      "statement": "Keanu Reeves once gave up $75 million of his Matrix salary so the special effects and costume design teams could be paid more.",
+      "is_real": false,
+      "explanation": "While Keanu Reeves is genuinely known for generosity (he did give portions of his earnings to crew), the specific figure of $75 million and the claim about costume design teams is exaggerated and fabricated. He reportedly gave up points on the backend to the special effects team, but the exact numbers are unverified.",
+      "category": "pop_culture",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q051",
+      "statement": "The iconic Wilhelm Scream sound effect has been used in over 400 films and TV shows, including every Star Wars and Indiana Jones film.",
+      "is_real": true,
+      "explanation": "The Wilhelm Scream, recorded in 1951, has been used in hundreds of productions. It became a Hollywood in-joke, appearing in Star Wars, Indiana Jones, Lord of the Rings, and many other major franchises.",
+      "category": "pop_culture",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q052",
+      "statement": "Pac-Man was originally called Puck-Man in Japan but was changed for Western release because the arcade cabinets could easily be vandalized to spell a profanity.",
+      "is_real": true,
+      "explanation": "The game was indeed originally called 'Puck-Man' in Japan (from 'paku-paku,' a Japanese onomatopoeia for eating). Namco changed it to Pac-Man for international release to prevent vandals from altering the P to an F.",
+      "category": "pop_culture",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q053",
+      "statement": "David Bowie released a concept album in 1997 called 'Earthling' that was entirely composed using an AI music generation program he helped develop called Verbasizer.",
+      "is_real": false,
+      "explanation": "Bowie's 'Earthling' (1997) is real, and the Verbasizer is a real tool Bowie used \u2014 but it was a text randomization program for generating lyric ideas, not an 'AI music generation program,' and the album was certainly not 'entirely composed' by it.",
+      "category": "pop_culture",
+      "difficulty": "hard",
+      "source_model": "Claude 3"
+    },
+    {
+      "id": "q054",
+      "statement": "The word 'robot' was coined by a Czech playwright, Karel Capek, in his 1920 play R.U.R. (Rossum's Universal Robots).",
+      "is_real": true,
+      "explanation": "Karel Capek introduced the word 'robot' (from the Czech 'robota' meaning forced labor) in his 1920 play R.U.R. His brother Josef actually suggested the word. The play describes artificial people created as workers.",
+      "category": "pop_culture",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q055",
+      "statement": "The Mona Lisa was once stolen from the Louvre in 1911 and was missing for over two years. During that time, more people came to see the empty wall than had come to see the painting.",
+      "is_real": true,
+      "explanation": "Vincenzo Peruggia, an Italian handyman, stole the Mona Lisa on August 21, 1911. It was recovered in December 1913. The empty wall with four hooks where it had hung became a major attraction, drawing larger crowds than the painting itself had.",
+      "category": "pop_culture",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q056",
+      "statement": "Dolphins sleep with one eye open because only half their brain sleeps at a time, a process called unihemispheric slow-wave sleep.",
+      "is_real": true,
+      "explanation": "Dolphins and several other marine mammals practice unihemispheric slow-wave sleep, keeping one brain hemisphere active while the other rests. This allows them to continue surfacing to breathe and watch for predators.",
+      "category": "science",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q057",
+      "statement": "There is a bridge in Scotland called the Overtoun Bridge where dogs have been mysteriously jumping to their deaths since the 1960s, with over 600 documented cases.",
+      "is_real": false,
+      "explanation": "Overtoun Bridge in Scotland is real, and dogs have indeed jumped from it \u2014 but the number '600' is a massive exaggeration frequently generated by AI. The actual documented number is around 50 over several decades. Mink scent below the bridge is the likely cause.",
+      "category": "geography",
+      "difficulty": "hard",
+      "source_model": "ChatGPT-4"
+    },
+    {
+      "id": "q058",
+      "statement": "There's a species of shrimp called the mantis shrimp that can punch with the force of a .22 caliber bullet and see 16 types of color receptors (humans have 3).",
+      "is_real": true,
+      "explanation": "The peacock mantis shrimp can strike with a force of 1,500 newtons \u2014 one of the strongest pound-for-pound strikes in the animal kingdom. They do have 16 types of photoreceptor cells, though research suggests their color vision may be less refined than this implies.",
+      "category": "science",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q059",
+      "statement": "IBM's Watson computer, after winning Jeopardy!, was repurposed for medical diagnosis and correctly identified a rare form of leukemia that human doctors had missed for months.",
+      "is_real": true,
+      "explanation": "In 2016, IBM Watson analyzed the genetic data of a 60-year-old woman with leukemia at the University of Tokyo. It correctly identified a rare secondary leukemia in about 10 minutes, after doctors had struggled with the case for months.",
+      "category": "technology",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q061",
+      "statement": "Pope Gregory IX declared cats to be agents of devil worship in 1233, leading to mass cat killings that may have worsened the Black Plague by reducing the predators of plague-carrying rats.",
+      "is_real": false,
+      "explanation": "While Pope Gregory IX's 'Vox in Rama' (1233) did mention black cats in the context of heretical rituals, it did not declare all cats agents of the devil or order mass killings. The connection to the Black Plague (1347-1351) is a popular but historically unsupported narrative.",
+      "category": "history",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q062",
+      "statement": "The Eiffel Tower grows about 6 inches taller in summer because the iron expands with heat.",
+      "is_real": true,
+      "explanation": "Thermal expansion causes the Eiffel Tower's iron to expand in hot weather. The tower can grow by up to about 6 inches (15 cm) during summer heat and slightly tilts away from the sun.",
+      "category": "science",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q063",
+      "statement": "SpaceX's Starship rocket was partially inspired by the design of a water tower that Elon Musk saw on a farm in Boca Chica, Texas.",
+      "is_real": false,
+      "explanation": "While Starship is built in Boca Chica, Texas, and early prototypes had a water-tower-like appearance, there is no credible source for Musk being 'inspired by a water tower on a farm.' The design derives from standard rocket engineering principles and stainless steel construction choices.",
+      "category": "technology",
+      "difficulty": "medium",
+      "source_model": "GPT-4"
+    },
+    {
+      "id": "q064",
+      "statement": "The GPS in your phone would be inaccurate by about 7 miles per day if it didn't correct for Einstein's theory of relativity.",
+      "is_real": true,
+      "explanation": "GPS satellites experience both special relativity (time dilation from speed) and general relativity (time speeding up from weaker gravity). Without corrections, GPS positions would drift by roughly 10 km (about 7 miles) per day.",
+      "category": "technology",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q065",
+      "statement": "There is a point in the Pacific Ocean called Point Nemo that is so remote, the nearest humans are often the astronauts aboard the International Space Station orbiting 258 miles overhead.",
+      "is_real": true,
+      "explanation": "Point Nemo (the oceanic pole of inaccessibility) is approximately 1,670 miles from the nearest land. When the ISS orbits overhead at about 258 miles altitude, the astronauts aboard are indeed closer than any humans on Earth's surface.",
+      "category": "geography",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q068",
+      "statement": "The original Star Wars script by George Lucas included a character named 'Mace Windy' who was a large, heavyset Jedi from the planet Ophuchi.",
+      "is_real": true,
+      "explanation": "In George Lucas's early rough drafts of Star Wars (1973-1974), there was indeed a character named 'Mace Windy.' The name eventually evolved into Mace Windu, played by Samuel L. Jackson in the prequel trilogy.",
+      "category": "pop_culture",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q069",
+      "statement": "Iceland has no mosquitoes despite having the wet, boggy conditions they typically thrive in.",
+      "is_real": true,
+      "explanation": "Iceland is one of the few habitable places on Earth with no native mosquito population. Scientists believe the unique climate cycles of freezing and thawing happen at times that disrupt the mosquito breeding cycle.",
+      "category": "geography",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q070",
+      "statement": "Apple co-founder Steve Wozniak holds a patent for the universal remote control, which he invented in 1987 while recovering from a plane crash.",
+      "is_real": true,
+      "explanation": "After surviving a small plane crash in 1981 (not 1987 \u2014 the timing given is approximate), Wozniak did create CL 9, a company that produced the first programmable universal remote control, and he holds the patent for it.",
+      "category": "technology",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q071",
+      "statement": "Albert Einstein failed math as a child and was considered a poor student by his teachers.",
+      "is_real": false,
+      "explanation": "This is one of the most widespread myths about Einstein. He excelled in mathematics from a young age and mastered calculus by age 15. The myth may stem from a grading system confusion \u2014 in the Swiss system, 6 was the highest grade, and Einstein scored 6s in math.",
+      "category": "history",
+      "difficulty": "easy",
+      "source_model": null
+    },
+    {
+      "id": "q072",
+      "statement": "The 1904 Olympic marathon in St. Louis involved a runner who was driven part of the course in a car and initially declared the winner before the fraud was discovered.",
+      "is_real": true,
+      "explanation": "Fred Lorz hitched a ride in a car for about 11 miles of the 1904 marathon due to cramps. When the car broke down, he jogged the rest and crossed first. He was initially celebrated before witnesses revealed the cheating.",
+      "category": "history",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q073",
+      "statement": "Marie Curie's personal notebooks from the 1890s are still so radioactive that they must be stored in lead-lined boxes, and visitors must sign a liability waiver to view them.",
+      "is_real": true,
+      "explanation": "Marie Curie's papers and personal effects are indeed highly radioactive and stored in lead-lined boxes at the Bibliotheque nationale de France. Visitors must wear protective gear and sign a waiver to access them. They will remain radioactive for another 1,500 years.",
+      "category": "science",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q074",
+      "statement": "The African country of Wakanda was briefly recognized by the U.S. Department of Agriculture as a free trade partner in 2019 due to a database error.",
+      "is_real": true,
+      "explanation": "In 2019, the USDA's agricultural tariff tracker listed Wakanda \u2014 the fictional nation from Marvel's Black Panther \u2014 as a free trade partner. It was used as a test entry that was accidentally published and later removed.",
+      "category": "pop_culture",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q075",
+      "statement": "The longest word in the English language that can be typed using only the top row of a QWERTY keyboard is 'typewriter.'",
+      "is_real": false,
+      "explanation": "While 'typewriter' (10 letters) is a well-known top-row-only word and often cited as the longest, the word 'proprietory' (11 letters) and 'rupturewort' (11 letters) can also be typed on the top row. 'Typewriter' is not the longest.",
+      "category": "technology",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q076",
+      "statement": "In 2016, Microsoft released an AI chatbot called Tay on Twitter, which learned from users and began posting offensive content within 16 hours, forcing Microsoft to shut it down.",
+      "is_real": true,
+      "explanation": "Microsoft's Tay was launched on March 23, 2016, designed to learn conversational patterns from Twitter users. Coordinated trolling caused it to generate offensive tweets within hours, and Microsoft took it offline within 16 hours.",
+      "category": "technology",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q077",
+      "statement": "The ancient Library of Alexandria was destroyed in a single catastrophic fire set by Julius Caesar's troops in 48 BC.",
+      "is_real": false,
+      "explanation": "The destruction of the Library of Alexandria was not a single event. While Caesar's troops did cause a fire in 48 BC, the library likely survived in some form for centuries. It declined gradually through multiple incidents, budget cuts, and neglect over several hundred years.",
+      "category": "history",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q078",
+      "statement": "Goldfish have a memory span of only about 3 seconds.",
+      "is_real": false,
+      "explanation": "This is a popular myth. Studies have shown goldfish can remember things for months, learn to navigate mazes, and even be trained to push levers for food. Their memories can last at least five months.",
+      "category": "science",
+      "difficulty": "easy",
+      "source_model": null
+    },
+    {
+      "id": "q079",
+      "statement": "A company called Theranos raised over $700 million claiming it could run hundreds of medical tests from a single drop of blood, before it was exposed as a fraud.",
+      "is_real": true,
+      "explanation": "Theranos, founded by Elizabeth Holmes, claimed revolutionary blood-testing technology. It raised over $700 million and was valued at $9 billion before investigations revealed the technology didn't work. Holmes was convicted of fraud in 2022.",
+      "category": "technology",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q080",
+      "statement": "Napoleon Bonaparte was unusually short for his time, standing only 5 feet 2 inches tall.",
+      "is_real": false,
+      "explanation": "Napoleon was actually about 5 feet 7 inches tall \u2014 average or slightly above average for a Frenchman of his era. The myth arose from confusion between French and English measurement systems, and from British propaganda caricatures.",
+      "category": "history",
+      "difficulty": "easy",
+      "source_model": null
+    },
+    {
+      "id": "q081",
+      "statement": "Lichtenstein, the pop artist, secretly embedded tiny self-portraits in the Ben-Day dots of his most famous works, discoverable only under magnification.",
+      "is_real": false,
+      "explanation": "Roy Lichtenstein did not embed hidden self-portraits in his Ben-Day dots. His dots were deliberately uniform and mechanical in appearance. This claim sounds plausible but is entirely fabricated.",
+      "category": "pop_culture",
+      "difficulty": "medium",
+      "source_model": "Claude 3.5"
+    },
+    {
+      "id": "q083",
+      "statement": "There is a massive underground ocean beneath the Earth's surface containing roughly three times the water of all surface oceans combined, trapped in a mineral called ringwoodite.",
+      "is_real": true,
+      "explanation": "In 2014, scientists discovered evidence of a vast reservoir of water trapped in ringwoodite, a blue mineral in the Earth's transition zone about 400 miles deep. It may hold about three oceans' worth of water.",
+      "category": "science",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q085",
+      "statement": "Humans swallow an average of eight spiders per year while sleeping.",
+      "is_real": false,
+      "explanation": "This 'fact' is entirely fabricated and was allegedly created in a 1993 magazine column to demonstrate how easily misinformation spreads. Spiders are unlikely to crawl into a sleeping person's mouth due to vibrations from breathing and heartbeat.",
+      "category": "science",
+      "difficulty": "easy",
+      "source_model": null
+    },
+    {
+      "id": "q086",
+      "statement": "The Democratic People's Republic of Korea (North Korea) maintains a government-run intranet called Kwangmyong that has its own search engine, email service, and approximately 5,500 websites.",
+      "is_real": true,
+      "explanation": "Kwangmyong (meaning 'bright') is North Korea's isolated national intranet. It has its own web browser, email, and around 1,000 to 5,500 websites (estimates vary). It is completely disconnected from the global internet.",
+      "category": "technology",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q087",
+      "statement": "The 'green flash' is a rare optical phenomenon where the sun briefly turns green for 1-2 seconds at sunset, caused by atmospheric refraction.",
+      "is_real": true,
+      "explanation": "The green flash is a real atmospheric optical phenomenon. When conditions are right (clear air, distinct horizon), the top edge of the sun briefly appears green for a second or two at sunset or sunrise due to atmospheric dispersion of light.",
+      "category": "science",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q088",
+      "statement": "Vincent van Gogh only sold one painting during his lifetime \u2014 'The Red Vineyard' \u2014 for 400 francs.",
+      "is_real": false,
+      "explanation": "While 'The Red Vineyard' is often cited as the only painting Van Gogh sold, recent research has found evidence of other sales and trades during his lifetime. The 'only one painting sold' narrative, while popular, oversimplifies the historical record.",
+      "category": "pop_culture",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q089",
+      "statement": "In 2020, a Google AI designed a computer chip layout in under 6 hours that would have taken human engineers months to complete.",
+      "is_real": true,
+      "explanation": "In a 2021 Nature paper, Google researchers described an AI system that could design chip floorplans (placing components on a chip) in under 6 hours, a task that typically takes human experts weeks or months. The resulting designs were comparable or superior to human designs.",
+      "category": "technology",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q092",
+      "statement": "The inventor of the Pringles can, Fredric Baur, was so proud of his creation that his ashes were buried in one after he died in 2008.",
+      "is_real": true,
+      "explanation": "Fredric Baur designed the iconic Pringles can (a hyperbolic paraboloid shape) and requested that his ashes be buried in one. His family honored his wish when he passed away in May 2008, burying part of his ashes in a Pringles can.",
+      "category": "pop_culture",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q093",
+      "statement": "During World War II, the British military developed a plan called Operation Habakkuk to build aircraft carriers out of ice mixed with wood pulp, called Pykrete.",
+      "is_real": true,
+      "explanation": "Project Habakkuk was a real WWII British plan to build massive, unsinkable aircraft carriers from Pykrete (a mixture of ice and sawdust). A prototype was built on a lake in Alberta, Canada. The project was eventually abandoned as impractical.",
+      "category": "history",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q095",
+      "statement": "Thomas Edison invented the light bulb.",
+      "is_real": false,
+      "explanation": "Edison did not invent the light bulb from scratch. Earlier inventors including Humphry Davy, Warren de la Rue, and Joseph Swan all developed forms of electric light. Edison's achievement was creating a practical, long-lasting, commercially viable incandescent bulb in 1879.",
+      "category": "history",
+      "difficulty": "easy",
+      "source_model": null
+    },
+    {
+      "id": "q096",
+      "statement": "We only use 10% of our brains.",
+      "is_real": false,
+      "explanation": "Brain imaging studies show that virtually all parts of the brain are active, and over the course of a day, 100% of the brain is used. The myth may have originated from misinterpreted early neuroscience or a misquote attributed to Albert Einstein.",
+      "category": "science",
+      "difficulty": "easy",
+      "source_model": null
+    },
+    {
+      "id": "q097",
+      "statement": "The Great Fire of London in 1666 officially killed only 6 people, despite destroying over 13,000 houses.",
+      "is_real": true,
+      "explanation": "The official death toll from the Great Fire of London was indeed only 6, though the actual number is believed to be higher since deaths among the poor and homeless may not have been recorded. The fire destroyed 13,200 houses and 87 churches.",
+      "category": "history",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q098",
+      "statement": "Carrots improve your eyesight, especially your ability to see in the dark.",
+      "is_real": false,
+      "explanation": "While carrots contain vitamin A (important for eye health), eating them won't give you superior night vision. This myth was promoted by British propaganda during WWII to explain why RAF pilots could spot enemy planes at night, hiding the real reason: radar technology.",
+      "category": "science",
+      "difficulty": "easy",
+      "source_model": null
+    },
+    {
+      "id": "q099",
+      "statement": "The Dyatlov Pass incident of 1959 \u2014 where nine hikers died under mysterious circumstances in the Ural Mountains \u2014 was officially explained in 2021 as caused by a small slab avalanche.",
+      "is_real": true,
+      "explanation": "Russian authorities reopened the Dyatlov Pass investigation and concluded in 2020-2021 that a small slab avalanche was the likely cause, explaining why the hikers cut through their tent from the inside and fled. Swiss researchers later published a Nature paper supporting this theory.",
+      "category": "history",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q100",
+      "statement": "Spotify's first-ever playlist was curated by an algorithm called 'BART' (Bayesian Audio Recommendation Tool) that analyzed listeners' heartbeat patterns through their device microphones.",
+      "is_real": false,
+      "explanation": "Spotify has never used a tool called BART or analyzed heartbeat patterns through microphones. Spotify's recommendation system uses collaborative filtering, natural language processing, and audio analysis \u2014 but of the music itself, not listeners' biophysical data.",
+      "category": "technology",
+      "difficulty": "medium",
+      "source_model": "Claude 3.5"
+    },
+    {
+      "id": "q101",
+      "statement": "Lake Hillier in Western Australia is permanently bright pink, and scientists still have no confirmed explanation for its color.",
+      "is_real": false,
+      "explanation": "Lake Hillier is indeed permanently pink, but the claim that scientists have 'no confirmed explanation' is false. Research has identified the pink color is caused by the microorganism Dunaliella salina, a type of halophilic (salt-loving) algae that produces beta-carotene.",
+      "category": "geography",
+      "difficulty": "hard",
+      "source_model": "GPT-4"
+    },
+    {
+      "id": "q102",
+      "statement": "The city of Centralia, Pennsylvania has been burning underground since 1962 due to a coal mine fire, and its population dropped from over 1,000 to fewer than 10 residents.",
+      "is_real": true,
+      "explanation": "A coal mine fire started in Centralia in 1962 and has been burning underground ever since. The fire could burn for 250 more years. The town was largely abandoned; as of recent counts, fewer than 10 people remain.",
+      "category": "geography",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q103",
+      "statement": "The island of Socotra, located off the coast of Yemen, has so many unique species that it's sometimes called 'the most alien-looking place on Earth.'",
+      "is_real": true,
+      "explanation": "Socotra is home to approximately 700 species found nowhere else on Earth, including the Dragon's Blood Tree and the Cucumber Tree. Its isolation for millions of years led to extraordinary biodiversity, earning it a UNESCO World Heritage designation.",
+      "category": "geography",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q105",
+      "statement": "The Great Pacific Garbage Patch is a visible, solid island of trash roughly twice the size of Texas that you can walk on.",
+      "is_real": false,
+      "explanation": "While the Great Pacific Garbage Patch is real and enormous, it is not a solid island you can see or walk on. It consists mostly of microplastics suspended in the water column, making it more like a 'plastic soup' that's largely invisible to the naked eye from a boat.",
+      "category": "geography",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q106",
+      "statement": "The Amazon rainforest produces 20% of the world's oxygen, which is why it's called 'the lungs of the Earth.'",
+      "is_real": false,
+      "explanation": "While the Amazon is often called 'the lungs of the Earth,' it does not produce 20% of the world's oxygen. The Amazon's vegetation consumes roughly as much oxygen through respiration as it produces through photosynthesis. Most of Earth's oxygen comes from ocean phytoplankton.",
+      "category": "geography",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q107",
+      "statement": "There is a naturally occurring nuclear reactor in Gabon, Africa, that sustained a fission chain reaction for hundreds of thousands of years, about 2 billion years ago.",
+      "is_real": true,
+      "explanation": "The Oklo natural nuclear reactors in Gabon are the only known natural nuclear fission reactors. Discovered in 1972, they operated approximately 1.7 billion years ago and ran for several hundred thousand years before their uranium fuel was depleted.",
+      "category": "science",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q109",
+      "statement": "Crows can recognize individual human faces and will hold grudges against specific people for years, even teaching their offspring to avoid those people.",
+      "is_real": true,
+      "explanation": "Research at the University of Washington demonstrated that crows can remember and recognize individual human faces for years. They share this information with other crows, including their offspring, creating multi-generational grudges against specific people.",
+      "category": "science",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q110",
+      "statement": "The total weight of all ants on Earth is greater than the total weight of all humans on Earth.",
+      "is_real": false,
+      "explanation": "This was once considered plausible and widely repeated, but recent research estimates the total biomass of ants at roughly 80 million tons, while humans weigh approximately 400 million tons. Ants are impressive but don't outweigh us.",
+      "category": "science",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q111",
+      "statement": "Chameleons change color primarily to camouflage themselves from predators.",
+      "is_real": false,
+      "explanation": "While chameleons can change color, the primary reasons are temperature regulation and social signaling (communicating mood, territory, and mating status to other chameleons), not camouflage. Their resting colors already provide good camouflage.",
+      "category": "science",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q112",
+      "statement": "Lightning never strikes the same place twice.",
+      "is_real": false,
+      "explanation": "This is one of the most well-known false sayings. Lightning frequently strikes the same place multiple times. The Empire State Building, for instance, is struck by lightning about 20-25 times per year.",
+      "category": "science",
+      "difficulty": "easy",
+      "source_model": null
+    },
+    {
+      "id": "q113",
+      "statement": "The Academy Award (Oscar) statuette was originally designed by Cedric Gibbons in 1928 and is rumored to have been modeled after Mexican film director Emilio Fernandez.",
+      "is_real": true,
+      "explanation": "The Oscar statuette was designed by Cedric Gibbons and sculpted by George Stanley. While never officially confirmed, the long-standing rumor (supported by Dolores del Rio, Fernandez's then-partner) is that the figure was modeled after the handsome Emilio Fernandez.",
+      "category": "pop_culture",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q114",
+      "statement": "Walt Disney's body was cryogenically frozen after his death in 1966, preserved in a secret facility beneath Disneyland's Pirates of the Caribbean ride.",
+      "is_real": false,
+      "explanation": "This is an enduring urban legend. Walt Disney was cremated on December 17, 1966, two days after his death. His ashes were interred at Forest Lawn Memorial Park in Glendale, California. He was not cryogenically frozen.",
+      "category": "pop_culture",
+      "difficulty": "easy",
+      "source_model": null
+    },
+    {
+      "id": "q115",
+      "statement": "In the original Grimm Brothers' version of Cinderella, the stepsisters cut off parts of their feet to fit into the glass slipper.",
+      "is_real": true,
+      "explanation": "In the Brothers Grimm version (Aschenputtel), one stepsister cut off her toes and the other cut off her heel to try to fit into the slipper. Pigeons alerted the prince to the blood. The story ends with the stepsisters' eyes being pecked out by birds.",
+      "category": "pop_culture",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q117",
+      "statement": "Marvel Comics once published a crossover event where Spider-Man and Superman teamed up to defeat a villain called Entropy, and it became the best-selling comic of 1982.",
+      "is_real": false,
+      "explanation": "While DC and Marvel did produce crossover comics (including Superman vs. The Amazing Spider-Man in 1976), there was no crossover involving a villain called 'Entropy' and it was certainly not the best-selling comic of 1982. Those specific details are fabricated.",
+      "category": "pop_culture",
+      "difficulty": "medium",
+      "source_model": "ChatGPT-4"
+    },
+    {
+      "id": "q118",
+      "statement": "There is a single tree in the Sahara Desert called the Tree of Tenere that was once considered the most isolated tree on Earth, with no other tree within 250 miles \u2014 until a drunk driver crashed into it in 1973.",
+      "is_real": true,
+      "explanation": "The Tree of Tenere in Niger was indeed the most isolated tree on Earth, the sole survivor of a once-thriving forest. In 1973, a reportedly drunk Libyan truck driver crashed into it. A metal sculpture now marks the spot, and the dead tree is in a museum in Niamey.",
+      "category": "geography",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q122",
+      "statement": "The Swiss village of Grindelwald banned the use of AI-generated images in tourism marketing in 2023, becoming the first municipality in Europe to pass such a law.",
+      "is_real": false,
+      "explanation": "No such ban exists. While AI-generated imagery in tourism marketing has been a topic of discussion, Grindelwald has not passed any law banning it. This is a plausible-sounding fabrication that plays on real concerns about AI in media.",
+      "category": "geography",
+      "difficulty": "medium",
+      "source_model": "GPT-4"
+    },
+    {
+      "id": "q123",
+      "statement": "The original name for the search engine Yahoo stood for 'Yet Another Hierarchically Organized Oracle.'",
+      "is_real": false,
+      "explanation": "While Yahoo's founders David Filo and Jerry Yang did claim the name stood for 'Yet Another Hierarchical Officious Oracle' (not 'Organized Oracle'), they also said they chose it because they liked the general definition of a 'yahoo' \u2014 a rude, unsophisticated person. The exact backronym given here is slightly wrong.",
+      "category": "technology",
+      "difficulty": "hard",
+      "source_model": "ChatGPT-4"
+    },
+    {
+      "id": "q124",
+      "statement": "Dogs can only see in black and white.",
+      "is_real": false,
+      "explanation": "Dogs are not colorblind in the way most people think. They can see colors, but their color vision is limited compared to humans \u2014 they see on a blue-yellow spectrum (dichromatic vision) rather than the full red-green-blue spectrum humans see.",
+      "category": "science",
+      "difficulty": "easy",
+      "source_model": null
+    },
+    {
+      "id": "q125",
+      "statement": "The blood in your veins is blue when it's deoxygenated, which is why veins appear blue through your skin.",
+      "is_real": false,
+      "explanation": "Human blood is never blue. Deoxygenated blood is dark red, not blue. Veins appear blue through the skin due to how light penetrates and is absorbed by skin tissue at different wavelengths \u2014 it's an optical effect, not the color of the blood itself.",
+      "category": "science",
+      "difficulty": "easy",
+      "source_model": null
+    },
+    {
+      "id": "q126",
+      "statement": "The Great Emu War of 1932 was a real Australian military operation in which soldiers with machine guns were deployed against emus \u2014 and the emus essentially won.",
+      "is_real": true,
+      "explanation": "The Emu War was a real wildlife management operation in Western Australia. The Royal Australian Artillery deployed soldiers with Lewis guns against roughly 20,000 emus damaging crops. The emus proved remarkably resilient, and the military withdrew after limited success.",
+      "category": "history",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q127",
+      "statement": "In 2018, a Japanese AI named AIZAWA wrote a novel that passed the first round of a literary competition, and judges did not know it was written by a machine.",
+      "is_real": false,
+      "explanation": "While in 2016 a team did enter an AI-co-authored novel in the Hoshi Shinichi Literary Award (it passed the first round), the AI was not called 'AIZAWA' and it did not write the novel independently \u2014 humans structured the plot and the AI generated some text. The year and details here are fabricated.",
+      "category": "technology",
+      "difficulty": "hard",
+      "source_model": "Claude 3"
+    },
+    {
+      "id": "q128",
+      "statement": "Bulls are enraged by the color red.",
+      "is_real": false,
+      "explanation": "Bulls are actually colorblind to red. In bullfighting, the bull charges at the muleta (cape) because of its movement, not its color. The red color is traditional and likely chosen to mask bloodstains.",
+      "category": "science",
+      "difficulty": "easy",
+      "source_model": null
+    },
+    {
+      "id": "q129",
+      "statement": "Nikola Tesla once claimed to have received radio signals from Mars in 1899, and many scientists of the era took his claim seriously.",
+      "is_real": true,
+      "explanation": "In his Colorado Springs lab in 1899, Tesla reported receiving regular radio signals he believed came from Mars or another planet. While modern scientists believe he may have detected emissions from Jupiter, many contemporaries took his extraterrestrial communication claims seriously.",
+      "category": "history",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q130",
+      "statement": "The Netflix algorithm recommended the production of 'House of Cards' in 2013 after analyzing viewer data showing high overlap between fans of Kevin Spacey, David Fincher, and British political dramas.",
+      "is_real": false,
+      "explanation": "While Netflix has promoted this narrative, the reality is more nuanced. Ted Sarandos and Netflix executives made a traditional content acquisition deal. The data analytics story was partly marketing spin \u2014 the decision involved significant human judgment and a bidding war, not just an algorithm.",
+      "category": "technology",
+      "difficulty": "hard",
+      "source_model": null
+    },
+    {
+      "id": "q131",
+      "statement": "J.R.R. Tolkien and C.S. Lewis were close friends who met weekly in a group called the Inklings, and they had a bet about who could write a better space/time travel story.",
+      "is_real": true,
+      "explanation": "Tolkien and Lewis were indeed members of the Inklings, an informal literary group at Oxford. They had an agreement (not exactly a bet) where Lewis would write a space-travel story (Out of the Silent Planet) and Tolkien would write a time-travel story (The Lost Road, which he never finished).",
+      "category": "pop_culture",
+      "difficulty": "medium",
+      "source_model": null
+    },
+    {
+      "id": "q133",
+      "statement": "Stephen King sold the film rights to 'The Shawshank Redemption' to Frank Darabont for $1, as part of his 'Dollar Baby' program for aspiring filmmakers.",
+      "is_real": false,
+      "explanation": "While Stephen King does have a 'Dollar Baby' program for short film adaptations, The Shawshank Redemption was not part of it. Castle Rock Entertainment properly acquired the rights to the novella 'Rita Hayworth and Shawshank Redemption.' The Dollar Baby program applies only to short stories adapted as student/amateur short films.",
+      "category": "pop_culture",
+      "difficulty": "hard",
+      "source_model": "GPT-4"
+    }
+  ]
+}

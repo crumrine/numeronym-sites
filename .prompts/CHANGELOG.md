@@ -4,6 +4,18 @@ How this project was built, one conversation at a time.
 
 ---
 
+## Session 5 — h11n Hall of Fame + Quiz Game (2026-02-09)
+
+Built two major h11n.dev features in parallel using two Claude Code background agents.
+The Hall of Fame is a content-collection-powered gallery of 18 seed AI hallucinations
+across 6 categories (history rewrites, geography fails, people who don't exist,
+confident math, citation needed, science gone wrong), with a filterable gallery index,
+detail pages, and an absurdity-rated leaderboard. The "Real or Hallucinated?" quiz
+is a 10-question game drawn from a 70-question bank across 5 categories, with
+keyboard shortcuts, streak tracking, share-to-clipboard, and animated transitions.
+Also deployed p8s.dev with Session 4's CTA fix. Zero build errors on first try.
+[Full log ->](log/005-h11n-features.md)
+
 ## Session 4 — Verification & Landing Page Fix (2026-02-09)
 
 First session using Claude via Cowork mode (desktop app) instead of Claude Code CLI.
