@@ -1,0 +1,1203 @@
+---
+import BaseLayout from '@shared/components/BaseLayout.astro';
+import SiteHeader from '@shared/components/SiteHeader.astro';
+import SiteFooter from '@shared/components/SiteFooter.astro';
+import points from '../data/embedding-points.json';
+---
+
+<BaseLayout
+  title="Embedding Explorer — e8s.dev"
+  description="Explore the semantic space of music, emotions, tech, and fun. See how embeddings cluster meaning."
+  site="e8s"
+>
+  <SiteHeader site="e8s" nav={[{ label: 'Explorer', href: '/explorer' }, { label: 'Jukebox', href: '/jukebox' }]} />
+
+  <main>
+    <section class="explorer-hero">
+      <div class="container">
+        <h1 class="explorer-title fade-up">Embedding <span class="accent">Explorer</span></h1>
+        <p class="explorer-subtitle fade-up fade-up-delay-1">
+          Navigate the semantic space where meaning becomes geometry. Pan, zoom, and discover what's near what.
+        </p>
+      </div>
+    </section>
+
+    <section class="explorer-controls">
+      <div class="container">
+        <div class="controls-row">
+          <div class="toggle-group">
+            <button class="toggle-btn active" data-category="music" style="--cat-color: #a855f7;">
+              <span class="toggle-dot"></span> Music <span class="toggle-count">50</span>
+            </button>
+            <button class="toggle-btn active" data-category="emotions" style="--cat-color: #f59e0b;">
+              <span class="toggle-dot"></span> Emotions <span class="toggle-count">40</span>
+            </button>
+            <button class="toggle-btn active" data-category="tech" style="--cat-color: #06b6d4;">
+              <span class="toggle-dot"></span> Tech <span class="toggle-count">50</span>
+            </button>
+            <button class="toggle-btn active" data-category="fun" style="--cat-color: #22c55e;">
+              <span class="toggle-dot"></span> Fun <span class="toggle-count">60</span>
+            </button>
+          </div>
+          <div class="zoom-info">
+            <span class="zoom-label" id="zoomLevel">1.0x</span>
+            <button class="zoom-btn" id="zoomReset" title="Reset view">Reset</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="explorer-canvas-section">
+      <div class="container">
+        <div class="canvas-wrapper">
+          <canvas id="explorerCanvas"></canvas>
+          <div class="canvas-hint" id="canvasHint">Click and drag to pan. Scroll to zoom.</div>
+        </div>
+
+        <div class="info-panel" id="infoPanel">
+          <button class="info-close" id="infoPanelClose" aria-label="Close info panel">&times;</button>
+          <div class="info-label" id="infoLabel">—</div>
+          <div class="info-category" id="infoCategory">—</div>
+          <div class="info-divider"></div>
+          <div class="info-neighbors-title">Nearest neighbors</div>
+          <ul class="info-neighbors" id="infoNeighbors"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="explorer-suggestions">
+      <div class="container">
+        <p class="suggestions-label">Try these clusters:</p>
+        <div class="suggestions-row">
+          <button class="suggestion-pill" data-target="electronic-cluster">Electronic music</button>
+          <button class="suggestion-pill" data-target="positive-emotions">Positive emotions</button>
+          <button class="suggestion-pill" data-target="ml-ai">ML / AI</button>
+          <button class="suggestion-pill" data-target="cozy-vibes">Cozy vibes</button>
+          <button class="suggestion-pill" data-target="heavy-music">Heavy music</button>
+          <button class="suggestion-pill" data-target="nature">Nature</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="explorer-explainer">
+      <div class="container">
+        <details class="explainer-details">
+          <summary class="explainer-summary">What am I looking at?</summary>
+          <div class="explainer-content">
+            <p>
+              This is a 2D projection of an <strong>embedding space</strong>. In AI, embeddings are
+              vectors — lists of numbers — that represent the meaning of words, concepts, or any
+              kind of data. When you plot these vectors, things that are semantically similar end up
+              close together.
+            </p>
+            <p>
+              The ~200 points here span four categories: music genres, emotions, tech concepts, and
+              fun/experiential items. Their positions are designed to reflect real semantic relationships:
+            </p>
+            <ul>
+              <li><strong>Electronic, house, and techno</strong> cluster tightly because they share sonic DNA.</li>
+              <li><strong>Jazz, blues, and soul</strong> sit near each other — and near positive emotions like joy and contentment.</li>
+              <li><strong>Metal, punk, and grindcore</strong> cluster far from ambient and classical.</li>
+              <li><strong>"Meditation"</strong> lives near "serenity" and "peace" across category boundaries.</li>
+              <li><strong>ML/AI terms</strong> (transformer, attention, LLM) form their own dense cluster, separate from web/infra tech.</li>
+            </ul>
+            <p>
+              In real embedding models (like those powering LLMs), these spaces have hundreds or thousands
+              of dimensions. This 2D view is a simplified illustration — but the clustering principle is
+              exactly how modern AI understands meaning.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter site="e8s" />
+</BaseLayout>
+
+<style>
+  .explorer-hero {
+    padding: var(--space-xl) 0 var(--space-lg);
+    text-align: center;
+  }
+
+  .explorer-title {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-md);
+  }
+
+  .accent {
+    color: var(--accent);
+  }
+
+  .explorer-subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 50ch;
+    margin: 0 auto;
+  }
+
+  .explorer-controls {
+    padding: var(--space-md) 0;
+  }
+
+  .controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  .toggle-group {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    user-select: none;
+  }
+
+  .toggle-btn:hover {
+    border-color: var(--cat-color);
+  }
+
+  .toggle-btn.active {
+    border-color: var(--cat-color);
+    color: var(--text-primary);
+  }
+
+  .toggle-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--cat-color);
+    opacity: 0.3;
+    transition: opacity var(--transition-fast);
+  }
+
+  .toggle-btn.active .toggle-dot {
+    opacity: 1;
+  }
+
+  .toggle-count {
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+  }
+
+  .zoom-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .zoom-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    min-width: 3.5rem;
+    text-align: right;
+  }
+
+  .zoom-btn {
+    padding: 0.3rem 0.7rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .zoom-btn:hover {
+    border-color: var(--accent);
+    color: var(--text-primary);
+  }
+
+  .explorer-canvas-section {
+    padding: 0 0 var(--space-lg);
+  }
+
+  .explorer-canvas-section .container {
+    position: relative;
+  }
+
+  .canvas-wrapper {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg-secondary);
+  }
+
+  #explorerCanvas {
+    display: block;
+    width: 100%;
+    height: 550px;
+    cursor: grab;
+  }
+
+  #explorerCanvas:active {
+    cursor: grabbing;
+  }
+
+  .canvas-hint {
+    position: absolute;
+    bottom: var(--space-md);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    background: rgba(10, 10, 15, 0.7);
+    backdrop-filter: blur(8px);
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--radius-md);
+    pointer-events: none;
+    transition: opacity var(--transition-slow);
+  }
+
+  .canvas-hint.hidden {
+    opacity: 0;
+  }
+
+  .info-panel {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    width: 260px;
+    background: rgba(26, 26, 37, 0.92);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity var(--transition-base), transform var(--transition-base);
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .info-panel.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .info-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.7rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: var(--text-xl);
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.2rem;
+    transition: color var(--transition-fast);
+  }
+
+  .info-close:hover {
+    color: var(--text-primary);
+  }
+
+  .info-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+    padding-right: 1.5rem;
+  }
+
+  .info-category {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .info-divider {
+    height: 1px;
+    background: var(--border);
+    margin: var(--space-md) 0;
+  }
+
+  .info-neighbors-title {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .info-neighbors {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .info-neighbors li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+
+  .info-neighbors li .neighbor-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .info-neighbors li .neighbor-name {
+    flex: 1;
+    margin-left: 0.5rem;
+  }
+
+  .info-neighbors li .neighbor-dist {
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+    margin-left: 0.5rem;
+  }
+
+  .explorer-suggestions {
+    padding: 0 0 var(--space-lg);
+  }
+
+  .suggestions-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin-bottom: var(--space-sm);
+  }
+
+  .suggestions-row {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .suggestion-pill {
+    padding: 0.35rem 0.9rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .suggestion-pill:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  .explorer-explainer {
+    padding: 0 0 var(--space-xl);
+  }
+
+  .explainer-details {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .explainer-summary {
+    padding: var(--space-md) var(--space-lg);
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    cursor: pointer;
+    user-select: none;
+    transition: color var(--transition-fast);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .explainer-summary::before {
+    content: '\25B6';
+    font-size: var(--text-xs);
+    color: var(--accent);
+    transition: transform var(--transition-fast);
+  }
+
+  .explainer-details[open] .explainer-summary::before {
+    transform: rotate(90deg);
+  }
+
+  .explainer-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .explainer-summary:hover {
+    color: var(--accent);
+  }
+
+  .explainer-content {
+    padding: 0 var(--space-lg) var(--space-lg);
+  }
+
+  .explainer-content p {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+    line-height: 1.7;
+    max-width: 72ch;
+  }
+
+  .explainer-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-md);
+  }
+
+  .explainer-content li {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    padding-left: 1.2rem;
+    position: relative;
+    margin-bottom: 0.3rem;
+  }
+
+  .explainer-content li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6rem;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+
+  .explainer-content strong {
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 768px) {
+    .explorer-title {
+      font-size: var(--text-3xl);
+    }
+
+    #explorerCanvas {
+      height: 400px;
+    }
+
+    .info-panel {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: auto;
+      width: 100%;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      max-height: 50vh;
+      overflow-y: auto;
+    }
+
+    .controls-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .toggle-group {
+      justify-content: center;
+    }
+
+    .zoom-info {
+      justify-content: center;
+    }
+
+    .suggestions-row {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #explorerCanvas {
+      height: 320px;
+    }
+
+    .toggle-btn {
+      font-size: var(--text-xs);
+      padding: 0.3rem 0.6rem;
+    }
+  }
+</style>
+
+<script is:inline define:vars={{ points }}>
+(function() {
+  'use strict';
+
+  // --- Constants ---
+  const CATEGORY_COLORS = {
+    music: '#a855f7',
+    emotions: '#f59e0b',
+    tech: '#06b6d4',
+    fun: '#22c55e'
+  };
+
+  const POINT_RADIUS = 6;
+  const HOVER_RADIUS = 10;
+  const NEIGHBOR_COUNT = 5;
+  const HOVER_SNAP_DISTANCE = 20;
+  const LABEL_ZOOM_THRESHOLD = 2;
+  const MIN_ZOOM = 0.5;
+  const MAX_ZOOM = 12;
+  const ZOOM_SPEED = 0.001;
+  const PADDING = 60;
+
+  // --- Cluster targets for suggestion pills ---
+  const CLUSTER_TARGETS = {
+    'electronic-cluster': { x: 0.25, y: 0.19, zoom: 4.5 },
+    'positive-emotions':  { x: 0.12, y: 0.62, zoom: 4.0 },
+    'ml-ai':              { x: 0.60, y: 0.34, zoom: 4.0 },
+    'cozy-vibes':         { x: 0.55, y: 0.72, zoom: 3.5 },
+    'heavy-music':        { x: 0.48, y: 0.13, zoom: 4.5 },
+    'nature':             { x: 0.58, y: 0.78, zoom: 3.5 }
+  };
+
+  // --- State ---
+  let activeCategories = new Set(['music', 'emotions', 'tech', 'fun']);
+  let offsetX = 0;
+  let offsetY = 0;
+  let scale = 1;
+  let hoveredPoint = null;
+  let selectedPoint = null;
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let dragStartOffsetX = 0;
+  let dragStartOffsetY = 0;
+  let hasDragged = false;
+  let animating = false;
+  let animationId = null;
+
+  // Touch state
+  let lastTouchDist = 0;
+  let lastTouchMidX = 0;
+  let lastTouchMidY = 0;
+  let isTouchPanning = false;
+  let isPinching = false;
+
+  // Animation state
+  let animTarget = null;
+  let animStart = null;
+  let animStartOffset = null;
+  let animStartScale = null;
+  const ANIM_DURATION = 600;
+
+  // --- DOM refs ---
+  const canvas = document.getElementById('explorerCanvas');
+  const ctx = canvas.getContext('2d');
+  const zoomLabel = document.getElementById('zoomLevel');
+  const zoomResetBtn = document.getElementById('zoomReset');
+  const infoPanel = document.getElementById('infoPanel');
+  const infoLabel = document.getElementById('infoLabel');
+  const infoCategory = document.getElementById('infoCategory');
+  const infoNeighbors = document.getElementById('infoNeighbors');
+  const infoPanelClose = document.getElementById('infoPanelClose');
+  const canvasHint = document.getElementById('canvasHint');
+  const toggleBtns = document.querySelectorAll('.toggle-btn');
+  const suggestionPills = document.querySelectorAll('.suggestion-pill');
+
+  // --- Helpers ---
+  function dist(a, b) {
+    const dx = a.x - b.x;
+    const dy = a.y - b.y;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  function getVisiblePoints() {
+    return points.filter(function(p) { return activeCategories.has(p.category); });
+  }
+
+  function getNeighbors(point, count) {
+    var visible = getVisiblePoints().filter(function(p) { return p.id !== point.id; });
+    visible.sort(function(a, b) { return dist(point, a) - dist(point, b); });
+    return visible.slice(0, count).map(function(p) {
+      return { point: p, distance: dist(point, p) };
+    });
+  }
+
+  function dataToCanvas(px, py) {
+    var cw = canvas.width / window.devicePixelRatio;
+    var ch = canvas.height / window.devicePixelRatio;
+    var drawW = cw - PADDING * 2;
+    var drawH = ch - PADDING * 2;
+    var cx = PADDING + px * drawW;
+    var cy = PADDING + py * drawH;
+    // Apply pan and zoom
+    cx = (cx + offsetX) * scale + cw / 2 * (1 - scale);
+    cy = (cy + offsetY) * scale + ch / 2 * (1 - scale);
+    return { x: cx, y: cy };
+  }
+
+  function canvasToData(cx, cy) {
+    var cw = canvas.width / window.devicePixelRatio;
+    var ch = canvas.height / window.devicePixelRatio;
+    var drawW = cw - PADDING * 2;
+    var drawH = ch - PADDING * 2;
+    // Reverse transform
+    var rx = (cx - cw / 2 * (1 - scale)) / scale - offsetX;
+    var ry = (cy - ch / 2 * (1 - scale)) / scale - offsetY;
+    var dx = (rx - PADDING) / drawW;
+    var dy = (ry - PADDING) / drawH;
+    return { x: dx, y: dy };
+  }
+
+  function findNearestPoint(mx, my) {
+    var best = null;
+    var bestDist = Infinity;
+    var visible = getVisiblePoints();
+    for (var i = 0; i < visible.length; i++) {
+      var p = visible[i];
+      var cp = dataToCanvas(p.x, p.y);
+      var d = Math.sqrt((cp.x - mx) * (cp.x - mx) + (cp.y - my) * (cp.y - my));
+      if (d < bestDist) {
+        bestDist = d;
+        best = p;
+      }
+    }
+    if (bestDist <= HOVER_SNAP_DISTANCE) return best;
+    return null;
+  }
+
+  // --- Resize ---
+  function resize() {
+    var dpr = window.devicePixelRatio || 1;
+    var rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    draw();
+  }
+
+  // --- Draw ---
+  function draw() {
+    var cw = canvas.width / window.devicePixelRatio;
+    var ch = canvas.height / window.devicePixelRatio;
+
+    ctx.clearRect(0, 0, cw, ch);
+
+    var visible = getVisiblePoints();
+
+    // Draw grid (subtle)
+    ctx.save();
+    ctx.strokeStyle = 'rgba(42, 42, 58, 0.3)';
+    ctx.lineWidth = 0.5;
+    for (var gx = 0; gx <= 1; gx += 0.1) {
+      var g1 = dataToCanvas(gx, 0);
+      var g2 = dataToCanvas(gx, 1);
+      ctx.beginPath();
+      ctx.moveTo(g1.x, g1.y);
+      ctx.lineTo(g2.x, g2.y);
+      ctx.stroke();
+    }
+    for (var gy = 0; gy <= 1; gy += 0.1) {
+      var g3 = dataToCanvas(0, gy);
+      var g4 = dataToCanvas(1, gy);
+      ctx.beginPath();
+      ctx.moveTo(g3.x, g3.y);
+      ctx.lineTo(g4.x, g4.y);
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // Draw connection lines for hovered/selected point
+    var activePoint = hoveredPoint || selectedPoint;
+    var neighbors = [];
+    if (activePoint) {
+      neighbors = getNeighbors(activePoint, NEIGHBOR_COUNT);
+      var ap = dataToCanvas(activePoint.x, activePoint.y);
+      for (var n = 0; n < neighbors.length; n++) {
+        var np = dataToCanvas(neighbors[n].point.x, neighbors[n].point.y);
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(ap.x, ap.y);
+        ctx.lineTo(np.x, np.y);
+        ctx.strokeStyle = 'rgba(168, 85, 247, 0.25)';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 4]);
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+
+    // Draw points
+    for (var i = 0; i < visible.length; i++) {
+      var p = visible[i];
+      var cp = dataToCanvas(p.x, p.y);
+
+      // Skip if off-screen
+      if (cp.x < -20 || cp.x > cw + 20 || cp.y < -20 || cp.y > ch + 20) continue;
+
+      var isActive = activePoint && p.id === activePoint.id;
+      var isNeighbor = false;
+      for (var nn = 0; nn < neighbors.length; nn++) {
+        if (neighbors[nn].point.id === p.id) { isNeighbor = true; break; }
+      }
+
+      var color = CATEGORY_COLORS[p.category] || '#888';
+      var radius = isActive ? HOVER_RADIUS : (isNeighbor ? POINT_RADIUS + 2 : POINT_RADIUS);
+      var alpha = isActive ? 1 : (isNeighbor ? 0.9 : 0.7);
+
+      // Glow for active
+      if (isActive) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(cp.x, cp.y, radius + 8, 0, Math.PI * 2);
+        ctx.fillStyle = color.replace(')', ', 0.15)').replace('rgb', 'rgba');
+        // Handle hex colors for glow
+        var glowR = parseInt(color.slice(1, 3), 16);
+        var glowG = parseInt(color.slice(3, 5), 16);
+        var glowB = parseInt(color.slice(5, 7), 16);
+        ctx.fillStyle = 'rgba(' + glowR + ',' + glowG + ',' + glowB + ', 0.15)';
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // Point circle
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cp.x, cp.y, radius, 0, Math.PI * 2);
+      var r = parseInt(color.slice(1, 3), 16);
+      var g = parseInt(color.slice(3, 5), 16);
+      var b = parseInt(color.slice(5, 7), 16);
+      ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+      ctx.fill();
+
+      // Border for active/neighbor
+      if (isActive || isNeighbor) {
+        ctx.strokeStyle = 'rgba(' + r + ',' + g + ',' + b + ', 0.9)';
+        ctx.lineWidth = isActive ? 2 : 1;
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      // Label when zoomed in or when hovered/neighbor
+      var showLabel = scale >= LABEL_ZOOM_THRESHOLD || isActive || isNeighbor;
+      if (showLabel) {
+        ctx.save();
+        var labelAlpha = isActive ? 1 : (isNeighbor ? 0.85 : 0.6);
+        ctx.font = (isActive ? '600 ' : '400 ') + '11px "JetBrains Mono", monospace';
+        ctx.fillStyle = 'rgba(232, 232, 237, ' + labelAlpha + ')';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+
+        // Background for label
+        var labelText = p.label;
+        var metrics = ctx.measureText(labelText);
+        var lx = cp.x;
+        var ly = cp.y - radius - 4;
+        var lw = metrics.width + 8;
+        var lh = 16;
+
+        ctx.fillStyle = 'rgba(10, 10, 15, 0.75)';
+        ctx.beginPath();
+        ctx.roundRect(lx - lw / 2, ly - lh, lw, lh, 3);
+        ctx.fill();
+
+        ctx.fillStyle = 'rgba(232, 232, 237, ' + labelAlpha + ')';
+        ctx.fillText(labelText, lx, ly - 2);
+        ctx.restore();
+      }
+    }
+
+    // Update zoom label
+    zoomLabel.textContent = scale.toFixed(1) + 'x';
+  }
+
+  // --- Info panel ---
+  function showInfoPanel(point) {
+    selectedPoint = point;
+    var neighbors = getNeighbors(point, NEIGHBOR_COUNT);
+
+    infoLabel.textContent = point.label;
+    infoCategory.textContent = point.category;
+    infoCategory.style.color = CATEGORY_COLORS[point.category];
+
+    infoNeighbors.innerHTML = '';
+    for (var i = 0; i < neighbors.length; i++) {
+      var n = neighbors[i];
+      var li = document.createElement('li');
+
+      var dot = document.createElement('span');
+      dot.className = 'neighbor-dot';
+      dot.style.background = CATEGORY_COLORS[n.point.category];
+
+      var name = document.createElement('span');
+      name.className = 'neighbor-name';
+      name.textContent = n.point.label;
+
+      var d = document.createElement('span');
+      d.className = 'neighbor-dist';
+      d.textContent = n.distance.toFixed(3);
+
+      li.appendChild(dot);
+      li.appendChild(name);
+      li.appendChild(d);
+      infoNeighbors.appendChild(li);
+    }
+
+    infoPanel.classList.add('visible');
+    draw();
+  }
+
+  function hideInfoPanel() {
+    infoPanel.classList.remove('visible');
+    selectedPoint = null;
+    draw();
+  }
+
+  // --- Animation ---
+  function animateTo(targetOffsetX, targetOffsetY, targetScale) {
+    animTarget = { offsetX: targetOffsetX, offsetY: targetOffsetY, scale: targetScale };
+    animStart = performance.now();
+    animStartOffset = { x: offsetX, y: offsetY };
+    animStartScale = scale;
+    if (!animating) {
+      animating = true;
+      requestAnimationFrame(animationStep);
+    }
+  }
+
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  function animationStep(now) {
+    if (!animTarget) { animating = false; return; }
+    var elapsed = now - animStart;
+    var t = Math.min(elapsed / ANIM_DURATION, 1);
+    var e = easeInOutCubic(t);
+
+    offsetX = animStartOffset.x + (animTarget.offsetX - animStartOffset.x) * e;
+    offsetY = animStartOffset.y + (animTarget.offsetY - animStartOffset.y) * e;
+    scale = animStartScale + (animTarget.scale - animStartScale) * e;
+
+    draw();
+
+    if (t < 1) {
+      requestAnimationFrame(animationStep);
+    } else {
+      animating = false;
+      animTarget = null;
+    }
+  }
+
+  function zoomToDataPoint(dx, dy, targetZoom) {
+    var cw = canvas.width / window.devicePixelRatio;
+    var ch = canvas.height / window.devicePixelRatio;
+    var drawW = cw - PADDING * 2;
+    var drawH = ch - PADDING * 2;
+
+    // We want dataToCanvas(dx, dy) to end up at canvas center
+    // cx = (PADDING + dx * drawW + newOffsetX) * newScale + cw/2 * (1 - newScale)
+    // We want cx = cw/2
+    // cw/2 = (PADDING + dx * drawW + newOffsetX) * newScale + cw/2 * (1 - newScale)
+    // cw/2 - cw/2 * (1 - newScale) = (PADDING + dx * drawW + newOffsetX) * newScale
+    // cw/2 * newScale = (PADDING + dx * drawW + newOffsetX) * newScale
+    // cw/2 = PADDING + dx * drawW + newOffsetX
+    // newOffsetX = cw/2 - PADDING - dx * drawW
+    var newOffsetX = cw / 2 - PADDING - dx * drawW;
+    var newOffsetY = ch / 2 - PADDING - dy * drawH;
+    animateTo(newOffsetX, newOffsetY, targetZoom);
+  }
+
+  // --- Event handlers ---
+
+  // Mouse move (hover)
+  canvas.addEventListener('mousemove', function(e) {
+    if (isDragging) {
+      var dx = e.clientX - dragStartX;
+      var dy = e.clientY - dragStartY;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) hasDragged = true;
+      offsetX = dragStartOffsetX + dx / scale;
+      offsetY = dragStartOffsetY + dy / scale;
+      draw();
+      return;
+    }
+
+    var rect = canvas.getBoundingClientRect();
+    var mx = e.clientX - rect.left;
+    var my = e.clientY - rect.top;
+    var newHovered = findNearestPoint(mx, my);
+
+    if (newHovered !== hoveredPoint) {
+      hoveredPoint = newHovered;
+      canvas.style.cursor = hoveredPoint ? 'pointer' : 'grab';
+      draw();
+    }
+  });
+
+  // Mouse down (start drag)
+  canvas.addEventListener('mousedown', function(e) {
+    isDragging = true;
+    hasDragged = false;
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+    dragStartOffsetX = offsetX;
+    dragStartOffsetY = offsetY;
+    canvas.style.cursor = 'grabbing';
+
+    // Hide hint on first interaction
+    canvasHint.classList.add('hidden');
+  });
+
+  // Mouse up (end drag / click)
+  window.addEventListener('mouseup', function(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    canvas.style.cursor = hoveredPoint ? 'pointer' : 'grab';
+
+    if (!hasDragged) {
+      // It was a click
+      var rect = canvas.getBoundingClientRect();
+      var mx = e.clientX - rect.left;
+      var my = e.clientY - rect.top;
+      var clicked = findNearestPoint(mx, my);
+      if (clicked) {
+        showInfoPanel(clicked);
+      } else {
+        hideInfoPanel();
+      }
+    }
+  });
+
+  // Mouse wheel (zoom)
+  canvas.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    canvasHint.classList.add('hidden');
+
+    var rect = canvas.getBoundingClientRect();
+    var mx = e.clientX - rect.left;
+    var my = e.clientY - rect.top;
+
+    var delta = -e.deltaY * ZOOM_SPEED;
+    var newScale = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, scale * (1 + delta)));
+
+    // Zoom toward mouse position
+    var cw = canvas.width / window.devicePixelRatio;
+    var ch = canvas.height / window.devicePixelRatio;
+
+    // The point under the mouse in data space should stay fixed
+    var beforeData = canvasToData(mx, my);
+    scale = newScale;
+    // After changing scale, find where that data point would now be on canvas
+    // and adjust offset to keep it under the mouse
+    var drawW = cw - PADDING * 2;
+    var drawH = ch - PADDING * 2;
+    var targetCanvasX = PADDING + beforeData.x * drawW;
+    var targetCanvasY = PADDING + beforeData.y * drawH;
+
+    // mx = (targetCanvasX + offsetX) * scale + cw/2*(1-scale)
+    // offsetX = (mx - cw/2*(1-scale)) / scale - targetCanvasX
+    offsetX = (mx - cw / 2 * (1 - scale)) / scale - targetCanvasX;
+    offsetY = (my - ch / 2 * (1 - scale)) / scale - targetCanvasY;
+
+    draw();
+  }, { passive: false });
+
+  // Mouse leave
+  canvas.addEventListener('mouseleave', function() {
+    if (!isDragging) {
+      hoveredPoint = null;
+      draw();
+    }
+  });
+
+  // Touch events
+  canvas.addEventListener('touchstart', function(e) {
+    canvasHint.classList.add('hidden');
+    if (e.touches.length === 1) {
+      isTouchPanning = true;
+      isPinching = false;
+      hasDragged = false;
+      dragStartX = e.touches[0].clientX;
+      dragStartY = e.touches[0].clientY;
+      dragStartOffsetX = offsetX;
+      dragStartOffsetY = offsetY;
+    } else if (e.touches.length === 2) {
+      isPinching = true;
+      isTouchPanning = false;
+      var dx = e.touches[1].clientX - e.touches[0].clientX;
+      var dy = e.touches[1].clientY - e.touches[0].clientY;
+      lastTouchDist = Math.sqrt(dx * dx + dy * dy);
+      lastTouchMidX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+      lastTouchMidY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+    }
+  }, { passive: true });
+
+  canvas.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    if (isTouchPanning && e.touches.length === 1) {
+      var dx = e.touches[0].clientX - dragStartX;
+      var dy = e.touches[0].clientY - dragStartY;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) hasDragged = true;
+      offsetX = dragStartOffsetX + dx / scale;
+      offsetY = dragStartOffsetY + dy / scale;
+      draw();
+    } else if (isPinching && e.touches.length === 2) {
+      var dx2 = e.touches[1].clientX - e.touches[0].clientX;
+      var dy2 = e.touches[1].clientY - e.touches[0].clientY;
+      var newDist = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+      var midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+      var midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+
+      var rect = canvas.getBoundingClientRect();
+      var mx = midX - rect.left;
+      var my = midY - rect.top;
+
+      var zoomFactor = newDist / lastTouchDist;
+      var newScale = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, scale * zoomFactor));
+
+      var cw = canvas.width / window.devicePixelRatio;
+      var ch = canvas.height / window.devicePixelRatio;
+      var beforeData = canvasToData(mx, my);
+      scale = newScale;
+      var drawW = cw - PADDING * 2;
+      var drawH = ch - PADDING * 2;
+      var targetCanvasX = PADDING + beforeData.x * drawW;
+      var targetCanvasY = PADDING + beforeData.y * drawH;
+      offsetX = (mx - cw / 2 * (1 - scale)) / scale - targetCanvasX;
+      offsetY = (my - ch / 2 * (1 - scale)) / scale - targetCanvasY;
+
+      // Pan with midpoint movement
+      var panDx = (midX - lastTouchMidX) / scale;
+      var panDy = (midY - lastTouchMidY) / scale;
+      offsetX += panDx;
+      offsetY += panDy;
+
+      lastTouchDist = newDist;
+      lastTouchMidX = midX;
+      lastTouchMidY = midY;
+
+      draw();
+    }
+  }, { passive: false });
+
+  canvas.addEventListener('touchend', function(e) {
+    if (isTouchPanning && !hasDragged && e.changedTouches.length === 1) {
+      var rect = canvas.getBoundingClientRect();
+      var mx = e.changedTouches[0].clientX - rect.left;
+      var my = e.changedTouches[0].clientY - rect.top;
+      var tapped = findNearestPoint(mx, my);
+      if (tapped) {
+        showInfoPanel(tapped);
+      } else {
+        hideInfoPanel();
+      }
+    }
+    isTouchPanning = false;
+    isPinching = false;
+  }, { passive: true });
+
+  // Category toggles
+  toggleBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var cat = btn.dataset.category;
+      if (activeCategories.has(cat)) {
+        if (activeCategories.size > 1) {
+          activeCategories.delete(cat);
+          btn.classList.remove('active');
+        }
+      } else {
+        activeCategories.add(cat);
+        btn.classList.add('active');
+      }
+      // If hovered/selected point is now hidden, clear it
+      if (hoveredPoint && !activeCategories.has(hoveredPoint.category)) hoveredPoint = null;
+      if (selectedPoint && !activeCategories.has(selectedPoint.category)) hideInfoPanel();
+      draw();
+    });
+  });
+
+  // Zoom reset
+  zoomResetBtn.addEventListener('click', function() {
+    animateTo(0, 0, 1);
+  });
+
+  // Info panel close
+  infoPanelClose.addEventListener('click', function() {
+    hideInfoPanel();
+  });
+
+  // Suggestion pills
+  suggestionPills.forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      var target = pill.dataset.target;
+      var cluster = CLUSTER_TARGETS[target];
+      if (cluster) {
+        // Ensure relevant category is visible
+        var catMap = {
+          'electronic-cluster': 'music',
+          'positive-emotions': 'emotions',
+          'ml-ai': 'tech',
+          'cozy-vibes': 'fun',
+          'heavy-music': 'music',
+          'nature': 'fun'
+        };
+        var cat = catMap[target];
+        if (cat && !activeCategories.has(cat)) {
+          activeCategories.add(cat);
+          toggleBtns.forEach(function(b) {
+            if (b.dataset.category === cat) b.classList.add('active');
+          });
+        }
+        zoomToDataPoint(cluster.x, cluster.y, cluster.zoom);
+      }
+    });
+  });
+
+  // Keyboard
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      hideInfoPanel();
+    }
+  });
+
+  // Window resize
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resize, 100);
+  });
+
+  // --- Init ---
+  resize();
+})();
+</script>

@@ -19,5 +19,5 @@ by Claude Code, directed by a human architect.
 
 ## Stats
 
-- Total sessions: 6
+- Total sessions: 8
 - Hand-written lines: 0

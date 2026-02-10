@@ -1,0 +1,605 @@
+{
+  "genres": [
+    {
+      "id": "synthwave",
+      "name": "Synthwave",
+      "description": "Retro-futuristic electronic music inspired by 1980s film soundtracks, video games, and synth-pop. Pulsing arpeggios, warm analog synths, and driving drum machines create a neon-lit atmosphere.",
+      "keywords": ["neon", "night", "driving", "retro", "80s", "city", "futuristic", "synth", "nostalgia", "cinematic", "cyber", "outrun", "electric", "dreamy", "pulsing", "sunset", "chrome", "arcade", "highway", "glowing"],
+      "mood_color": "#ff6b9d",
+      "energy": "medium-high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "vaporwave",
+      "name": "Vaporwave",
+      "description": "Slowed-down, chopped samples from 80s and 90s muzak, smooth jazz, and corporate elevator music. A surreal, ironic nostalgia for consumer culture filtered through digital haze.",
+      "keywords": ["aesthetic", "mall", "nostalgia", "surreal", "slow", "glitch", "retro", "dreamy", "hazy", "corporate", "digital", "pastel", "lo-fi", "melancholy", "ironic", "sunset", "pool", "static", "distorted"],
+      "mood_color": "#ff71ce",
+      "energy": "low",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "lo-fi-hip-hop",
+      "name": "Lo-fi Hip Hop",
+      "description": "Warm, crackling beats with mellow jazz samples, vinyl hiss, and soft Rhodes chords. The soundtrack to late-night studying, rainy afternoons, and quiet contemplation.",
+      "keywords": ["study", "chill", "rain", "warm", "cozy", "beats", "mellow", "relaxing", "coffee", "late-night", "vinyl", "soft", "calm", "homework", "focus", "jazz", "gentle", "afternoon", "window", "quiet"],
+      "mood_color": "#c4a882",
+      "energy": "low",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "ambient",
+      "name": "Ambient",
+      "description": "Expansive, atmospheric soundscapes that prioritize texture and mood over rhythm or melody. Drifting pads, field recordings, and shimmering tones create immersive sonic environments.",
+      "keywords": ["space", "floating", "atmospheric", "calm", "meditative", "ethereal", "drone", "peaceful", "vast", "texture", "minimal", "serene", "ocean", "forest", "deep", "still", "sleep", "clouds", "expansive", "weightless"],
+      "mood_color": "#4a9eff",
+      "energy": "very-low",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": [
+        { "title": "Ocean of Silence (Shanti)", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" }
+      ]
+    },
+    {
+      "id": "chillwave",
+      "name": "Chillwave",
+      "description": "Sun-bleached, woozy synth-pop with lo-fi production, reverb-soaked vocals, and nostalgic summer vibes. Equal parts dreamy and melancholic, like a Polaroid fading in the sun.",
+      "keywords": ["summer", "beach", "dreamy", "hazy", "warm", "nostalgic", "sun", "washed", "reverb", "lazy", "afternoon", "golden", "faded", "breezy", "gentle", "shore", "sunset", "carefree", "pastel"],
+      "mood_color": "#ffb347",
+      "energy": "low-medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "house",
+      "name": "House",
+      "description": "Four-on-the-floor dance music with soulful vocals, warm bass, and infectious grooves. Born in Chicago warehouses, house music brings people together on the dancefloor with uplifting energy.",
+      "keywords": ["dance", "club", "groove", "party", "uplifting", "four-on-the-floor", "warm", "soulful", "night", "festival", "energy", "bass", "dancefloor", "funky", "euphoria", "crowd", "bounce", "movement", "celebration"],
+      "mood_color": "#ff4757",
+      "energy": "high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": [
+        { "title": "Neon Tidings", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" },
+        { "title": "Deck the Club", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" },
+        { "title": "Bass of the Bells", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" },
+        { "title": "World of Joy", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" },
+        { "title": "Shiva's Dance (Eternal Vibration)", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" },
+        { "title": "Heart of the Sky (Radha's Love)", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" }
+      ]
+    },
+    {
+      "id": "deep-house",
+      "name": "Deep House",
+      "description": "Smoother, moodier cousin of house with deeper bass, jazzy chords, and understated grooves. Perfect for sunset sets, rooftop bars, and late-night conversations.",
+      "keywords": ["smooth", "deep", "groovy", "night", "lounge", "sunset", "warm", "bass", "sophisticated", "rooftop", "chill", "jazzy", "mellow", "underground", "late-night", "silky", "classy", "sensual", "cocktail"],
+      "mood_color": "#5f27cd",
+      "energy": "medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": [
+        { "title": "Velvet Snow", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" }
+      ]
+    },
+    {
+      "id": "techno",
+      "name": "Techno",
+      "description": "Relentless, hypnotic electronic music driven by mechanical rhythms and industrial textures. Born in Detroit, techno thrives in dark warehouses and underground clubs where the beat is everything.",
+      "keywords": ["dark", "industrial", "warehouse", "mechanical", "hypnotic", "pounding", "underground", "night", "intense", "repetitive", "relentless", "berlin", "rave", "strobes", "bass", "minimal", "driving", "raw", "concrete"],
+      "mood_color": "#2d3436",
+      "energy": "high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": [
+        { "title": "Voice of Truth (The Transmission)", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" },
+        { "title": "Midnight Kings", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" }
+      ]
+    },
+    {
+      "id": "trance",
+      "name": "Trance",
+      "description": "Euphoric, soaring electronic music built on arpeggiated synths, epic breakdowns, and transcendent buildups. Designed to induce a state of elevated consciousness on the dancefloor.",
+      "keywords": ["euphoria", "soaring", "epic", "uplifting", "festival", "arpeggio", "build", "breakdown", "transcendent", "anthem", "energy", "emotional", "peak", "sunrise", "crowd", "massive", "spiritual", "bliss", "powerful"],
+      "mood_color": "#00b894",
+      "energy": "high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": [
+        { "title": "Thousand Suns (Sahasrara Peak)", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" },
+        { "title": "The Inner Eye (Vision of the Void)", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" },
+        { "title": "Adeste Raver", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" }
+      ]
+    },
+    {
+      "id": "drum-and-bass",
+      "name": "Drum and Bass",
+      "description": "High-velocity breakbeats and deep, rolling basslines at 160+ BPM. From liquid rollers to heavy neurofunk, DnB is pure kinetic energy channeled through rhythm and sub-bass.",
+      "keywords": ["fast", "breakbeat", "bass", "jungle", "rolling", "energy", "intense", "rave", "dark", "liquid", "night", "adrenaline", "rapid", "underground", "heavy", "movement", "frantic", "powerful", "urban"],
+      "mood_color": "#e17055",
+      "energy": "very-high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": [
+        { "title": "River of Wisdom (Saraswati's Flow)", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" },
+        { "title": "Sky High Herald", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" }
+      ]
+    },
+    {
+      "id": "dubstep",
+      "name": "Dubstep",
+      "description": "Heavy bass drops, wobbly synths, and half-time rhythms that hit like seismic waves. Evolved from UK garage and dub, dubstep ranges from dark and brooding to aggressive and filthy.",
+      "keywords": ["bass", "heavy", "drop", "wobble", "dark", "intense", "aggressive", "loud", "filthy", "massive", "breakdown", "distorted", "grinding", "powerful", "impact", "crushing", "storm", "brutal", "sub"],
+      "mood_color": "#6c5ce7",
+      "energy": "very-high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": [
+        { "title": "Roots of Power (Ganesha's Ground)", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" },
+        { "title": "Sugar Plum Bass", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" }
+      ]
+    },
+    {
+      "id": "future-bass",
+      "name": "Future Bass",
+      "description": "Shimmering, emotional electronic music with lush synth chords, pitched vocals, and uplifting drops. Colorful and euphoric, like sunlight through prisms.",
+      "keywords": ["colorful", "uplifting", "emotional", "bright", "shimmer", "lush", "sweet", "festival", "cheerful", "happy", "warm", "glittery", "positive", "sunshine", "playful", "melodic", "sparkle", "joyful", "vibrant"],
+      "mood_color": "#fd79a8",
+      "energy": "medium-high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "idm",
+      "name": "IDM",
+      "description": "Intellectually adventurous electronic music that deconstructs rhythm, melody, and structure. Glitchy textures, complex time signatures, and unpredictable arrangements reward deep listening.",
+      "keywords": ["experimental", "glitch", "complex", "cerebral", "abstract", "intricate", "weird", "digital", "deconstructed", "brainy", "angular", "chaotic", "strange", "innovative", "layered", "textural", "precise", "headphones"],
+      "mood_color": "#636e72",
+      "energy": "medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "downtempo",
+      "name": "Downtempo",
+      "description": "Slow, groovy electronic music that blends organic instruments with digital production. Mid-tempo rhythms, world music influences, and lush atmospheres perfect for unwinding.",
+      "keywords": ["slow", "groovy", "relaxing", "organic", "chill", "warm", "evening", "lounge", "worldly", "sophisticated", "mellow", "smooth", "sunset", "wine", "contemplative", "atmospheric", "lazy", "sensual", "flowing"],
+      "mood_color": "#e17055",
+      "energy": "low-medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "trip-hop",
+      "name": "Trip-Hop",
+      "description": "Dark, cinematic fusion of hip-hop beats, moody atmospherics, and ethereal vocals. Born in Bristol, trip-hop soundtracks shadowy urban nights with slow-burning intensity.",
+      "keywords": ["dark", "moody", "cinematic", "urban", "night", "smoky", "mysterious", "slow", "atmospheric", "brooding", "shadowy", "film-noir", "rain", "hypnotic", "deep", "sensual", "gritty", "introspective", "haunting"],
+      "mood_color": "#2d3436",
+      "energy": "low-medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "industrial",
+      "name": "Industrial",
+      "description": "Abrasive, mechanical music built from distorted synths, clanging metal, and confrontational noise. Industrial fuses electronic production with punk aggression and dystopian themes.",
+      "keywords": ["harsh", "mechanical", "dark", "aggressive", "noise", "dystopian", "factory", "metal", "distorted", "brutal", "cold", "machine", "abrasive", "intense", "angry", "concrete", "steel", "gritty", "oppressive"],
+      "mood_color": "#636e72",
+      "energy": "high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "indie-rock",
+      "name": "Indie Rock",
+      "description": "Guitar-driven alternative rock with DIY spirit, jangly melodies, and introspective lyrics. From basement shows to festival stages, indie rock balances vulnerability with urgency.",
+      "keywords": ["guitar", "alternative", "jangly", "introspective", "youthful", "authentic", "indie", "basement", "raw", "emotional", "lyrical", "energetic", "bittersweet", "college", "heartfelt", "honest", "lo-fi", "driving", "melodic"],
+      "mood_color": "#fdcb6e",
+      "energy": "medium-high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "shoegaze",
+      "name": "Shoegaze",
+      "description": "Walls of distorted, reverb-drenched guitars that blur into a shimmering, overwhelming wash of sound. Buried vocals float beneath layers of feedback and ethereal noise.",
+      "keywords": ["dreamy", "distorted", "hazy", "wall-of-sound", "reverb", "ethereal", "loud", "blurry", "overwhelming", "beautiful", "noise", "layered", "melancholy", "hypnotic", "immersive", "warm", "fuzzy", "celestial", "swirling"],
+      "mood_color": "#dfe6e9",
+      "energy": "medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "post-rock",
+      "name": "Post-Rock",
+      "description": "Cinematic instrumental rock that builds from delicate quiet to overwhelming crescendos. Patient, emotional, and expansive, post-rock tells stories without words through dynamics and texture.",
+      "keywords": ["cinematic", "epic", "crescendo", "instrumental", "emotional", "atmospheric", "vast", "building", "quiet", "loud", "patient", "beautiful", "sweeping", "dramatic", "orchestral", "mountains", "expansive", "contemplative", "soaring"],
+      "mood_color": "#74b9ff",
+      "energy": "medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "grunge",
+      "name": "Grunge",
+      "description": "Raw, heavy alternative rock drenched in distortion and existential angst. Born in Seattle's rain-soaked basements, grunge strips rock to its emotional core with unflinching honesty.",
+      "keywords": ["raw", "heavy", "angst", "distorted", "dark", "90s", "flannel", "rain", "seattle", "gritty", "loud", "emotional", "frustrated", "rebellious", "melancholy", "garage", "powerful", "authentic", "moody"],
+      "mood_color": "#b2bec3",
+      "energy": "high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "punk",
+      "name": "Punk",
+      "description": "Fast, loud, stripped-down rock fueled by attitude and anti-establishment energy. Three chords, two minutes, one message: do it yourself and question everything.",
+      "keywords": ["fast", "loud", "rebellious", "angry", "raw", "diy", "aggressive", "short", "energetic", "defiant", "youth", "freedom", "chaotic", "urgent", "garage", "intense", "anarchic", "provocative", "furious"],
+      "mood_color": "#d63031",
+      "energy": "very-high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "emo",
+      "name": "Emo",
+      "description": "Emotionally charged punk-influenced rock with confessional lyrics, dynamic shifts between quiet and loud, and cathartic vocal performances that wear the heart on the sleeve.",
+      "keywords": ["emotional", "heartbreak", "confessional", "passionate", "vulnerable", "cathartic", "melancholy", "intense", "youth", "raw", "bittersweet", "honest", "dramatic", "crying", "angsty", "personal", "longing", "tender"],
+      "mood_color": "#e84393",
+      "energy": "medium-high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "math-rock",
+      "name": "Math Rock",
+      "description": "Technically intricate rock with complex time signatures, tapping guitar patterns, and angular rhythms. Cerebral yet visceral, math rock turns musicianship into a spectacle of precision.",
+      "keywords": ["complex", "technical", "angular", "intricate", "precise", "rhythmic", "tapping", "odd-time", "cerebral", "nerdy", "energetic", "playful", "dynamic", "sharp", "progressive", "clean", "dexterous", "tight"],
+      "mood_color": "#00cec9",
+      "energy": "medium-high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "psychedelic-rock",
+      "name": "Psychedelic Rock",
+      "description": "Mind-expanding rock that uses swirling guitars, phased effects, and extended jams to alter perception. Kaleidoscopic and boundary-dissolving, psych rock opens doors of perception.",
+      "keywords": ["trippy", "swirling", "psychedelic", "colorful", "expanded", "mind-bending", "cosmic", "jam", "kaleidoscope", "acid", "groovy", "hypnotic", "spacey", "vibrant", "surreal", "flowing", "phased", "mystical", "consciousness"],
+      "mood_color": "#e056a0",
+      "energy": "medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "prog-rock",
+      "name": "Progressive Rock",
+      "description": "Ambitious, complex rock that draws from classical, jazz, and experimental traditions. Long compositions, shifting time signatures, and virtuosic musicianship push rock beyond conventional boundaries.",
+      "keywords": ["epic", "complex", "ambitious", "progressive", "virtuoso", "long", "classical", "orchestral", "dynamic", "intellectual", "layered", "dramatic", "concept", "adventurous", "technical", "sweeping", "grandiose", "sophisticated"],
+      "mood_color": "#a29bfe",
+      "energy": "medium-high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "garage-rock",
+      "name": "Garage Rock",
+      "description": "Raw, lo-fi rock 'n' roll played with maximum attitude and minimum polish. Fuzzy guitars, stomping rhythms, and primal energy straight from the garage to the stage.",
+      "keywords": ["raw", "fuzzy", "lo-fi", "garage", "energetic", "rock", "primal", "loud", "scrappy", "rough", "fun", "raucous", "stomping", "gritty", "unpolished", "wild", "sweaty", "riff", "direct"],
+      "mood_color": "#ffeaa7",
+      "energy": "high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "boom-bap",
+      "name": "Boom Bap",
+      "description": "Classic East Coast hip-hop with hard-hitting drums, jazzy samples, and lyrical virtuosity. Boom bap keeps it real with head-nodding beats and sharp wordplay from the golden era.",
+      "keywords": ["classic", "hip-hop", "lyrical", "drums", "samples", "golden-era", "east-coast", "head-nodding", "gritty", "urban", "vinyl", "raw", "boom", "bap", "street", "real", "crates", "wordplay", "old-school"],
+      "mood_color": "#d4a574",
+      "energy": "medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "trap",
+      "name": "Trap",
+      "description": "Hard-hitting Southern hip-hop with rolling hi-hats, deep 808 bass, and aggressive energy. Trap dominates modern hip-hop with its dark, atmospheric, and bass-heavy production style.",
+      "keywords": ["808", "bass", "hi-hats", "dark", "hard", "aggressive", "heavy", "modern", "urban", "banging", "loud", "street", "flex", "bounce", "night", "intense", "powerful", "gritty", "menacing"],
+      "mood_color": "#e17055",
+      "energy": "high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": [
+        { "title": "The 808 Drummer", "artist": "Snacks Not Found", "url": "https://open.spotify.com/artist/730mocxGK52DnCDcI3dyAQ" }
+      ]
+    },
+    {
+      "id": "jazz-rap",
+      "name": "Jazz Rap",
+      "description": "Hip-hop that leans into live jazz instrumentation, complex harmonies, and sophisticated lyricism. Jazz rap bridges improvisation and flow, creating something cerebral yet groovy.",
+      "keywords": ["jazzy", "intelligent", "sophisticated", "smooth", "lyrical", "conscious", "groovy", "complex", "organic", "live", "saxophone", "improvisational", "thoughtful", "warm", "creative", "cerebral", "cool", "artistic"],
+      "mood_color": "#81ecec",
+      "energy": "medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "neo-soul",
+      "name": "Neo-Soul",
+      "description": "Warm, organic reinvention of classic soul with modern production, jazzy chords, and deeply personal vocals. Neo-soul is intimate, sensual, and rooted in authentic musical expression.",
+      "keywords": ["warm", "soulful", "organic", "intimate", "sensual", "smooth", "jazzy", "personal", "heartfelt", "groove", "golden", "honest", "romantic", "earthy", "lush", "vocal", "passionate", "rich", "tender"],
+      "mood_color": "#fab1a0",
+      "energy": "low-medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "rnb",
+      "name": "R&B",
+      "description": "Rhythm and blues spanning silky vocals, lush production, and emotional depth. From classic Motown grooves to modern alternative R&B, the genre centers the human voice and feeling.",
+      "keywords": ["smooth", "vocal", "romantic", "sensual", "night", "groovy", "silky", "emotional", "love", "passion", "sultry", "bedroom", "warm", "soulful", "slow", "intimate", "moonlight", "heartfelt", "velvet"],
+      "mood_color": "#e84393",
+      "energy": "low-medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "phonk",
+      "name": "Phonk",
+      "description": "Dark, sample-heavy hip-hop drawing from Memphis rap, chopped-and-screwed, and drift culture. Cowbell-laden beats, distorted 808s, and an aggressive, haunting aesthetic.",
+      "keywords": ["dark", "drift", "cowbell", "memphis", "distorted", "aggressive", "driving", "night", "car", "heavy", "bass", "chopped", "haunting", "gritty", "fast", "menacing", "underground", "raw", "intense"],
+      "mood_color": "#d63031",
+      "energy": "high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "jazz",
+      "name": "Jazz",
+      "description": "The art of improvisation and swing. From smoky club performances to complex compositions, jazz is conversation between musicians — spontaneous, surprising, and deeply human.",
+      "keywords": ["improvisation", "swing", "saxophone", "club", "smoky", "sophisticated", "complex", "spontaneous", "night", "warm", "intimate", "trumpet", "piano", "cool", "live", "groove", "creative", "elegant", "timeless", "classic"],
+      "mood_color": "#fdcb6e",
+      "energy": "medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "classical",
+      "name": "Classical",
+      "description": "Centuries of Western art music spanning intimate chamber works to sweeping orchestral symphonies. Classical music explores the full range of human emotion through composed, notated music.",
+      "keywords": ["orchestral", "elegant", "dramatic", "beautiful", "composed", "dynamic", "sweeping", "refined", "timeless", "concert", "symphony", "piano", "violin", "grand", "delicate", "emotional", "majestic", "contemplative", "serene", "powerful"],
+      "mood_color": "#dfe6e9",
+      "energy": "medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "bossa-nova",
+      "name": "Bossa Nova",
+      "description": "Gentle, swaying Brazilian music blending samba rhythms with jazz harmonics. Soft guitar, whispered vocals, and warm melodies conjure sun-dappled beaches and quiet afternoons.",
+      "keywords": ["brazilian", "gentle", "warm", "beach", "swaying", "guitar", "soft", "romantic", "sunny", "relaxing", "tropical", "breezy", "afternoon", "elegant", "smooth", "coastal", "golden", "intimate", "peaceful", "cafe"],
+      "mood_color": "#55efc4",
+      "energy": "low",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "folk",
+      "name": "Folk",
+      "description": "Acoustic, story-driven music rooted in tradition and community. Guitar, banjo, and fiddle accompany tales of love, loss, and the human condition with simple, honest beauty.",
+      "keywords": ["acoustic", "storytelling", "campfire", "rustic", "warm", "honest", "gentle", "nature", "rural", "heartfelt", "simple", "authentic", "guitar", "tradition", "community", "earthy", "intimate", "woodland", "morning", "home"],
+      "mood_color": "#a0855b",
+      "energy": "low-medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "blues",
+      "name": "Blues",
+      "description": "Raw emotional expression through bent guitar notes, shuffle rhythms, and soulful vocals. The blues is the root of modern popular music, turning pain and joy into universal art.",
+      "keywords": ["soulful", "raw", "guitar", "emotion", "pain", "warm", "gritty", "smoky", "deep", "honest", "night", "bar", "whiskey", "roots", "slow", "heartfelt", "expressive", "earthy", "bending", "groove"],
+      "mood_color": "#0984e3",
+      "energy": "low-medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "country",
+      "name": "Country",
+      "description": "Twangy guitars, steel pedals, and fiddle melodies tell stories of heartbreak, freedom, and open roads. Country music pairs honest storytelling with the wide-open American landscape.",
+      "keywords": ["twang", "rural", "storytelling", "highway", "heartbreak", "guitar", "freedom", "honest", "dusty", "americana", "bar", "truck", "sunset", "open-road", "simple", "warm", "homesick", "boots", "tradition"],
+      "mood_color": "#e17055",
+      "energy": "medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "soul",
+      "name": "Soul",
+      "description": "Passionate vocal performances over gospel-influenced arrangements with horns, strings, and deep grooves. Soul music channels raw emotion — joy, heartache, love, struggle — through the voice.",
+      "keywords": ["vocal", "passionate", "gospel", "warm", "emotional", "groovy", "heartfelt", "powerful", "uplifting", "horn", "strings", "classic", "retro", "soulful", "expressive", "rich", "joyful", "gritty", "church"],
+      "mood_color": "#e17055",
+      "energy": "medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "funk",
+      "name": "Funk",
+      "description": "Groove-heavy music driven by syncopated bass, tight rhythms, and irresistible danceability. Funk makes the body move with its pocket rhythms, wah-wah guitars, and celebratory spirit.",
+      "keywords": ["groove", "bass", "funky", "dance", "rhythm", "bouncy", "party", "tight", "syncopated", "fun", "energetic", "wah-wah", "slap", "playful", "celebratory", "retro", "movement", "swagger", "pocket"],
+      "mood_color": "#fdcb6e",
+      "energy": "high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "reggae",
+      "name": "Reggae",
+      "description": "Offbeat rhythms, deep bass, and conscious lyrics from Jamaica. Reggae spreads messages of love, resistance, and unity over laid-back grooves that make you sway in the sun.",
+      "keywords": ["jamaica", "offbeat", "bass", "conscious", "peaceful", "sunny", "laid-back", "island", "spiritual", "roots", "sway", "tropical", "warm", "positive", "resistance", "unity", "groove", "summer", "slow"],
+      "mood_color": "#00b894",
+      "energy": "low-medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "afrobeat",
+      "name": "Afrobeat",
+      "description": "Pulsing, polyrhythmic West African music fusing jazz, funk, and highlife with politically charged lyrics. Extended jams, horn sections, and layered percussion create irresistible momentum.",
+      "keywords": ["polyrhythmic", "percussion", "african", "groovy", "horn", "energetic", "warm", "dancing", "celebratory", "political", "layered", "tropical", "pulsing", "community", "vibrant", "rhythmic", "joyful", "organic", "powerful"],
+      "mood_color": "#e17055",
+      "energy": "high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "k-pop",
+      "name": "K-Pop",
+      "description": "Highly polished, genre-blending pop from South Korea featuring precise choreography, catchy hooks, and immaculate production. K-pop maximizes energy, visuals, and fan connection.",
+      "keywords": ["polished", "catchy", "dance", "colorful", "energetic", "pop", "choreography", "bright", "fun", "youthful", "slick", "hooks", "vibrant", "upbeat", "shiny", "performance", "trendy", "flashy", "addictive"],
+      "mood_color": "#fd79a8",
+      "energy": "high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "metal",
+      "name": "Metal",
+      "description": "Heavy, aggressive music defined by powerful riffs, thundering drums, and intense vocals. Metal spans a vast spectrum from melodic power metal to extreme death metal, united by sheer sonic force.",
+      "keywords": ["heavy", "aggressive", "loud", "powerful", "dark", "intense", "riff", "thundering", "epic", "brutal", "fast", "distorted", "headbanging", "angry", "ferocious", "crushing", "raw", "massive", "furious"],
+      "mood_color": "#636e72",
+      "energy": "very-high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "electro-swing",
+      "name": "Electro Swing",
+      "description": "Vintage jazz and swing samples fused with modern electronic beats. Brass stabs meet four-on-the-floor kicks, creating an irresistible fusion of old-world charm and dancefloor energy.",
+      "keywords": ["swing", "jazz", "retro", "fun", "dance", "vintage", "brass", "lively", "party", "classy", "bouncy", "upbeat", "playful", "charming", "energetic", "prohibition", "cabaret", "celebratory", "whimsical"],
+      "mood_color": "#fdcb6e",
+      "energy": "high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "new-wave",
+      "name": "New Wave",
+      "description": "Synth-driven post-punk pop with angular guitars, electronic textures, and art-school aesthetics. New wave made electronic experimentation accessible with catchy hooks and stylish attitude.",
+      "keywords": ["synth", "80s", "angular", "stylish", "electronic", "catchy", "art", "cool", "new-wave", "post-punk", "dance", "quirky", "bright", "urban", "glossy", "fashionable", "energetic", "modern", "sharp"],
+      "mood_color": "#e056a0",
+      "energy": "medium-high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "dream-pop",
+      "name": "Dream Pop",
+      "description": "Gossamer vocals floating over shimmering guitars, lush synths, and gentle rhythms. Dream pop wraps the listener in a cocoon of beauty, creating music that feels like a waking dream.",
+      "keywords": ["dreamy", "ethereal", "soft", "shimmering", "beautiful", "hazy", "floating", "gentle", "lush", "romantic", "nostalgic", "serene", "celestial", "warm", "pastel", "delicate", "hypnotic", "blissful", "moonlit"],
+      "mood_color": "#dfe6e9",
+      "energy": "low",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "witch-house",
+      "name": "Witch House",
+      "description": "Dark, occult-tinged electronic music with pitched-down vocals, eerie samples, and slow, heavy beats. A haunted intersection of hip-hop, noise, and gothic atmosphere.",
+      "keywords": ["dark", "occult", "eerie", "haunting", "slow", "heavy", "gothic", "creepy", "fog", "ritual", "mysterious", "distorted", "night", "sinister", "shadowy", "cold", "dread", "supernatural", "unsettling"],
+      "mood_color": "#2d3436",
+      "energy": "low-medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "city-pop",
+      "name": "City Pop",
+      "description": "Glossy, sophisticated Japanese pop from the late 70s and 80s blending funk, disco, and AOR. Urban optimism, neon-lit nights, and breezy melodies from Tokyo's economic boom era.",
+      "keywords": ["japanese", "glossy", "urban", "retro", "80s", "smooth", "funky", "sophisticated", "neon", "night", "breezy", "groovy", "warm", "disco", "city", "sunshine", "upbeat", "elegant", "cruising"],
+      "mood_color": "#ff6b9d",
+      "energy": "medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "hardcore-punk",
+      "name": "Hardcore Punk",
+      "description": "Faster, harder, angrier evolution of punk rock with breakneck tempos, shouted vocals, and stripped-down fury. Hardcore channels pure adrenaline into short, explosive bursts of sound.",
+      "keywords": ["fast", "angry", "loud", "aggressive", "intense", "raw", "furious", "explosive", "short", "adrenaline", "mosh", "underground", "diy", "brutal", "unrelenting", "chaotic", "defiant", "fierce", "primal"],
+      "mood_color": "#d63031",
+      "energy": "very-high",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": []
+    },
+    {
+      "id": "electronic",
+      "name": "Electronic",
+      "description": "Broad umbrella of synthesizer-driven music spanning from delicate bleeps to massive soundscapes. Electronic music reimagines what instruments and compositions can be in the digital age.",
+      "keywords": ["synth", "digital", "electronic", "futuristic", "beats", "produced", "modern", "atmospheric", "layered", "textural", "innovative", "clean", "precise", "glowing", "immersive", "sonic", "experimental", "pulsing", "technological"],
+      "mood_color": "#a855f7",
+      "energy": "medium",
+      "spotify_url": "",
+      "youtube_url": "",
+      "brian_tracks": [
+        { "title": "The Indigo Hive", "artist": "Brian 200", "url": "https://open.spotify.com/artist/42cX08uZTLT69CivXfpDIt" }
+      ]
+    }
+  ],
+  "presets": [
+    { "label": "Sunday morning coffee", "query": "warm calm morning coffee acoustic gentle" },
+    { "label": "3am coding session", "query": "focused electronic ambient dark night coding" },
+    { "label": "Post-meditation glow", "query": "peaceful serene calm spiritual floating gentle" },
+    { "label": "Festival main stage", "query": "energy crowd euphoria bass loud festival dance" },
+    { "label": "Driving through rain", "query": "driving rain night melancholy city lights moody" },
+    { "label": "Beach sunset golden hour", "query": "warm sunset beach golden summer breezy tropical" },
+    { "label": "Dark warehouse rave", "query": "dark underground techno bass industrial warehouse night" },
+    { "label": "Heartbreak at midnight", "query": "sad emotional night lonely melancholy heartbreak slow" },
+    { "label": "Road trip with friends", "query": "driving fun energetic highway summer wind freedom" },
+    { "label": "Rainy day reading", "query": "rain quiet gentle calm soft contemplative cozy warm" }
+  ]
+}

@@ -1,0 +1,913 @@
+---
+import BaseLayout from '@shared/components/BaseLayout.astro';
+import SiteHeader from '@shared/components/SiteHeader.astro';
+import SiteFooter from '@shared/components/SiteFooter.astro';
+import genreData from '../data/jukebox-genres.json';
+
+const genresJSON = JSON.stringify(genreData);
+---
+
+<BaseLayout
+  title="Semantic Jukebox — e8s.dev"
+  description="Describe a vibe. Find the music that matches. A pre-computed, client-side genre matcher powered by keyword embeddings."
+  site="e8s"
+>
+  <SiteHeader site="e8s" nav={[{ label: 'Explorer', href: '/explorer' }, { label: 'Jukebox', href: '/jukebox' }]} />
+
+  <main>
+    <!-- Hero -->
+    <section class="jukebox-hero">
+      <div class="container text-center">
+        <h1 class="jukebox-title fade-up">
+          Semantic <span class="accent">Jukebox</span>
+        </h1>
+        <p class="jukebox-tagline fade-up fade-up-delay-1">
+          Describe a vibe. Find the music that matches.
+        </p>
+
+        <!-- Search -->
+        <div class="search-wrapper fade-up fade-up-delay-2">
+          <div class="search-input-group">
+            <input
+              type="text"
+              id="vibe-input"
+              class="vibe-input"
+              placeholder="Describe your vibe..."
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <button id="clear-btn" class="clear-btn" aria-label="Clear search" style="display: none;">
+              &times;
+            </button>
+            <button id="search-btn" class="search-btn">Search</button>
+          </div>
+        </div>
+
+        <!-- Presets -->
+        <div class="presets fade-up fade-up-delay-3" id="presets">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="section results-section" id="results-section" style="display: none;">
+      <div class="container">
+        <div class="results-header">
+          <h2 id="results-title">Results</h2>
+          <span class="results-count" id="results-count"></span>
+        </div>
+        <div class="results-grid" id="results-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Empty state -->
+    <section class="section empty-state" id="empty-state">
+      <div class="container text-center">
+        <p class="empty-prompt">Try a preset to get started</p>
+        <div class="empty-arrows" aria-hidden="true">
+          <span>&uarr;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- No results state -->
+    <section class="section no-results" id="no-results" style="display: none;">
+      <div class="container text-center">
+        <p class="no-results-text">No vibes matched. Try different words.</p>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section how-it-works">
+      <div class="container">
+        <button class="how-toggle" id="how-toggle" aria-expanded="false">
+          <span>How does this work?</span>
+          <span class="how-chevron" id="how-chevron">&#9662;</span>
+        </button>
+        <div class="how-content" id="how-content" style="display: none;">
+          <div class="how-grid">
+            <div class="how-step">
+              <span class="how-number">1</span>
+              <h3>You describe a vibe</h3>
+              <p>Type words that capture a feeling, setting, or mood. "Rainy night driving" or "sunny beach afternoon" work great.</p>
+            </div>
+            <div class="how-step">
+              <span class="how-number">2</span>
+              <h3>Keywords are matched</h3>
+              <p>Each genre has 15-25 curated keywords covering mood, energy, setting, tempo, and visuals. Your words are compared against all of them.</p>
+            </div>
+            <div class="how-step">
+              <span class="how-number">3</span>
+              <h3>Scores are ranked</h3>
+              <p>Exact keyword matches score highest, partial matches contribute less. Genre names and descriptions are also checked. The top results surface with match percentages.</p>
+            </div>
+            <div class="how-step">
+              <span class="how-number">4</span>
+              <h3>No AI, no API</h3>
+              <p>Everything runs locally in your browser. The genre data is pre-computed and shipped as static JSON. Zero network requests, instant results.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter site="e8s" />
+</BaseLayout>
+
+<script is:inline define:vars={{ genresJSON }}>
+  (function() {
+    const data = JSON.parse(genresJSON);
+    const genres = data.genres;
+    const presets = data.presets;
+
+    // DOM refs
+    const input = document.getElementById('vibe-input');
+    const searchBtn = document.getElementById('search-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const presetsEl = document.getElementById('presets');
+    const resultsSection = document.getElementById('results-section');
+    const resultsGrid = document.getElementById('results-grid');
+    const resultsTitle = document.getElementById('results-title');
+    const resultsCount = document.getElementById('results-count');
+    const emptyState = document.getElementById('empty-state');
+    const noResults = document.getElementById('no-results');
+    const howToggle = document.getElementById('how-toggle');
+    const howContent = document.getElementById('how-content');
+    const howChevron = document.getElementById('how-chevron');
+
+    // Synonym map for query expansion
+    const synonyms = {
+      'happy': ['joyful', 'cheerful', 'upbeat', 'bright', 'fun'],
+      'sad': ['melancholy', 'emotional', 'heartbreak', 'lonely', 'bittersweet'],
+      'chill': ['relaxing', 'calm', 'mellow', 'laid-back', 'gentle'],
+      'angry': ['aggressive', 'intense', 'furious', 'raw', 'fierce'],
+      'dark': ['moody', 'shadowy', 'brooding', 'noir', 'sinister'],
+      'fast': ['energetic', 'rapid', 'intense', 'driving', 'frantic'],
+      'slow': ['gentle', 'mellow', 'calm', 'lazy', 'peaceful'],
+      'loud': ['heavy', 'massive', 'powerful', 'crushing', 'intense'],
+      'quiet': ['soft', 'gentle', 'delicate', 'minimal', 'still'],
+      'romantic': ['love', 'sensual', 'intimate', 'passion', 'tender'],
+      'party': ['dance', 'celebration', 'fun', 'crowd', 'energy'],
+      'work': ['focus', 'productive', 'concentration', 'study', 'coding'],
+      'coding': ['focus', 'electronic', 'ambient', 'night', 'concentration'],
+      'studying': ['focus', 'calm', 'study', 'concentration', 'quiet'],
+      'running': ['fast', 'energetic', 'intense', 'adrenaline', 'movement'],
+      'sleeping': ['sleep', 'calm', 'peaceful', 'gentle', 'quiet', 'serene'],
+      'morning': ['warm', 'gentle', 'soft', 'bright', 'peaceful', 'sunrise'],
+      'evening': ['sunset', 'warm', 'mellow', 'contemplative', 'golden'],
+      'workout': ['energetic', 'intense', 'powerful', 'fast', 'adrenaline'],
+      'relax': ['relaxing', 'calm', 'peaceful', 'gentle', 'mellow'],
+      'focus': ['concentration', 'calm', 'minimal', 'ambient', 'cerebral'],
+      'vibe': ['atmospheric', 'mood', 'feeling', 'groove'],
+      'spooky': ['eerie', 'dark', 'haunting', 'creepy', 'sinister'],
+      'love': ['romantic', 'passion', 'intimate', 'heartfelt', 'tender'],
+      'adventure': ['epic', 'sweeping', 'vast', 'dramatic', 'cinematic'],
+      'cool': ['smooth', 'sophisticated', 'stylish', 'slick'],
+      'weird': ['experimental', 'strange', 'abstract', 'surreal', 'quirky'],
+      'old': ['classic', 'retro', 'vintage', 'timeless', 'nostalgia'],
+      'new': ['modern', 'innovative', 'fresh', 'trendy', 'futuristic'],
+      'heavy': ['massive', 'powerful', 'crushing', 'thundering', 'intense'],
+      'light': ['gentle', 'soft', 'delicate', 'airy', 'breezy']
+    };
+
+    // Energy label mapping
+    const energyLabels = {
+      'very-low': 'Very Low',
+      'low': 'Low',
+      'low-medium': 'Low-Med',
+      'medium': 'Medium',
+      'medium-high': 'Med-High',
+      'high': 'High',
+      'very-high': 'Very High'
+    };
+
+    // Render presets
+    function renderPresets() {
+      presetsEl.innerHTML = presets.map(function(p) {
+        return '<button class="preset-pill" data-query="' + escapeAttr(p.query) + '">' + escapeHtml(p.label) + '</button>';
+      }).join('');
+
+      presetsEl.querySelectorAll('.preset-pill').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var query = btn.getAttribute('data-query');
+          input.value = query;
+          clearBtn.style.display = 'flex';
+          doSearch(query);
+        });
+      });
+    }
+
+    // Match genres against query
+    function matchGenres(query) {
+      var tokens = query.toLowerCase().trim().split(/\s+/).filter(function(t) { return t.length > 1; });
+      if (tokens.length === 0) return [];
+
+      // Expand tokens with synonyms
+      var expandedTokens = [];
+      tokens.forEach(function(t) {
+        expandedTokens.push({ word: t, weight: 1.0 });
+        if (synonyms[t]) {
+          synonyms[t].forEach(function(syn) {
+            expandedTokens.push({ word: syn, weight: 0.5 });
+          });
+        }
+      });
+
+      var results = genres.map(function(genre) {
+        var score = 0;
+        var nameLower = genre.name.toLowerCase();
+        var descLower = genre.description.toLowerCase();
+
+        expandedTokens.forEach(function(token) {
+          var t = token.word;
+          var w = token.weight;
+
+          // Check keywords
+          genre.keywords.forEach(function(kw) {
+            if (kw === t) {
+              score += 3 * w; // exact match
+            } else if (kw.length > 3 && t.length > 3 && (kw.indexOf(t) !== -1 || t.indexOf(kw) !== -1)) {
+              score += 1 * w; // partial match
+            }
+          });
+
+          // Check genre name
+          if (nameLower.indexOf(t) !== -1) {
+            score += 2 * w;
+          }
+
+          // Check description words
+          if (descLower.indexOf(t) !== -1) {
+            score += 0.5 * w;
+          }
+        });
+
+        return {
+          genre: genre,
+          rawScore: score
+        };
+      });
+
+      // Filter out zero scores
+      results = results.filter(function(r) { return r.rawScore > 0; });
+
+      // Sort by score descending
+      results.sort(function(a, b) { return b.rawScore - a.rawScore; });
+
+      // Scale factor: aim for top result around 85-95%, mediocre around 40-60%
+      // With ~5 input tokens and exact matches worth 3, a good match might score 15-25
+      // Scale so that a score of 20 = ~85%
+      var scaleFactor = 4.25;
+      results.forEach(function(r) {
+        r.matchScore = Math.min(99, Math.round(r.rawScore * scaleFactor));
+      });
+
+      // Return top 8
+      return results.slice(0, 8);
+    }
+
+    // Perform search
+    function doSearch(query) {
+      if (!query || !query.trim()) {
+        showEmpty();
+        return;
+      }
+
+      var results = matchGenres(query);
+
+      if (results.length === 0) {
+        showNoResults();
+        return;
+      }
+
+      showResults(results, query);
+    }
+
+    // Show results
+    function showResults(results, query) {
+      emptyState.style.display = 'none';
+      noResults.style.display = 'none';
+      resultsSection.style.display = 'block';
+      resultsCount.textContent = results.length + ' genre' + (results.length !== 1 ? 's' : '') + ' matched';
+
+      resultsGrid.innerHTML = results.map(function(r, i) {
+        var g = r.genre;
+        var pct = r.matchScore;
+        var energy = energyLabels[g.energy] || g.energy;
+
+        var linksHtml = '';
+        if (g.spotify_url) {
+          linksHtml += '<a href="' + escapeAttr(g.spotify_url) + '" target="_blank" rel="noopener" class="listen-link listen-spotify">Spotify</a>';
+        } else {
+          linksHtml += '<span class="listen-link listen-disabled">Spotify</span>';
+        }
+        if (g.youtube_url) {
+          linksHtml += '<a href="' + escapeAttr(g.youtube_url) + '" target="_blank" rel="noopener" class="listen-link listen-youtube">YouTube</a>';
+        } else {
+          linksHtml += '<span class="listen-link listen-disabled">YouTube</span>';
+        }
+
+        var tracksHtml = '';
+        if (g.brian_tracks && g.brian_tracks.length > 0) {
+          tracksHtml = '<div class="brian-tracks">' +
+            '<span class="brian-label">From the artist</span>' +
+            g.brian_tracks.map(function(t) {
+              var trackLink = t.url
+                ? '<a href="' + escapeAttr(t.url) + '" target="_blank" rel="noopener" class="brian-track-link">' + escapeHtml(t.title) + '</a>'
+                : '<span class="brian-track-title">' + escapeHtml(t.title) + '</span>';
+              return '<div class="brian-track">' + trackLink + '<span class="brian-artist">' + escapeHtml(t.artist) + '</span></div>';
+            }).join('') +
+            '</div>';
+        }
+
+        return '<div class="result-card" style="--mood-color: ' + g.mood_color + '; --delay: ' + (i * 80) + 'ms;">' +
+          '<div class="result-card-inner">' +
+            '<div class="result-header">' +
+              '<h3 class="result-name">' + escapeHtml(g.name) + '</h3>' +
+              '<span class="energy-badge energy-' + g.energy + '">' + energy + '</span>' +
+            '</div>' +
+            '<div class="match-bar-wrapper">' +
+              '<div class="match-bar">' +
+                '<div class="match-fill" style="--pct: ' + pct + '%;"></div>' +
+              '</div>' +
+              '<span class="match-pct">' + pct + '%</span>' +
+            '</div>' +
+            '<p class="result-desc">' + escapeHtml(truncate(g.description, 140)) + '</p>' +
+            '<div class="result-links">' + linksHtml + '</div>' +
+            tracksHtml +
+          '</div>' +
+        '</div>';
+      }).join('');
+
+      // Trigger staggered animation
+      requestAnimationFrame(function() {
+        var cards = resultsGrid.querySelectorAll('.result-card');
+        cards.forEach(function(card) {
+          card.classList.add('animate-in');
+        });
+      });
+    }
+
+    // Show empty state
+    function showEmpty() {
+      resultsSection.style.display = 'none';
+      noResults.style.display = 'none';
+      emptyState.style.display = 'block';
+    }
+
+    // Show no results
+    function showNoResults() {
+      resultsSection.style.display = 'none';
+      emptyState.style.display = 'none';
+      noResults.style.display = 'block';
+    }
+
+    // Utility: escape HTML
+    function escapeHtml(str) {
+      var div = document.createElement('div');
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
+    }
+
+    // Utility: escape attribute
+    function escapeAttr(str) {
+      return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    // Utility: truncate
+    function truncate(str, max) {
+      if (str.length <= max) return str;
+      return str.substring(0, max).replace(/\s+\S*$/, '') + '...';
+    }
+
+    // Debounce
+    var debounceTimer;
+    function debounce(fn, delay) {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(fn, delay);
+    }
+
+    // Event listeners
+    input.addEventListener('input', function() {
+      var val = input.value.trim();
+      clearBtn.style.display = val ? 'flex' : 'none';
+      debounce(function() {
+        doSearch(val);
+      }, 500);
+    });
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        clearTimeout(debounceTimer);
+        doSearch(input.value.trim());
+      }
+    });
+
+    searchBtn.addEventListener('click', function() {
+      clearTimeout(debounceTimer);
+      doSearch(input.value.trim());
+    });
+
+    clearBtn.addEventListener('click', function() {
+      input.value = '';
+      clearBtn.style.display = 'none';
+      showEmpty();
+      input.focus();
+    });
+
+    howToggle.addEventListener('click', function() {
+      var expanded = howToggle.getAttribute('aria-expanded') === 'true';
+      howToggle.setAttribute('aria-expanded', String(!expanded));
+      howContent.style.display = expanded ? 'none' : 'block';
+      howChevron.style.transform = expanded ? 'rotate(0deg)' : 'rotate(180deg)';
+    });
+
+    // Init
+    renderPresets();
+    showEmpty();
+  })();
+</script>
+
+<style>
+  /* Hero */
+  .jukebox-hero {
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .jukebox-title {
+    font-size: var(--text-5xl);
+    margin-bottom: var(--space-md);
+    letter-spacing: -0.03em;
+  }
+
+  .accent {
+    color: var(--accent);
+  }
+
+  .jukebox-tagline {
+    font-size: var(--text-xl);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xl);
+    max-width: none;
+  }
+
+  /* Search */
+  .search-wrapper {
+    max-width: 36rem;
+    margin: 0 auto;
+  }
+
+  .search-input-group {
+    display: flex;
+    align-items: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xs);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .search-input-group:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-dim), 0 0 30px var(--accent-glow);
+  }
+
+  .vibe-input {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    padding: var(--space-sm) var(--space-md);
+    outline: none;
+    min-width: 0;
+  }
+
+  .vibe-input::placeholder {
+    color: var(--text-muted);
+  }
+
+  .clear-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: var(--text-xl);
+    cursor: pointer;
+    transition: color var(--transition-fast);
+    flex-shrink: 0;
+  }
+
+  .clear-btn:hover {
+    color: var(--text-primary);
+  }
+
+  .search-btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity var(--transition-fast);
+    flex-shrink: 0;
+  }
+
+  .search-btn:hover {
+    opacity: 0.85;
+  }
+
+  /* Presets */
+  .presets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+
+  .preset-pill {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    border-radius: 2rem;
+    padding: var(--space-xs) var(--space-md);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    cursor: pointer;
+    transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .preset-pill:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  /* Results */
+  .results-section {
+    padding-top: var(--space-lg);
+  }
+
+  .results-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .results-header h2 {
+    font-size: var(--text-2xl);
+  }
+
+  .results-count {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  /* Result Card */
+  .result-card {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition-delay: var(--delay, 0ms);
+  }
+
+  .result-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .result-card-inner {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--mood-color, var(--accent));
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    height: 100%;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+  }
+
+  .result-card-inner:hover {
+    border-color: var(--mood-color, var(--accent));
+    box-shadow: 0 0 20px color-mix(in srgb, var(--mood-color, var(--accent)) 20%, transparent);
+    transform: translateY(-2px);
+  }
+
+  .result-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .result-name {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .energy-badge {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    background: var(--bg-secondary);
+    padding: 2px var(--space-sm);
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Match bar */
+  .match-bar-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .match-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--bg-secondary);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .match-fill {
+    height: 100%;
+    width: var(--pct, 0%);
+    background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+    border-radius: 3px;
+    transition: width 0.6s ease;
+  }
+
+  .match-pct {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 2.5rem;
+    text-align: right;
+  }
+
+  .result-desc {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+    max-width: none;
+  }
+
+  /* Listen links */
+  .result-links {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .listen-link {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .listen-link.listen-disabled {
+    color: var(--text-muted);
+    cursor: default;
+    opacity: 0.5;
+  }
+
+  a.listen-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
+  a.listen-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  /* Brian tracks */
+  .brian-tracks {
+    margin-top: var(--space-sm);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--border);
+  }
+
+  .brian-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .brian-track {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+    margin-bottom: 2px;
+  }
+
+  .brian-track-title,
+  .brian-track-link {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+
+  .brian-track-link {
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .brian-track-link:hover {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  .brian-artist {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+
+  /* Empty state */
+  .empty-state {
+    padding: var(--space-xl) 0;
+  }
+
+  .empty-prompt {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    max-width: none;
+  }
+
+  .empty-arrows {
+    margin-top: var(--space-md);
+    font-size: var(--text-2xl);
+    color: var(--text-muted);
+    opacity: 0.4;
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.2; transform: translateY(0); }
+    50% { opacity: 0.5; transform: translateY(-4px); }
+  }
+
+  /* No results */
+  .no-results-text {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    max-width: none;
+  }
+
+  /* How it works */
+  .how-it-works {
+    padding: var(--space-xl) 0;
+  }
+
+  .how-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) var(--space-md);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+    width: 100%;
+    justify-content: center;
+  }
+
+  .how-toggle:hover {
+    border-color: var(--accent);
+    color: var(--text-primary);
+  }
+
+  .how-chevron {
+    transition: transform var(--transition-base);
+    font-size: var(--text-xs);
+  }
+
+  .how-content {
+    margin-top: var(--space-lg);
+  }
+
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .how-step {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+  }
+
+  .how-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-radius: 50%;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+  }
+
+  .how-step h3 {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-sm);
+    color: var(--text-primary);
+  }
+
+  .how-step p {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .jukebox-hero {
+      padding: var(--space-xl) 0 var(--space-lg);
+    }
+
+    .jukebox-title {
+      font-size: var(--text-3xl);
+    }
+
+    .jukebox-tagline {
+      font-size: var(--text-lg);
+    }
+
+    .search-input-group {
+      flex-wrap: nowrap;
+    }
+
+    .vibe-input {
+      font-size: var(--text-base);
+      padding: var(--space-sm);
+    }
+
+    .search-btn {
+      padding: var(--space-sm) var(--space-md);
+      font-size: var(--text-xs);
+    }
+
+    .results-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .results-header {
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .presets {
+      gap: var(--space-xs);
+    }
+
+    .preset-pill {
+      font-size: 0.65rem;
+    }
+  }
+</style>

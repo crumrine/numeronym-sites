@@ -11,7 +11,7 @@ import Card from '@shared/components/Card.astro';
   description="Explore the hidden geometry of language, music, and meaning. Built entirely by Claude Code."
   site="e8s"
 >
-  <SiteHeader site="e8s" />
+  <SiteHeader site="e8s" nav={[{ label: 'Explorer', href: '/explorer' }, { label: 'Jukebox', href: '/jukebox' }]} />
 
   <main>
     <!-- Hero -->
@@ -63,15 +63,17 @@ import Card from '@shared/components/Card.astro';
     <!-- Coming Soon -->
     <section class="section">
       <div class="container">
-        <h2 class="text-center fade-up">Coming Soon</h2>
+        <h2 class="text-center fade-up">Explore</h2>
         <div class="card-grid" style="margin-top: var(--space-xl);">
           <Card
             title="Embedding Explorer"
-            description="Type anything. See where it lands in the space of meaning. Discover what's nearby."
+            description="200 concepts plotted in 2D space. Pan, zoom, and discover what's nearby."
+            href="/explorer"
           />
           <Card
             title="Semantic Jukebox"
             description="Describe a vibe. Find the music that matches. Where math meets taste."
+            href="/jukebox"
           />
           <Card
             title="What's Near What?"
