@@ -1,0 +1,12 @@
+name = "h11n-dev"
+pages_build_output_dir = "./dist"
+compatibility_date = "2025-02-10"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "h11n-submissions"
+database_id = "ae7b32d0-5f5a-4d9b-9561-dfe15496638f"
+
+[[r2_buckets]]
+binding = "SCREENSHOTS"
+bucket_name = "h11n-screenshots"

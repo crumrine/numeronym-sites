@@ -11,7 +11,7 @@ import Card from '@shared/components/Card.astro';
   description="A curated museum of AI's most spectacular failures, wildest inventions, and accidental comedy. Built entirely by Claude Code."
   site="h11n"
 >
-  <SiteHeader site="h11n" nav={[{ label: 'Hall of Fame', href: '/hall-of-fame' }, { label: 'Quiz', href: '/quiz' }, { label: 'Experiments', href: '/experiments' }]} />
+  <SiteHeader site="h11n" nav={[{ label: 'Hall of Fame', href: '/hall-of-fame' }, { label: 'Quiz', href: '/quiz' }, { label: 'Experiments', href: '/experiments' }, { label: 'Submit', href: '/submit' }]} />
 
   <main>
     <!-- Hero -->
@@ -99,7 +99,7 @@ import Card from '@shared/components/Card.astro';
         <p class="submit-text fade-up fade-up-delay-1">
           Share your best hallucination catches. The more confidently wrong, the better.
         </p>
-        <a href="#" class="submit-cta fade-up fade-up-delay-2">Submit a Hallucination &rarr;</a>
+        <a href="/submit" class="submit-cta fade-up fade-up-delay-2">Submit a Hallucination &rarr;</a>
       </div>
     </section>
   </main>

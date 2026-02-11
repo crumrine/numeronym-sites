@@ -129,4 +129,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy sites/h11n/dist --project-name h11n-dev
+          workingDirectory: sites/h11n
+          command: pages deploy dist --project-name h11n-dev

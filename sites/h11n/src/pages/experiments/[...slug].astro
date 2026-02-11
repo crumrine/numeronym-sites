@@ -46,7 +46,7 @@ const hasOutput = entry.data.output_url && entry.data.output_url.length > 0;
     <meta property="og:url" content={`https://h11n.dev/experiments/${entry.id}`} />
   </Fragment>
 
-  <SiteHeader site="h11n" nav={[{ label: 'Hall of Fame', href: '/hall-of-fame' }, { label: 'Quiz', href: '/quiz' }, { label: 'Experiments', href: '/experiments' }]} />
+  <SiteHeader site="h11n" nav={[{ label: 'Hall of Fame', href: '/hall-of-fame' }, { label: 'Quiz', href: '/quiz' }, { label: 'Experiments', href: '/experiments' }, { label: 'Submit', href: '/submit' }]} />
 
   <main>
     <article class="experiment" style={`--exp-accent: var(--type-${entry.data.output_type})`}>
