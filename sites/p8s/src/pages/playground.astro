@@ -148,9 +148,10 @@ import responsesData from '../data/playground-responses.json';
             </div>
             <p class="param-desc">Different models have distinct reasoning styles and capabilities.</p>
             <select id="modelSelect" class="param-select">
-              <option value="claude-3.5-sonnet">claude-3.5-sonnet</option>
+              <option value="claude-sonnet-4">claude-sonnet-4</option>
+              <option value="claude-opus-4">claude-opus-4</option>
               <option value="gpt-4o">gpt-4o</option>
-              <option value="claude-3-haiku">claude-3-haiku</option>
+              <option value="claude-haiku-4">claude-haiku-4</option>
             </select>
             <details class="param-details">
               <summary>Learn more</summary>
@@ -179,7 +180,7 @@ import responsesData from '../data/playground-responses.json';
             <span class="badge badge--temp">temp: <strong>0.7</strong></span>
             <span class="badge badge--topp">top_p: <strong>0.9</strong></span>
             <span class="badge badge--tokens">max: <strong>500</strong></span>
-            <span class="badge badge--model">claude-3.5-sonnet</span>
+            <span class="badge badge--model">claude-sonnet-4</span>
           </div>
 
           <div class="output-response" id="outputResponse">
@@ -229,7 +230,7 @@ import responsesData from '../data/playground-responses.json';
       topP: 0.9,
       maxTokens: 500,
       systemPrompt: 'default',
-      model: 'claude-3.5-sonnet',
+      model: 'claude-sonnet-4',
     };
 
     const PRESETS: Record<string, { temperature: number; topP: number; maxTokens: number; label: string; description: string }> = {

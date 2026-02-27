@@ -8,7 +8,7 @@
       "temperature": 0.1,
       "topP": 0.3,
       "systemPrompt": "default",
-      "model": "claude-3.5-sonnet",
+      "model": "claude-sonnet-4",
       "response": "A neural network is a computational model inspired by the structure of biological neurons. It consists of layers of interconnected nodes (neurons) that process input data through weighted connections. Each neuron applies an activation function to its weighted inputs to produce an output. Neural networks learn by adjusting these weights through a process called backpropagation, minimizing the difference between predicted and actual outputs. They are used for tasks such as image recognition, natural language processing, and predictive analytics."
     },
     {
@@ -24,7 +24,7 @@
       "temperature": 0.1,
       "topP": 0.3,
       "systemPrompt": "default",
-      "model": "claude-3-haiku",
+      "model": "claude-haiku-4",
       "response": "A neural network is a computing system made of connected nodes organized in layers. Input data enters the first layer, gets processed through hidden layers, and produces output. The connections between nodes have weights that are adjusted during training. This lets the network learn patterns from data."
     },
     {
@@ -32,7 +32,7 @@
       "temperature": 0.7,
       "topP": 0.9,
       "systemPrompt": "default",
-      "model": "claude-3.5-sonnet",
+      "model": "claude-sonnet-4",
       "response": "Think of a neural network as a pattern-recognition engine loosely inspired by the human brain. It's built from layers of artificial neurons, each one a simple mathematical function that takes in numbers, multiplies them by learned weights, adds them up, and decides how strongly to \"fire.\"\n\nThe magic happens in the training process. You feed the network thousands of examples, it makes predictions, checks how wrong it was, and nudges all those weights a tiny bit in the right direction. Do that millions of times and suddenly the network can recognize faces, translate languages, or beat you at chess.\n\nThe key insight is that with enough layers (hence \"deep learning\"), these networks can learn incredibly abstract representations of data, building up from simple edge detection all the way to understanding complex concepts."
     },
     {
@@ -48,7 +48,7 @@
       "temperature": 0.7,
       "topP": 0.9,
       "systemPrompt": "default",
-      "model": "claude-3-haiku",
+      "model": "claude-haiku-4",
       "response": "A neural network is a type of AI model that learns from examples. It works by passing data through layers of connected nodes, where each connection has an adjustable weight. During training, the network sees many examples and gradually adjusts these weights to get better at its task, like recognizing images or understanding text. The more data and layers you add, the more complex patterns it can learn."
     },
     {
@@ -56,7 +56,7 @@
       "temperature": 1.2,
       "topP": 0.95,
       "systemPrompt": "default",
-      "model": "claude-3.5-sonnet",
+      "model": "claude-sonnet-4",
       "response": "Imagine you're trying to teach a child to recognize dogs. You don't give them a rulebook (\"four legs, fur, tail\"). Instead, you show them thousands of pictures: \"dog, dog, not a dog, dog, not a dog.\" Eventually, something clicks. They just... know.\n\nThat's essentially what a neural network does, but with math instead of intuition.\n\nPicture a massive web of tiny decision-makers, each one absurdly simple on its own. One might notice edges. Another detects curves. A third combines those into \"ear-shaped thing.\" Stack enough of these layers together and suddenly you've got a system that can tell a chihuahua from a muffin (usually).\n\nThe real magic? Nobody programs these features. The network discovers them on its own through trial and error, adjusting millions of numerical dials until the output matches reality. It's less like programming and more like sculpting, chipping away at randomness until something meaningful emerges from the noise."
     },
     {
@@ -72,7 +72,7 @@
       "temperature": 2.0,
       "topP": 1.0,
       "systemPrompt": "default",
-      "model": "claude-3.5-sonnet",
+      "model": "claude-sonnet-4",
       "response": "OH you want to know about neural networks? Strap in, friend, because this is where math gets WEIRD.\n\nSo picture this: you take a billion tiny calculators, right? And you connect them with strings. Glowing strings. And each string has a volume knob on it. Now you scream numbers at the first row of calculators and they each do their little multiply-and-add dance, pass the result through a squishing function (literally what sigmoid means, a SQUISH), and yell the result at the next row.\n\nRepeat until enlightenment. Or at least until your loss function stops being embarrassingly large.\n\nThe beautiful absurdity is that NOBODY DESIGNED the features it learns. You just... throw data at this magnificent tangle of arithmetic and it starts seeing patterns. Edges become shapes become faces become YOUR face specifically. It's like evolution but on fast-forward and running on GPUs instead of primordial soup.\n\nIs it thinking? No. Maybe. Depends on your definition. It's certainly SOMETHING, and that something just ate half the software industry for breakfast."
     },
     {
@@ -88,7 +88,7 @@
       "temperature": 0.7,
       "topP": 0.9,
       "systemPrompt": "pirate",
-      "model": "claude-3.5-sonnet",
+      "model": "claude-sonnet-4",
       "response": "Arrr, gather 'round ye landlubbers, and I'll tell ye about the mystical beast known as the neural network!\n\nImagine ye've got a crew of sailors, aye? Each one passes messages to the next in line. The first crew spots the horizon, the middle crew makes sense of what they see, and the last crew shouts the answer to the captain.\n\nNow here's the trick, ye scurvy dog: each sailor has a trustworthiness score, a weight if ye will. When a sailor gets it right, ye turn up his weight. Gets it wrong? Walk the plank! Well, not literally, ye just turn his weight down a smidge.\n\nDo this enough times with enough training treasure (that's yer data, savvy?), and soon enough yer whole crew can spot enemy ships, read weather patterns, and navigate by the stars without ye havin' to tell 'em how.\n\nThat's deep learnin', matey. It be like trainig a parrot, except the parrot has a million brains and runs on electricity instead of crackers."
     },
     {
@@ -96,7 +96,7 @@
       "temperature": 0.7,
       "topP": 0.9,
       "systemPrompt": "shakespeare",
-      "model": "claude-3.5-sonnet",
+      "model": "claude-sonnet-4",
       "response": "Hark! What strange and wondrous artifice is this, that doth mimic the very seat of thought? The neural network, good gentles, is a construction most marvellous.\n\nPicture, if thou wilt, a great tapestry of interconnected minds, each but a humble weaver knowing only to multiply and sum. Alone, each thread is meaningless, a cipher, a nothing. But woven together in layers, lo! They perceive patterns invisible to mortal eyes.\n\nThe training thereof is a process most patient. Like a young actor rehearsing his part ten thousand times, the network doth receive examples, err most grievously, and through the gentle correction of backpropagation, learn to speak truth where once it spoke only nonsense.\n\n'Tis neither magic nor true understanding, and yet, what marvels it produces! It doth translate tongues, compose verse, and recognize faces as well as any player upon the stage. Whether 'tis nobler in the mind to call this intelligence or mere computation, that, dear friends, remains the question."
     },
     {
@@ -104,7 +104,7 @@
       "temperature": 0.7,
       "topP": 0.9,
       "systemPrompt": "eli5",
-      "model": "claude-3.5-sonnet",
+      "model": "claude-sonnet-4",
       "response": "Okay, imagine you have a really big box of LEGOs. But instead of building a spaceship by following instructions, you just show the box a picture of a spaceship and say \"figure it out!\"\n\nAt first, the box builds something terrible. Like, not even close. But you tell it \"nope, try again,\" and it changes a few bricks around. You do this a bajillion times.\n\nEventually, the box gets really good at building spaceships! And the cool part is, you never told it HOW to build one. It just learned by trying and failing over and over.\n\nThat's basically what a neural network does, but instead of LEGOs, it uses numbers. And instead of spaceships, it can learn to recognize pictures, understand words, or even play video games.\n\nThe \"neurons\" are like little math helpers that each do one tiny job. One might notice colors, another notices shapes. When you stack lots of them together in layers, they can figure out really complicated stuff, like telling the difference between a cat and a dog!"
     },
     {
@@ -112,7 +112,7 @@
       "temperature": 0.7,
       "topP": 0.9,
       "systemPrompt": "technical",
-      "model": "claude-3.5-sonnet",
+      "model": "claude-sonnet-4",
       "response": "## Neural Network Architecture\n\nA neural network is a directed computational graph composed of parameterized differentiable functions organized in layers.\n\n### Core Components\n\n**Neurons**: Each neuron computes `y = f(w*x + b)`, where `w` is the weight vector, `x` is the input, `b` is the bias term, and `f` is a nonlinear activation function (ReLU, sigmoid, tanh, etc.).\n\n**Layers**: Networks are typically organized as:\n- **Input layer**: Receives raw feature vectors\n- **Hidden layers**: Intermediate transformations (the \"depth\" in deep learning)\n- **Output layer**: Produces final predictions (softmax for classification, linear for regression)\n\n### Training Process\n\n1. **Forward pass**: Input propagates through the network to produce a prediction\n2. **Loss computation**: A loss function (cross-entropy, MSE) quantifies prediction error\n3. **Backward pass**: Backpropagation computes gradients via the chain rule\n4. **Weight update**: An optimizer (SGD, Adam) adjusts parameters along the negative gradient\n\n### Key Hyperparameters\n\n- Learning rate, batch size, number of layers, neurons per layer, dropout rate, activation functions\n\nModern architectures include CNNs (spatial data), RNNs/LSTMs (sequential data), and Transformers (attention-based parallel processing)."
     },
     {
@@ -120,7 +120,7 @@
       "temperature": 1.2,
       "topP": 0.95,
       "systemPrompt": "pirate",
-      "model": "claude-3.5-sonnet",
+      "model": "claude-sonnet-4",
       "response": "AVAST! Ye want to know about neural networks, do ye? Well batten down the hatches because Captain Claude is about to blow yer mind clean off the poop deck!\n\nSee, a neural network be like the most magnificent ship ever built, except instead of wood and canvas, she's made of MATH. Pure, beautiful, terrifying math.\n\nYe've got yer layers, see? The lookouts up in the crow's nest (that be yer input layer), they spot something on the horizon. They pass word down to the middle crew (hidden layers, mysterious as Davy Jones' locker), and each sailor decides what's important. \"That shape looks like a merchant vessel!\" \"Nay, those sails look naval!\"\n\nBy the time the message reaches the captain at the output layer, the whole crew's processed it through their weighted opinions. And the TRAINING? Oh ho! That be the finest part! Ye sail through a MILLION voyages, getting it wrong, adjusting yer crew's trust scores, until one day yer ship can spot treasure from a league away!\n\n'Tis black magic runnin' on lightning, and I'll not hear otherwise! YARRR!"
     },
     {
@@ -136,7 +136,7 @@
       "temperature": 0.2,
       "topP": 0.5,
       "systemPrompt": "eli5",
-      "model": "claude-3.5-sonnet",
+      "model": "claude-sonnet-4",
       "response": "A neural network is like a really smart guessing game.\n\nImagine you're trying to teach your friend to recognize animals. You show them lots of pictures and say \"this is a cat\" or \"this is a dog.\" At first they get it wrong a lot, but each time you tell them the right answer, they get a tiny bit better.\n\nA neural network does the same thing, but with math. It's made up of little pieces that each look at a small part of the problem. Some pieces notice colors, some notice shapes, and some notice sizes. When they all work together, they can figure out big things, like what's in a picture.\n\nThe \"learning\" part is just the computer trying over and over and getting a little bit better each time, like practicing a sport."
     },
     {
@@ -160,7 +160,7 @@
       "temperature": 2.0,
       "topP": 1.0,
       "systemPrompt": "eli5",
-      "model": "claude-3.5-sonnet",
+      "model": "claude-sonnet-4",
       "response": "Okay okay okay so you know how YOUR brain has like a BILLION tiny little thinking thingies called neurons? And they're all connected with tiny wires and they zap each other with electricity?\n\nWell some really smart people looked at that and went \"WHAT IF WE MADE THAT BUT WITH COMPUTERS?!\" And so they did! Kind of! It's not REALLY a brain, it's more like... okay...\n\nImagine a GIANT game of telephone but everyone in the line is doing math. And they're all terrible at math at first. Like REALLY terrible. They're just guessing random numbers. But every time they get the answer wrong, someone yells \"WRONG!\" and they change their numbers a teeny tiny bit.\n\nNow imagine playing this game ONE MILLION times. A BILLION times. Eventually all those terrible math friends get SO GOOD at their one tiny piece of the puzzle that together they can look at a picture and go \"THAT'S A PUPPY!\" \n\nAnd NOBODY told them what a puppy looks like! They just figured it out from seeing a lot of them! HOW COOL IS THAT?!\n\nIt's basically computers learning the same way you learned what a dog is, except instead of eyes they have math, and instead of a brain they have... well... more math. EVERYTHING IS MATH. Sorry."
     }
   ]
