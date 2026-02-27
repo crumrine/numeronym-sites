@@ -7,78 +7,54 @@ author: "Brian Crumrine"
 draft: false
 ---
 
-It's February 2026. I need to say the date out loud because the velocity of change has made time feel unreliable.
+It's February 2026 and I genuinely cannot tell if I'm being productive or if productivity has lost all meaning.
 
-Three weeks ago, I shipped a full-stack feature — database schema, API endpoint, form UI, validation, Cloudflare Workers deployment — in a single sitting. Not a prototype. Production. With error handling and Turnstile bot protection. The kind of feature that would have been a sprint ticket eighteen months ago. It took about forty minutes.
+Three weeks ago, I shipped a full-stack feature to [h11n.dev](https://h11n.dev). Database schema, API endpoint, form with validation, Cloudflare Workers deployment, Turnstile bot protection. All in a single sitting. Forty minutes, maybe. The kind of thing that would've been a sprint ticket with a two-point estimate eighteen months ago. I did it between lunch and a 1 PM meeting.
 
-This is not a brag. This is a weather report. I'm describing conditions.
+I keep waiting for the punchline. There isn't one. This is just how it works now.
 
-## Where We Are Right Now
+## The Actual State of Things
 
-Let me be specific, because vague "everything is faster" claims help nobody.
+I want to be concrete here because the discourse around AI and development speed tends to oscillate between "it changes everything!" and "it's just fancy autocomplete." Both are wrong, and I'm tired of both.
 
-**Single-engineer throughput has 10-50x'd for certain categories of work.** Scaffolding, CRUD, configuration, boilerplate, integration glue — the work that used to pad out sprints is now measured in minutes. If you're an experienced engineer with good taste and a capable AI coding tool, you can produce in a day what used to take a week.
+Here's what my day actually looks like in February 2026: I wake up, I think about what needs building, and then I describe it. Carefully, specifically, with twenty years of opinions about what "good" means baked into every sentence. And then it exists. Not a rough draft of it. Not a prototype. The thing.
 
-**The bottleneck has fully shifted from implementation to decision-making.** I don't spend time figuring out *how* to build things anymore. I spend time figuring out *what* to build, whether it should exist, and how it fits into the larger system. The coding itself is the fast part. The thinking is the slow part. This is a permanent inversion.
+The bottleneck used to be implementation. Now implementation is the fast part and I spend my time on the stuff that was always supposed to be the hard part: deciding what should exist, how the pieces fit together, whether this feature actually solves the problem or just looks like it does. The typing was never the point. I knew that intellectually. Now I feel it in my calendar.
 
-**Multi-file, multi-concern changes happen atomically.** When I added the submission feature to h11n.dev, the AI modified the frontend form, the serverless function, the content schema, and the deployment config in one coherent pass. It understood the full stack simultaneously. That's not autocomplete. That's architectural reasoning.
+The other thing that shifted, and this is the one that sneaks up on you, is that multi-file changes just happen. When I built that submission feature for h11n, the AI touched the frontend form, the serverless function, the content schema, and the deployment config in one pass. It held the whole stack in its head. A year ago that would've required me to context-switch between four files and keep the mental model consistent myself. Now I describe the feature and the consistency comes free.
 
-**Iteration cycles have collapsed.** The old loop was: write code, run it, find bugs, fix bugs, run it again, realize you need a different approach, start over. The new loop is: describe what you want, review the output, refine your description, review again. Two or three iterations and you're shipping. The whole thing happens in the time the old first iteration used to take.
+## What's Different From a Year Ago
 
-## What Changed Between 2025 and Now
+Early 2025 AI coding tools were useful in the way that a smart but unreliable intern is useful. You'd get output, then spend real time fixing the parts that were confidently wrong. Net gain, sure, but modest. Maybe 2-3x for someone who already knew what they were doing.
 
-A year ago, AI coding tools were useful but required constant supervision. You'd generate a function, then spend ten minutes fixing the parts it got wrong. The net productivity gain was real but modest — maybe 2-3x for experienced developers.
+Three things broke that ceiling.
 
-Three things shifted:
+Context windows stopped being a party trick and started being actually useful. The tool can hold your whole codebase, not just the file you're editing, the *whole thing*, and generate code that fits your existing patterns instead of generic code you have to sand down to fit.
 
-**Context windows got huge and actually useful.** Tools can now hold an entire codebase in working memory. Not just the file you're editing — the shared component library, the design tokens, the deployment config, the test patterns. When the AI suggests code, it's code that fits your system, not generic code you have to adapt.
+The loop changed. Instead of "generate code, human fixes code," it became "generate code, run it, read the error, fix it, run it again, verify it works, hand human a finished result." I went from being in the loop to being above it. That sounds like a small distinction. It isn't.
 
-**Agent loops replaced one-shot generation.** The AI doesn't just generate code anymore. It generates code, runs it, reads the error, fixes the issue, runs it again, verifies the output, and hands you a working result. The human went from being in the loop to being above the loop.
+And models got better at the most underrated capability in software: admitting they don't know. When the model isn't sure about your Cloudflare Workers config or your weird monorepo alias setup, it asks now instead of guessing. That one change might matter more than everything else combined, because it means I can *trust* the output. Trust changes the whole workflow.
 
-**Models got better at saying "I don't know."** This matters more than people realize. Early AI coding tools would confidently generate plausible-looking code that was subtly wrong. Now, when the model isn't sure about your specific setup, it asks. That one improvement might have done more for real-world productivity than any other advance.
+## December
 
-## The December Prediction
+Predictions are dangerous and I'm going to make some anyway.
 
-Here's what I think we'll be talking about by the end of 2026.
+By end of year, I think generating a complete application from a specification document will be boring. Not impressive, not novel. Boring. Auth, persistence, business logic, deployment. The specification becomes the artifact that matters. The code is compiled output. We'll talk about specs the way we currently talk about code.
 
-**Full-application generation will be routine.** Not demos. Not toy apps. Real applications with authentication, data persistence, business logic, and deployment — generated from a detailed specification document. The specification will be the engineering artifact. The code will be the compiled output.
+I think the solo technical founder becomes the default. Not because teams stop mattering, but because for a surprisingly large category of products, the coordination cost of a five-person team exceeds what one person with deep domain knowledge and good tools can ship alone. This will be uncomfortable for the industry to absorb. It's going to happen anyway.
 
-**The solo technical founder becomes the default startup archetype.** One person with deep domain expertise, strong architectural judgment, and a good AI toolkit will be able to build and ship a product that currently requires a team of five to eight. Not because teams are bad — but because the coordination overhead of a team will exceed the output gap for many product categories.
+I think "code review" will mean reviewing a system against a specification instead of reviewing a pull request against a style guide. The unit of work changes.
 
-**"Code review" will mean something different.** Instead of reviewing human-written code for style, patterns, and bugs, engineers will review AI-generated systems for architectural coherence, security posture, and alignment with product intent. The unit of review shifts from the pull request to the specification.
+And I think speed stops being the story. That's the big one. Right now when I tell another engineer I shipped something in forty minutes, they react. By December, nobody will blink. The interesting conversation moves from "look how fast" to "okay, it's fast, so what should we actually be building?" That's a better conversation. We should've been having it all along.
 
-**Development speed will stop being impressive.** Right now, when I tell other engineers how fast I shipped something, they're surprised. By December, that speed will be baseline. The conversation will shift from "can you believe how fast we can build?" to "given that building is fast, what should we be building?"
+## The Uncomfortable Part
 
-That last shift is the important one.
+I've stopped planning more than two weeks ahead on anything technical. I can't. The assumptions I make today about what's hard and what's easy will be wrong by March. I've been in software for over twenty years and I have never experienced a period where the ground moves this fast.
 
-## The Part Nobody Talks About
+Here's what I didn't expect: speed is exhausting in a way that slowness never was. When building is fast, you can try everything, which means you need to decide what's worth trying, which means you need taste, and you need it *fast*. The old world let you hide mediocre judgment behind thorough execution. Spend three weeks building something wrong and nobody blames your decision. They empathize with the effort. Build the wrong thing in an afternoon and it's obviously a judgment call you got wrong.
 
-Speed has a shadow side that the industry hasn't grappled with yet.
+The architect who takes two weeks to produce a design document is now competing with the architect who ships three working prototypes in two days and lets the users pick. I know which one I'd bet on. It's not the one with the document.
 
-When building is fast, iteration is cheap. When iteration is cheap, you can try more things. When you can try more things, you need better judgment about what's worth trying. The engineers who thrived in a slow-build world by being thorough and careful implementers need to develop a different skill: rapid evaluation of ideas.
+So that's where I am. Moving fast, trying to steer well, occasionally wondering if the brakes work. If you're an engineer who understands systems and users and tradeoffs, this is the most leveraged you've ever been. If you're not, if the job was always about the typing, I don't know what to tell you that would be both honest and comforting.
 
-The question used to be "can we build this?" The question is now "should we build this?" and you need an answer in minutes, not months, because by the time you finish a feasibility study the competitive landscape has shifted.
-
-This is uncomfortable. A lot of engineering culture was built around deliberation, consensus, and careful planning. Those aren't wrong — but the timeframe they operate on has compressed by an order of magnitude. The architect who takes two weeks to produce a design document is now competing with the architect who produces three working prototypes in two days and lets the users pick.
-
-## What I'm Doing About It
-
-Personally, I've stopped planning more than two weeks ahead for any technical decision. The tools change too fast. The assumptions I make today about what's hard and what's easy will be wrong by March.
-
-Instead, I'm optimizing for three things:
-
-1. **Speed of learning.** How fast can I evaluate a new tool, approach, or architecture? Not by reading about it — by building with it and watching what breaks.
-
-2. **Quality of specification.** The better I can describe what I want, the better the output. This is the core skill now. Not coding. Specifying.
-
-3. **Taste under pressure.** When everything is buildable, the differentiator is knowing what's worth building. That's taste. And taste under time pressure — making good calls fast — is the meta-skill of 2026.
-
-## The Honest Assessment
-
-Is all of this a little terrifying? Yes. The pace is genuinely disorienting. I've been in software for over twenty years and I have never experienced a period where the ground moves this fast under your feet.
-
-But terrifying and exciting are the same physiological response. The difference is whether you feel like you have agency. If you're an engineer who ships value — who understands systems, users, and tradeoffs — you have more agency now than at any point in your career. Your leverage is enormous. Your tools are extraordinary. Your output ceiling just went up by an order of magnitude.
-
-If that's not exciting, I don't know what is.
-
-The parameters are changing faster than ever. Know them, or get left behind.
+The parameters are changing faster than they ever have. Keep up.
