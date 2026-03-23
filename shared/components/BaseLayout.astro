@@ -10,6 +10,29 @@ const { title, description, site, ogImage } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = ogImage ? new URL(ogImage, Astro.site).href : undefined;
+
+const siteNames: Record<string, string> = {
+  p8s: 'p8s.dev',
+  e8s: 'e8s.dev',
+  h11n: 'h11n.dev',
+};
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      name: siteNames[site] || title,
+      url: Astro.site?.href,
+      description,
+    },
+    {
+      '@type': 'Organization',
+      name: 'brian404',
+      url: 'https://brian404.dev',
+    },
+  ],
+});
 ---
 
 <!doctype html>
@@ -33,6 +56,7 @@ const ogImageURL = ogImage ? new URL(ogImage, Astro.site).href : undefined;
     <meta name="twitter:description" content={description} />
     {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
     <title>{title}</title>
+    <script type="application/ld+json" set:html={jsonLd} />
     <slot name="head" />
   </head>
   <body>
