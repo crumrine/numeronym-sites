@@ -8,8 +8,9 @@ import Card from '@shared/components/Card.astro';
 
 <BaseLayout
   title="p8s.dev — Know Your Parameters"
-  description="An interactive guide to the knobs, dials, and levers of AI. Built entirely by Claude Code."
+  description="An interactive guide to the knobs, dials, and levers of AI. Explore temperature, top_p, max_tokens, and the parameters that shape every AI interaction."
   site="p8s"
+  ogImage="/og-image.png"
 >
   <SiteHeader site="p8s" nav={[{ label: 'Blog', href: '/blog' }, { label: 'Playground', href: '/playground' }]} />
 
@@ -20,7 +21,7 @@ import Card from '@shared/components/Card.astro';
         <div class="hero-logo fade-up">
           <NumeroLogo site="p8s" size="hero" />
         </div>
-        <p class="hero-tagline fade-up fade-up-delay-1">Everything is a parameter.</p>
+        <h1 class="hero-tagline fade-up fade-up-delay-1">Everything is a parameter.</h1>
         <p class="hero-subtitle fade-up fade-up-delay-2">
           An interactive guide to the knobs, dials, and levers of AI — built entirely by Claude Code.
         </p>

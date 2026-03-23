@@ -8,8 +8,9 @@ import Card from '@shared/components/Card.astro';
 
 <BaseLayout
   title="h11n.dev — The Hallucination Museum"
-  description="A curated museum of AI's most spectacular failures, wildest inventions, and accidental comedy. Built entirely by Claude Code."
+  description="A curated museum of AI's most spectacular failures, wildest inventions, and accidental comedy. Explore the Hall of Fame, take the quiz, and submit yours."
   site="h11n"
+  ogImage="/og-image.png"
 >
   <SiteHeader site="h11n" nav={[{ label: 'Hall of Fame', href: '/hall-of-fame' }, { label: 'Quiz', href: '/quiz' }, { label: 'Experiments', href: '/experiments' }, { label: 'Submit', href: '/submit' }]} />
 
@@ -20,7 +21,7 @@ import Card from '@shared/components/Card.astro';
         <div class="hero-logo fade-up">
           <NumeroLogo site="h11n" size="hero" />
         </div>
-        <p class="hero-tagline fade-up fade-up-delay-1">Confidently wrong since 2022.</p>
+        <h1 class="hero-tagline fade-up fade-up-delay-1">Confidently wrong since 2022.</h1>
         <p class="hero-subtitle fade-up fade-up-delay-2">
           A curated museum of AI's most spectacular failures, wildest inventions,
           and accidental comedy — built entirely by Claude Code.
