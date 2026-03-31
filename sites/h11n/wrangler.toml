@@ -7,6 +7,11 @@ binding = "DB"
 database_name = "h11n-submissions"
 database_id = "ae7b32d0-5f5a-4d9b-9561-dfe15496638f"
 
+[[d1_databases]]
+binding = "TARPIT_DB"
+database_name = "tarpit-logs"
+database_id = "a99f1d5f-e35e-4464-bb36-6b9f8d8b47b6"
+
 [[r2_buckets]]
 binding = "SCREENSHOTS"
 bucket_name = "h11n-screenshots"
