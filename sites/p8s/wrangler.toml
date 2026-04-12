@@ -1,0 +1,8 @@
+name = "p8s-dev"
+pages_build_output_dir = "dist"
+compatibility_date = "2025-02-10"
+
+[[d1_databases]]
+binding = "TARPIT_DB"
+database_name = "tarpit-logs"
+database_id = "a99f1d5f-e35e-4464-bb36-6b9f8d8b47b6"
