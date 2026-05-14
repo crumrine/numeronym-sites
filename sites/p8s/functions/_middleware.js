@@ -51,14 +51,25 @@ async function logAttempt(env, type, path, data, request) {
   if (!env?.TARPIT_DB) return;
   try {
     const host = new URL(request.url).hostname;
+    const ip = request.headers.get('cf-connecting-ip') || 'unknown';
+    const ua = (request.headers.get('user-agent') || '').substring(0, 200);
+    const country = request.headers.get('cf-ipcountry') || '';
+    const asn = Number(request.cf?.asn) || 0;
+    const asOrg = (request.cf?.asOrganization || '').substring(0, 100);
+    const dataStr = JSON.stringify(data ?? null).substring(0, 500);
+    // Rollup UPSERT: one row per (site, type, ip, hour). Repeats increment
+    // count instead of appending a new row. Matches domain-sites/shared/tarpit.js.
     await env.TARPIT_DB.prepare(
-      "INSERT INTO tarpit_log (site, type, path, data, ip, ua, ts) VALUES (?, ?, ?, ?, ?, ?, datetime('now'))"
-    ).bind(
-      host, type, path,
-      JSON.stringify(data).substring(0, 500),
-      request.headers.get('cf-connecting-ip') || 'unknown',
-      (request.headers.get('user-agent') || '').substring(0, 200),
-    ).run();
+      `INSERT INTO tarpit_rollup
+         (site, type, ip, hour_bucket, count, first_ts, last_ts, path, ua, country, asn, as_org, data)
+       VALUES (?, ?, ?, strftime('%Y-%m-%d %H:00:00','now'), 1,
+               datetime('now'), datetime('now'), ?, ?, ?, ?, ?, ?)
+       ON CONFLICT(site, type, ip, hour_bucket) DO UPDATE SET
+         count = count + 1,
+         last_ts = datetime('now'),
+         path = excluded.path,
+         ua = excluded.ua`
+    ).bind(host, type, ip, path, ua, country, asn, asOrg, dataStr).run();
   } catch {
     // Table might not exist yet
   }
