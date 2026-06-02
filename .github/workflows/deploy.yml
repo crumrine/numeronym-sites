@@ -60,17 +60,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: sites/p8s/package-lock.json
+          cache: pnpm
+          cache-dependency-path: sites/p8s/pnpm-lock.yaml
 
       - name: Install and build
         run: |
           cd sites/p8s
-          npm ci
-          npm run build
+          pnpm install --frozen-lockfile
+          pnpm run build
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
@@ -86,17 +90,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: sites/e8s/package-lock.json
+          cache: pnpm
+          cache-dependency-path: sites/e8s/pnpm-lock.yaml
 
       - name: Install and build
         run: |
           cd sites/e8s
-          npm ci
-          npm run build
+          pnpm install --frozen-lockfile
+          pnpm run build
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
@@ -112,17 +120,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: sites/h11n/package-lock.json
+          cache: pnpm
+          cache-dependency-path: sites/h11n/pnpm-lock.yaml
 
       - name: Install and build
         run: |
           cd sites/h11n
-          npm ci
-          npm run build
+          pnpm install --frozen-lockfile
+          pnpm run build
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
