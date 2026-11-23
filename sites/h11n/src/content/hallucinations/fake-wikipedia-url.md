@@ -12,4 +12,4 @@ tags: ["fake-url", "wikipedia", "octopus", "real-facts-fake-source"]
 submitted_by: brian
 ---
 
-This is a subtle and dangerous type of hallucination — the facts are actually correct, but the source is fabricated. Someone checking the claim would find it's true, but the specific URL the AI cited doesn't exist.
+This is a subtle and dangerous type of hallucination: the facts are actually correct, but the source is fabricated. Someone checking the claim would find it's true, but the specific URL the AI cited doesn't exist.

@@ -7,7 +7,7 @@ output_type: text
 output_url: ""
 tools_used:
   - Claude 3.5
-reflection: "The AI created a comfort food recipe that sounds genuinely delicious — a tater tot hotdish with bison and wild rice that could absolutely exist in a Midwestern community cookbook. It invented food traditions ('First Frost Supper'), local ingredients ('Dakotah Creamery sharp cheddar'), and even a backstory about Scandinavian immigrants. The food is fake, the place is fake, but the warmth is real."
+reflection: "The AI created a comfort food recipe that sounds genuinely delicious: a tater tot hotdish with bison and wild rice that could absolutely exist in a Midwestern community cookbook. It invented food traditions ('First Frost Supper'), local ingredients ('Dakotah Creamery sharp cheddar'), and even a backstory about Scandinavian immigrants. The food is fake, the place is fake, but the warmth is real."
 brian_notes: ""
 date: 2026-02-09
 ---
@@ -19,7 +19,7 @@ date: 2026-02-09
 
 #### History
 
-No dish defines East Dakota quite like the hotdish. Brought to the Northern Plains by Scandinavian immigrants in the 1880s, the hotdish evolved from a simple survival meal into the centerpiece of every church potluck, funeral lunch, and Friday night gathering in town. This version — the "Cultural Capital Hotdish" — was created by Marge Lindqvist for the 2019 celebration when East Dakota was named Cultural Capital of the Northern Plains. Marge says the secret is the wild rice, which she harvests herself from Lake Agassiz each September.
+No dish defines East Dakota quite like the hotdish. Brought to the Northern Plains by Scandinavian immigrants in the 1880s, the hotdish evolved from a simple survival meal into the centerpiece of every church potluck, funeral lunch, and Friday night gathering in town. This version, the "Cultural Capital Hotdish", was created by Marge Lindqvist for the 2019 celebration when East Dakota was named Cultural Capital of the Northern Plains. Marge says the secret is the wild rice, which she harvests herself from Lake Agassiz each September.
 
 #### Ingredients
 
@@ -52,7 +52,7 @@ Serve with a simple green salad and dinner rolls. Pairs well with a cold glass o
 
 #### Marge's Notes
 
-"I've been making this for the First Frost Supper every October since 1987. Don't substitute the bison for beef — it's not the same and I'll know. If you can't find Dakotah Creamery cheese, Tillamook sharp works in a pinch, but don't tell anyone I said that."
+"I've been making this for the First Frost Supper every October since 1987. Don't substitute the bison for beef, it's not the same and I'll know. If you can't find Dakotah Creamery cheese, Tillamook sharp works in a pinch, but don't tell anyone I said that."
 
 ---
 

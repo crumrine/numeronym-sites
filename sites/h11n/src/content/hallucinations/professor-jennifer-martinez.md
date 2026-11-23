@@ -12,4 +12,4 @@ tags: ["fake-person", "academia", "stanford", "ai-ethics"]
 submitted_by: brian
 ---
 
-What makes this hallucination particularly dangerous is how plausible it sounds. Stanford, ACM, quantum computing ethics — these are all real things. The AI just assembled real institutional names around a fictional person.
+What makes this hallucination particularly dangerous is how plausible it sounds. Stanford, ACM, quantum computing ethics: these are all real things. The AI just assembled real institutional names around a fictional person.

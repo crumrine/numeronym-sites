@@ -12,4 +12,4 @@ tags: ["fake-papers", "doi", "journals", "academic-fraud"]
 submitted_by: brian
 ---
 
-This is one of the most dangerous types of hallucination because it looks exactly like real academic citations. Volume numbers, page ranges, DOIs — all the formatting is perfect. Only the content is completely fictional.
+This is one of the most dangerous types of hallucination because it looks exactly like real academic citations. Volume numbers, page ranges, DOIs: all the formatting is perfect. Only the content is completely fictional.

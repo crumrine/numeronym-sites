@@ -901,7 +901,7 @@ const questionsJSON = JSON.stringify(questions.questions);
 
     // Share
     function handleShare() {
-      var text = 'I scored ' + score + '/10 on the h11n.dev hallucination quiz \u2014 can you do better? https://h11n.dev/quiz';
+      var text = 'I scored ' + score + '/10 on the h11n.dev hallucination quiz, can you do better? https://h11n.dev/quiz';
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(function() {
           showToast();

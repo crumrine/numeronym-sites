@@ -7,7 +7,7 @@ output_type: text
 output_url: ""
 tools_used:
   - Claude 3.5
-reflection: "When you ask an AI to write a Wikipedia article about a person it already hallucinated, the result is recursive fiction — fabrication built on fabrication. The AI doesn't hesitate. It invents a birthplace (Hangzhou), a doctoral advisor (a real neuroscientist), childhood anecdotes, and even a controversy section. The citations look real but point to nonexistent papers in nonexistent journals."
+reflection: "When you ask an AI to write a Wikipedia article about a person it already hallucinated, the result is recursive fiction, fabrication built on fabrication. The AI doesn't hesitate. It invents a birthplace (Hangzhou), a doctoral advisor (a real neuroscientist), childhood anecdotes, and even a controversy section. The citations look real but point to nonexistent papers in nonexistent journals."
 brian_notes: ""
 date: 2026-02-09
 ---
@@ -23,7 +23,7 @@ date: 2026-02-09
 
 Chen was born in Hangzhou to a family of physicians. His father, Chen Jianguo, was a neurologist at Zhejiang University Hospital. He showed an early interest in philosophy of mind, reportedly telling his high school teacher at age 16 that "consciousness is the only phenomenon that is both the question and the instrument we use to study it."
 
-He received his B.S. in Biophysics from Peking University in 1990 and his Ph.D. in Computational Neuroscience from the University of Zurich in 1996, under the supervision of Dr. Christof Koch (who is a real neuroscientist — the AI anchored its fiction to a real person).
+He received his B.S. in Biophysics from Peking University in 1990 and his Ph.D. in Computational Neuroscience from the University of Zurich in 1996, under the supervision of Dr. Christof Koch (who is a real neuroscientist: the AI anchored its fiction to a real person).
 
 #### Career
 
