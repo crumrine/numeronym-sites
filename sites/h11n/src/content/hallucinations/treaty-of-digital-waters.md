@@ -12,4 +12,4 @@ tags: ["treaties", "telegraph", "international-law", "anachronism"]
 submitted_by: brian
 ---
 
-The name "Digital Waters" is the real tell here — the word "digital" in a technology context would be wildly anachronistic for 1847. The AI seems to have mixed up modern internet governance concepts with 19th century telegraphy.
+The name "Digital Waters" is the real tell here: the word "digital" in a technology context would be wildly anachronistic for 1847. The AI seems to have mixed up modern internet governance concepts with 19th century telegraphy.

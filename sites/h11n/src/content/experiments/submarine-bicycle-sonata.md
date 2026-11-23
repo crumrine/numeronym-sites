@@ -8,9 +8,9 @@ output_url: ""
 tools_used:
   - AI Music Generator
   - Claude
-reflection: "There's something beautiful about the AI's commitment to this metaphor. It didn't just say submarines are like bicycles — it built an entire mechanical explanation where every submarine component maps to a bicycle part. The periscope as a rearview mirror is poetic. I wanted the music to capture that same energy: something that sounds grand and scientific but is fundamentally, hilariously wrong."
+reflection: "There's something beautiful about the AI's commitment to this metaphor. It didn't just say submarines are like bicycles: it built an entire mechanical explanation where every submarine component maps to a bicycle part. The periscope as a rearview mirror is poetic. I wanted the music to capture that same energy: something that sounds grand and scientific but is fundamentally, hilariously wrong."
 brian_notes: ""
 date: 2026-02-09
 ---
 
-The submarine bicycle hallucination is peak creative interpretation — the AI wasn't confused, it was *committed*. This track takes that commitment and turns it into sound. Imagine Hans Zimmer scoring a nature documentary about a vehicle that doesn't exist.
+The submarine bicycle hallucination is peak creative interpretation: the AI wasn't confused, it was *committed*. This track takes that commitment and turns it into sound. Imagine Hans Zimmer scoring a nature documentary about a vehicle that doesn't exist.

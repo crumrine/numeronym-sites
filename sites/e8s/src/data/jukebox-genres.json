@@ -381,7 +381,7 @@
     {
       "id": "jazz",
       "name": "Jazz",
-      "description": "The art of improvisation and swing. From smoky club performances to complex compositions, jazz is conversation between musicians — spontaneous, surprising, and deeply human.",
+      "description": "The art of improvisation and swing. From smoky club performances to complex compositions, jazz is conversation between musicians, spontaneous, surprising, and deeply human.",
       "keywords": ["improvisation", "swing", "saxophone", "club", "smoky", "sophisticated", "complex", "spontaneous", "night", "warm", "intimate", "trumpet", "piano", "cool", "live", "groove", "creative", "elegant", "timeless", "classic"],
       "mood_color": "#fdcb6e",
       "energy": "medium",
@@ -447,7 +447,7 @@
     {
       "id": "soul",
       "name": "Soul",
-      "description": "Passionate vocal performances over gospel-influenced arrangements with horns, strings, and deep grooves. Soul music channels raw emotion — joy, heartache, love, struggle — through the voice.",
+      "description": "Passionate vocal performances over gospel-influenced arrangements with horns, strings, and deep grooves. Soul music channels raw emotion (joy, heartache, love, struggle) through the voice.",
       "keywords": ["vocal", "passionate", "gospel", "warm", "emotional", "groovy", "heartfelt", "powerful", "uplifting", "horn", "strings", "classic", "retro", "soulful", "expressive", "rich", "joyful", "gritty", "church"],
       "mood_color": "#e17055",
       "energy": "medium",

@@ -23,9 +23,9 @@ That's exactly where we are now. Code is becoming conversation.
 
 I didn't come up with the numeronym naming by accident. k8s democratized infrastructure. You didn't need to understand Linux networking at a packet level to deploy a container. You needed to know *what you wanted* and how to express it in a YAML file that Kubernetes could interpret.
 
-p8s is the same thesis applied to AI-assisted development. The parameters matter. The configuration matters. But the language you use to describe *what you want built* — that's the new source code.
+p8s is the same thesis applied to AI-assisted development. The parameters matter. The configuration matters. But the language you use to describe *what you want built*, that's the new source code.
 
-When I built this site, I didn't open VS Code and start typing `import React from 'react'`. I opened Claude Code and said, "Build me a monorepo with three Astro sites sharing a component library, deployed to Cloudflare Pages." The specificity of that prompt — the architectural decisions embedded in the language — that *was* the engineering.
+When I built this site, I didn't open VS Code and start typing `import React from 'react'`. I opened Claude Code and said, "Build me a monorepo with three Astro sites sharing a component library, deployed to Cloudflare Pages." The specificity of that prompt, the architectural decisions embedded in the language, that *was* the engineering.
 
 ## What This Actually Looks Like in Practice
 
@@ -54,11 +54,11 @@ Notice what's not on that list: memorizing API surfaces, recalling syntax from m
 
 If you're a junior developer reading this, you might feel like the ground is shifting under your feet. It is. But the shift favors you more than you think.
 
-The traditional path was: learn syntax, build projects, understand patterns, develop architectural intuition. That path took five to ten years. The new path compresses the early stages dramatically. You can generate working code in minutes. But architectural intuition — knowing *what* to build, not just *how* — that still takes experience. It still takes getting burned by bad decisions and learning from the scars.
+The traditional path was: learn syntax, build projects, understand patterns, develop architectural intuition. That path took five to ten years. The new path compresses the early stages dramatically. You can generate working code in minutes. But architectural intuition (knowing *what* to build, not just *how*) that still takes experience. It still takes getting burned by bad decisions and learning from the scars.
 
 The difference is that you can now accumulate those scars ten times faster. You can prototype an idea in an afternoon that used to take a sprint. You can explore three architectural approaches before lunch instead of committing to one and hoping for the best. The learning loop is tighter. The feedback is faster. The iteration speed is extraordinary.
 
-If you're a senior engineer, your advantage is immense — but only if you let go of the identity that's tied to writing code. Your value was never in the typing. It was in the knowing. The knowing doesn't go away. It becomes more valuable, not less, because it's the bottleneck now.
+If you're a senior engineer, your advantage is immense, but only if you let go of the identity that's tied to writing code. Your value was never in the typing. It was in the knowing. The knowing doesn't go away. It becomes more valuable, not less, because it's the bottleneck now.
 
 ## What the Industry Gets Wrong
 
@@ -70,7 +70,7 @@ Position two: "AI is just autocomplete. It's not a threat." Also no. If your dai
 
 The truth lives in between, and it's more interesting than either extreme. AI is a force multiplier for the competent. It widens the gap between engineers who understand systems and engineers who only understood syntax. It rewards clarity of thought. It punishes vagueness.
 
-English is the new programming language — but you still need to know what program to write.
+English is the new programming language, but you still need to know what program to write.
 
 ## The Uncomfortable Bottom Line
 
@@ -78,6 +78,6 @@ I've shipped more production-quality software in the last three months than in a
 
 The toolchain has changed. The compiler now runs on natural language. The IDE is a conversation. The deployment pipeline starts with a sentence.
 
-But the engineering — the hard part, the part that matters — hasn't changed at all. You still need to know your parameters.
+But the engineering (the hard part, the part that matters) hasn't changed at all. You still need to know your parameters.
 
 That's the whole point of this site.

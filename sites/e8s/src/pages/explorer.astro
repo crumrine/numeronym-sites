@@ -56,8 +56,8 @@ import points from '../data/embedding-points.json';
 
         <div class="info-panel" id="infoPanel">
           <button class="info-close" id="infoPanelClose" aria-label="Close info panel">&times;</button>
-          <div class="info-label" id="infoLabel">—</div>
-          <div class="info-category" id="infoCategory">—</div>
+          <div class="info-label" id="infoLabel">n/a</div>
+          <div class="info-category" id="infoCategory">n/a</div>
           <div class="info-divider"></div>
           <div class="info-neighbors-title">Nearest neighbors</div>
           <ul class="info-neighbors" id="infoNeighbors"></ul>
@@ -86,7 +86,7 @@ import points from '../data/embedding-points.json';
           <div class="explainer-content">
             <p>
               This is a 2D projection of an <strong>embedding space</strong>. In AI, embeddings are
-              vectors — lists of numbers — that represent the meaning of words, concepts, or any
+              vectors, lists of numbers, that represent the meaning of words, concepts, or any
               kind of data. When you plot these vectors, things that are semantically similar end up
               close together.
             </p>
@@ -96,14 +96,14 @@ import points from '../data/embedding-points.json';
             </p>
             <ul>
               <li><strong>Electronic, house, and techno</strong> cluster tightly because they share sonic DNA.</li>
-              <li><strong>Jazz, blues, and soul</strong> sit near each other — and near positive emotions like joy and contentment.</li>
+              <li><strong>Jazz, blues, and soul</strong> sit near each other, and near positive emotions like joy and contentment.</li>
               <li><strong>Metal, punk, and grindcore</strong> cluster far from ambient and classical.</li>
               <li><strong>"Meditation"</strong> lives near "serenity" and "peace" across category boundaries.</li>
               <li><strong>ML/AI terms</strong> (transformer, attention, LLM) form their own dense cluster, separate from web/infra tech.</li>
             </ul>
             <p>
               In real embedding models (like those powering LLMs), these spaces have hundreds or thousands
-              of dimensions. This 2D view is a simplified illustration — but the clustering principle is
+              of dimensions. This 2D view is a simplified illustration, but the clustering principle is
               exactly how modern AI understands meaning.
             </p>
           </div>

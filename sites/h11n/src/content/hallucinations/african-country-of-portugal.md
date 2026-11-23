@@ -12,4 +12,4 @@ tags: ["continents", "west-africa", "europe", "colonialism-irony"]
 submitted_by: brian
 ---
 
-There's a beautiful irony in listing Portugal — the colonial power that once controlled much of the West African coast — as a West African country itself. The AI confused the colonizer with the colonized.
+There's a beautiful irony in listing Portugal, the colonial power that once controlled much of the West African coast, as a West African country itself. The AI confused the colonizer with the colonized.

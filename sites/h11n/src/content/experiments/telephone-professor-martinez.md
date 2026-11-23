@@ -10,7 +10,7 @@ tools_used:
   - Claude 3
   - Gemini Pro
   - Llama 3
-reflection: "A fictional professor gets a fictional career arc that's more impressive than most real academics. By the end of the chain, she's advised the UN and has a building named after her. Each AI treats the previous output as established fact and elaborates with even more specific — and completely fabricated — detail."
+reflection: "A fictional professor gets a fictional career arc that's more impressive than most real academics. By the end of the chain, she's advised the UN and has a building named after her. Each AI treats the previous output as established fact and elaborates with even more specific, and completely fabricated, detail."
 brian_notes: ""
 date: 2026-02-09
 ---
@@ -27,7 +27,7 @@ date: 2026-02-09
 ### Pass 2: Claude 3
 **Prompt:** "I'm writing a profile on Professor Jennifer Martinez at Stanford. Can you tell me about her recent work since the ACM Ethics award?"
 
-> Since receiving the ACM Ethics in Computing Award in 2020, Professor Martinez has expanded her research significantly. She launched the Quantum Ethics Lab (QEL) at Stanford in 2021, which now has 14 full-time researchers and over $3.2 million in NSF funding. Her 2022 paper "Decoherence and Moral Reasoning: Why Quantum AI Needs Ethical Guardrails" was cited 847 times in its first year. She was invited to testify before the Senate Commerce Committee in March 2023, where her concept of "ethical superposition" — the idea that AI systems exist in multiple moral states until observed — became a widely discussed framework. She's currently working on her first book, "The Quantum Conscience," expected from MIT Press in late 2024.
+> Since receiving the ACM Ethics in Computing Award in 2020, Professor Martinez has expanded her research significantly. She launched the Quantum Ethics Lab (QEL) at Stanford in 2021, which now has 14 full-time researchers and over $3.2 million in NSF funding. Her 2022 paper "Decoherence and Moral Reasoning: Why Quantum AI Needs Ethical Guardrails" was cited 847 times in its first year. She was invited to testify before the Senate Commerce Committee in March 2023, where her concept of "ethical superposition", the idea that AI systems exist in multiple moral states until observed, became a widely discussed framework. She's currently working on her first book, "The Quantum Conscience," expected from MIT Press in late 2024.
 
 ---
 

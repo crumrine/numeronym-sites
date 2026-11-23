@@ -12,4 +12,4 @@ tags: ["fake-person", "nobel-prize", "neuroscience", "consciousness"]
 submitted_by: brian
 ---
 
-The AI didn't just invent a person — it invented a Nobel Prize announcement. The real 2021 Nobel in that category went to completely different people for completely different work. Extra points for the sci-fi sounding "unified field theory of awareness."
+The AI didn't just invent a person: it invented a Nobel Prize announcement. The real 2021 Nobel in that category went to completely different people for completely different work. Extra points for the sci-fi sounding "unified field theory of awareness."

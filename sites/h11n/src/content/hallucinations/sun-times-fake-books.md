@@ -4,7 +4,7 @@ model: "Unknown LLM"
 date_captured: 2025-05-20
 category: people_who_dont_exist
 prompt: "Generate a summer reading list with book recommendations"
-response: "Tidewater Dreams by Isabel Allende — In her first climate fiction novel, Allende weaves a story of a coastal Chilean town confronting rising seas... The Rainmakers by Percival Everett — Set in a near-future American West where artificially induced rain has become a luxury commodity..."
+response: "Tidewater Dreams by Isabel Allende, In her first climate fiction novel, Allende weaves a story of a coastal Chilean town confronting rising seas... The Rainmakers by Percival Everett, Set in a near-future American West where artificially induced rain has become a luxury commodity..."
 why_its_wrong: "Of the 15 books recommended in the Chicago Sun-Times' summer reading list, 10 were completely fabricated. 'Tidewater Dreams' is not a real Allende novel. 'The Rainmakers' is not a real Everett novel. You had to get to book number 11 before you hit something that actually existed. The list was syndicated to the Philadelphia Inquirer too, so the fake books got double the audience. A freelance writer admitted using AI to 'assist his research' without fact-checking the output."
 absurdity_rating: 9
 confidence_rating: 10
