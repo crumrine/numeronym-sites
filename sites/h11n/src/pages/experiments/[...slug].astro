@@ -36,12 +36,12 @@ const hasOutput = entry.data.output_url && entry.data.output_url.length > 0;
 ---
 
 <BaseLayout
-  title={`${entry.data.title} — h11n.dev Experiments`}
+  title={`${entry.data.title} | h11n.dev Experiments`}
   description={entry.data.reflection.slice(0, 155)}
   site="h11n"
 >
   <Fragment slot="head">
-    <meta property="og:title" content={`${entry.data.title} — h11n.dev`} />
+    <meta property="og:title" content={`${entry.data.title} | h11n.dev`} />
     <meta property="og:description" content={entry.data.reflection.slice(0, 155)} />
     <meta property="og:url" content={`https://h11n.dev/experiments/${entry.id}`} />
   </Fragment>
